@@ -276,14 +276,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return badges;
   }
 
-  // Get Community Contributors (Excludes Admin who has their separate dedicated rank)
+  // Helper to filter out automated bot accounts (e.g. github-actions[bot], dependabot[bot])
+  function isBotAccount(login) {
+    if (!login) return false;
+    const l = login.toLowerCase();
+    return l.endsWith("[bot]") || l.includes("bot") || l.includes("actions-user") || l === "github-actions";
+  }
+
+  // Get Community Contributors (Excludes Admin and Bots)
   // Ranked strictly by:
   // 1. Total Arcade Score (primary)
   // 2. Verified Games count (secondary)
   // 3. Merged Commits (tiebreaker)
   function getCommunityContributors() {
     return contributorsData
-      .filter(item => item.login && item.login.toLowerCase() !== "debasmitabose0")
+      .filter(item => item.login && item.login.toLowerCase() !== "debasmitabose0" && !isBotAccount(item.login))
       .sort((a, b) => {
         const scoreDiff = calculateScore(b) - calculateScore(a);
         if (scoreDiff !== 0) return scoreDiff;
@@ -554,8 +561,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
+        // Filter out automated bot accounts so only real human contributors are registered
+        const validUsers = data.filter(u => u.type !== "Bot" && !isBotAccount(u.login));
+
         // Map contributors in O(1) time per item - ZERO secondary network requests!
-        const enrichedContributors = data.map((user) => {
+        const enrichedContributors = validUsers.map((user) => {
           const isAdmin = user.login.toLowerCase() === "debasmitabose0";
 
           // Check if contributor exists in CONTRIBUTORS_REGISTRY or initial baseline data
@@ -611,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const adminUser = contributorsData.find(c => c.login.toLowerCase() === "debasmitabose0");
         if (adminUser) updateAdminSpotlight(adminUser);
 
-        const communityCount = contributorsData.filter(c => c.login.toLowerCase() !== "debasmitabose0").length;
+        const communityCount = contributorsData.filter(c => c.login.toLowerCase() !== "debasmitabose0" && !isBotAccount(c.login)).length;
         if (syncStatusText) syncStatusText.textContent = `GitHub Live Sync: 1 Admin Lead • ${communityCount} Community Contributor(s) active`;
       }
     } catch (err) {
