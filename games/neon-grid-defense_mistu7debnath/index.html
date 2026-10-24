@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Neon Grid Defense: Core Protocol | ArcadeVerse</title>
+  <meta name="description" content="Cyberpunk grid-based tower defense game. Defend your energy core against waves of cyber bots with strategic tower placement, upgrades, and tactical energy management.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ngd-app" id="ngd-app">
+
+    <!-- Screen Reader Announcer -->
+    <div id="ngd-announcer" class="ngd-sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- MAIN MENU OVERLAY -->
+    <section class="ngd-overlay ngd-menu-screen" id="ngd-menu-screen" aria-label="Main Menu">
+      <div class="ngd-menu-card">
+        <div class="ngd-badge">
+          <span class="ngd-pulse-dot" aria-hidden="true"></span>
+          <span>CYBER DEFENSE PROTOCOL • NSOC '26</span>
+        </div>
+
+        <h1 class="ngd-game-title">
+          <span class="ngd-title-sub">NEON GRID DEFENSE</span>
+          <span class="ngd-title-main">CORE PROTOCOL</span>
+        </h1>
+
+        <p class="ngd-game-desc">
+          Rogue cybernetic assault units are breaching sector 7. Deploy advanced plasma turrets, 
+          manage tactical credits, and safeguard the Energy Core at all costs.
+        </p>
+
+        <!-- Cyberpunk Animated Core Preview -->
+        <div class="ngd-core-preview" aria-hidden="true">
+          <div class="ngd-core-rings">
+            <div class="ngd-ring ngd-ring-1"></div>
+            <div class="ngd-ring ngd-ring-2"></div>
+            <div class="ngd-ring ngd-ring-3"></div>
+            <div class="ngd-core-orb"></div>
+          </div>
+        </div>
+
+        <!-- High Score Records Box -->
+        <div class="ngd-records-panel">
+          <div class="ngd-record-item">
+            <span class="ngd-record-label">BEST WAVE</span>
+            <span class="ngd-record-val" id="ngd-menu-best-wave">0</span>
+          </div>
+          <div class="ngd-record-divider" aria-hidden="true"></div>
+          <div class="ngd-record-item">
+            <span class="ngd-record-label">HIGH SCORE</span>
+            <span class="ngd-record-val" id="ngd-menu-best-score">0</span>
+          </div>
+        </div>
+
+        <!-- Menu Action Buttons -->
+        <div class="ngd-menu-actions">
+          <button type="button" class="ngd-btn ngd-btn-primary ngd-btn-lg" id="ngd-btn-start">
+            <svg class="ngd-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>INITIALIZE PROTOCOL</span>
+          </button>
+
+          <button type="button" class="ngd-btn ngd-btn-secondary" id="ngd-btn-how-to-play">
+            <svg class="ngd-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>HOW TO PLAY</span>
+          </button>
+        </div>
+
+        <div class="ngd-menu-footer">
+          <span>Author: <strong>mistu7debnath</strong></span>
+          <span class="ngd-dot">•</span>
+          <span>ArcadeVerse Pure Web Tech</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTIVE GAMEPLAY CONTAINER -->
+    <main class="ngd-game-container" id="ngd-game-container">
+      
+      <!-- TOP STATUS HUD -->
+      <header class="ngd-hud" id="ngd-hud" aria-label="Defense Command HUD">
+        <div class="ngd-hud-section ngd-hud-left">
+          <div class="ngd-brand">
+            <svg class="ngd-brand-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="#00f0ff" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <div class="ngd-brand-text">
+              <span class="ngd-brand-title">NEON GRID DEFENSE</span>
+              <span class="ngd-brand-subtitle">CORE PROTOCOL</span>
+            </div>
+          </div>
+
+          <div class="ngd-stat-chip ngd-chip-wave" title="Current Wave">
+            <svg class="ngd-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 12h2l3-7 4 14 4-9 3 5 2-3h2"></path>
+            </svg>
+            <div class="ngd-chip-content">
+              <span class="ngd-chip-label">WAVE</span>
+              <span class="ngd-chip-val" id="ngd-hud-wave">1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ngd-hud-section ngd-hud-center">
+          <!-- Core Health Widget -->
+          <div class="ngd-core-widget" title="Energy Core Integrity">
+            <div class="ngd-core-header">
+              <span class="ngd-core-label">
+                <svg class="ngd-icon ngd-icon-spin" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="#00f0ff" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M12 3v4M12 17v4M3 12h4M17 12h4"></path>
+                </svg>
+                CORE INTEGRITY
+              </span>
+              <span class="ngd-core-value" id="ngd-hud-core-health">100%</span>
+            </div>
+            <div class="ngd-health-bar-bg" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Core Integrity">
+              <div class="ngd-health-bar-fill" id="ngd-core-health-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <!-- Credits Display -->
+          <div class="ngd-stat-chip ngd-chip-credits" title="Available Energy Credits">
+            <svg class="ngd-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="#38bdf8" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="12 6 15 12 12 18 9 12 12 6"></polygon>
+            </svg>
+            <div class="ngd-chip-content">
+              <span class="ngd-chip-label">CREDITS</span>
+              <span class="ngd-chip-val ngd-color-credits" id="ngd-hud-credits">300</span>
+            </div>
+          </div>
+
+          <!-- Enemies Remaining -->
+          <div class="ngd-stat-chip ngd-chip-enemies" title="Hostile Bots Remaining in Wave">
+            <svg class="ngd-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="#f43f5e" stroke-width="2">
+              <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+              <circle cx="12" cy="5" r="2"></circle>
+              <path d="M12 7v4"></path>
+              <line x1="8" y1="16" x2="8" y2="16"></line>
+              <line x1="16" y1="16" x2="16" y2="16"></line>
+            </svg>
+            <div class="ngd-chip-content">
+              <span class="ngd-chip-label">ENEMIES</span>
+              <span class="ngd-chip-val" id="ngd-hud-enemies">0</span>
+            </div>
+          </div>
+
+          <!-- Score -->
+          <div class="ngd-stat-chip ngd-chip-score" title="Combat Score">
+            <svg class="ngd-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="#fbbf24" stroke-width="2">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+              <path d="M4 22h16"></path>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+            </svg>
+            <div class="ngd-chip-content">
+              <span class="ngd-chip-label">SCORE</span>
+              <span class="ngd-chip-val" id="ngd-hud-score">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ngd-hud-section ngd-hud-right">
+          <!-- Game Speed Toggle -->
+          <button type="button" class="ngd-hud-btn" id="ngd-btn-speed" aria-label="Toggle game speed (1x / 2x)" title="Game Speed: 1x / 2x">
+            <span class="ngd-speed-badge" id="ngd-speed-text">1X</span>
+          </button>
+
+          <!-- Sound Mute Toggle -->
+          <button type="button" class="ngd-hud-btn" id="ngd-btn-audio" aria-label="Toggle audio mute (M)" title="Toggle Audio (M)">
+            <svg class="ngd-icon" id="ngd-icon-sound-on" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <svg class="ngd-icon ngd-hidden" id="ngd-icon-sound-off" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="1" y1="1" x2="23" y2="23"></line>
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M23 9l-6 6"></path>
+              <path d="M17 9l6 6"></path>
+            </svg>
+          </button>
+
+          <!-- Pause Button -->
+          <button type="button" class="ngd-hud-btn" id="ngd-btn-pause" aria-label="Pause game (Space / P)" title="Pause Game (Space / P)">
+            <svg class="ngd-icon" id="ngd-icon-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+            <svg class="ngd-icon ngd-hidden" id="ngd-icon-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </button>
+
+          <!-- Help Button -->
+          <button type="button" class="ngd-hud-btn" id="ngd-btn-help" aria-label="How to play guide" title="How to Play / Help">
+            <svg class="ngd-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- BATTLEFIELD CANVAS CONTAINER -->
+      <div class="ngd-canvas-wrap" id="ngd-canvas-wrap">
+        <canvas id="ngd-canvas" width="960" height="600" role="img" aria-label="Neon Grid Defense interactive tactical battlefield grid"></canvas>
+
+        <!-- Notification Toast Banner -->
+        <div class="ngd-toast" id="ngd-toast" role="status" aria-live="polite">
+          <span class="ngd-toast-icon" id="ngd-toast-icon">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </span>
+          <span class="ngd-toast-msg" id="ngd-toast-msg">Protocol Initiated. Build your perimeter defenses!</span>
+        </div>
+      </div>
+
+      <!-- BOTTOM CONTROL DOCK -->
+      <footer class="ngd-dock" id="ngd-dock">
+        
+        <!-- TOWER SELECTION TRAY -->
+        <div class="ngd-tower-tray" id="ngd-tower-tray" role="group" aria-label="Tower Selection Tray">
+          <div class="ngd-tray-label">BUILD TURRETS</div>
+
+          <!-- Tower 1: Pulse Turret -->
+          <button type="button" class="ngd-tower-card" data-tower="pulse" id="ngd-card-pulse" aria-label="Pulse Turret, Cost 100 credits, Shortcut 1">
+            <div class="ngd-card-hotkey">1</div>
+            <div class="ngd-card-icon ngd-icon-pulse">
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="#00f0ff" stroke-width="2">
+                <circle cx="16" cy="16" r="11" stroke-dasharray="3 2"></circle>
+                <circle cx="16" cy="16" r="6" fill="#00f0ff" fill-opacity="0.3"></circle>
+                <line x1="16" y1="2" x2="16" y2="10" stroke-width="3"></line>
+              </svg>
+            </div>
+            <div class="ngd-card-details">
+              <span class="ngd-card-title">PULSE TURRET</span>
+              <span class="ngd-card-meta">Balanced • 100 CR</span>
+            </div>
+          </button>
+
+          <!-- Tower 2: Rapid Blaster -->
+          <button type="button" class="ngd-tower-card" data-tower="rapid" id="ngd-card-rapid" aria-label="Rapid Blaster, Cost 125 credits, Shortcut 2">
+            <div class="ngd-card-hotkey">2</div>
+            <div class="ngd-card-icon ngd-icon-rapid">
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="#38bdf8" stroke-width="2">
+                <rect x="6" y="6" width="20" height="20" rx="3"></rect>
+                <line x1="12" y1="2" x2="12" y2="8" stroke-width="2.5"></line>
+                <line x1="20" y1="2" x2="20" y2="8" stroke-width="2.5"></line>
+                <circle cx="16" cy="16" r="4" fill="#38bdf8"></circle>
+              </svg>
+            </div>
+            <div class="ngd-card-details">
+              <span class="ngd-card-title">RAPID BLASTER</span>
+              <span class="ngd-card-meta">Fast Anti-Swarm • 125 CR</span>
+            </div>
+          </button>
+
+          <!-- Tower 3: Nova Cannon -->
+          <button type="button" class="ngd-tower-card" data-tower="nova" id="ngd-card-nova" aria-label="Nova Cannon, Cost 175 credits, Shortcut 3">
+            <div class="ngd-card-hotkey">3</div>
+            <div class="ngd-card-icon ngd-icon-nova">
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="#a855f7" stroke-width="2">
+                <polygon points="16 3 28 27 4 27"></polygon>
+                <circle cx="16" cy="19" r="5" fill="#a855f7" fill-opacity="0.4"></circle>
+                <circle cx="16" cy="19" r="2" fill="#ffffff"></circle>
+              </svg>
+            </div>
+            <div class="ngd-card-details">
+              <span class="ngd-card-title">NOVA CANNON</span>
+              <span class="ngd-card-meta">Heavy AOE • 175 CR</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- TOWER INSPECTOR / UPGRADE & SELL PANEL -->
+        <div class="ngd-inspector ngd-hidden" id="ngd-inspector" role="region" aria-label="Selected Tower Inspector">
+          <div class="ngd-inspector-header">
+            <div class="ngd-inspector-title-wrap">
+              <span class="ngd-inspector-type" id="ngd-ins-type">PULSE TURRET</span>
+              <span class="ngd-inspector-badge" id="ngd-ins-level">MK. 1</span>
+            </div>
+            <button type="button" class="ngd-btn-icon-sm" id="ngd-ins-close" aria-label="Close inspector">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <div class="ngd-inspector-stats">
+            <div class="ngd-stat-pair">
+              <span class="ngd-stat-name">DMG</span>
+              <span class="ngd-stat-val" id="ngd-ins-dmg">26</span>
+            </div>
+            <div class="ngd-stat-pair">
+              <span class="ngd-stat-name">RATE</span>
+              <span class="ngd-stat-val" id="ngd-ins-rate">1.1/s</span>
+            </div>
+            <div class="ngd-stat-pair">
+              <span class="ngd-stat-name">RANGE</span>
+              <span class="ngd-stat-val" id="ngd-ins-range">135px</span>
+            </div>
+            <div class="ngd-stat-pair">
+              <span class="ngd-stat-name">KILLS</span>
+              <span class="ngd-stat-val" id="ngd-ins-kills">0</span>
+            </div>
+          </div>
+
+          <div class="ngd-inspector-actions">
+            <!-- Upgrade Button -->
+            <button type="button" class="ngd-btn ngd-btn-upgrade" id="ngd-btn-upgrade" aria-label="Upgrade Tower">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+              <span id="ngd-ins-upgrade-text">UPGRADE (80 CR)</span>
+            </button>
+
+            <!-- Sell Button -->
+            <button type="button" class="ngd-btn ngd-btn-sell" id="ngd-btn-sell" aria-label="Sell Tower">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+              <span id="ngd-ins-sell-text">SELL (70 CR)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- WAVE LAUNCH CONTROLLER -->
+        <div class="ngd-wave-ctrl" id="ngd-wave-ctrl">
+          <div class="ngd-wave-status-text" id="ngd-wave-status">PREPARATION PHASE</div>
+          
+          <button type="button" class="ngd-btn ngd-btn-wave" id="ngd-btn-start-wave" aria-label="Start next wave (N)">
+            <svg class="ngd-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span id="ngd-btn-wave-text">START WAVE 1</span>
+          </button>
+        </div>
+
+      </footer>
+    </main>
+
+    <!-- PAUSE MODAL OVERLAY -->
+    <div class="ngd-overlay ngd-hidden" id="ngd-pause-overlay" role="dialog" aria-modal="true" aria-labelledby="ngd-pause-title">
+      <div class="ngd-modal-card">
+        <h2 class="ngd-modal-title" id="ngd-pause-title">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#00f0ff" stroke-width="2">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+          SYSTEM PAUSED
+        </h2>
+        <p class="ngd-modal-subtitle">Defense operations on standby. Sector telemetry frozen.</p>
+
+        <div class="ngd-modal-actions">
+          <button type="button" class="ngd-btn ngd-btn-primary ngd-btn-block" id="ngd-btn-resume">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>RESUME PROTOCOL (Space)</span>
+          </button>
+
+          <button type="button" class="ngd-btn ngd-btn-secondary ngd-btn-block" id="ngd-btn-pause-help">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>VIEW MANUAL</span>
+          </button>
+
+          <button type="button" class="ngd-btn ngd-btn-danger ngd-btn-block" id="ngd-btn-restart-from-pause">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>RESTART SECTOR (R)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME OVER OVERLAY -->
+    <div class="ngd-overlay ngd-hidden" id="ngd-gameover-overlay" role="dialog" aria-modal="true" aria-labelledby="ngd-gameover-title">
+      <div class="ngd-modal-card ngd-card-danger">
+        <div class="ngd-badge ngd-badge-danger">
+          <span class="ngd-pulse-dot ngd-dot-red" aria-hidden="true"></span>
+          <span>SECURITY BREACH • CORE COMPROMISED</span>
+        </div>
+
+        <h2 class="ngd-modal-title ngd-title-danger" id="ngd-gameover-title">
+          PROTOCOL TERMINATED
+        </h2>
+        <p class="ngd-modal-subtitle">The Energy Core has collapsed under cyber drone bombardment.</p>
+
+        <div class="ngd-records-panel">
+          <div class="ngd-record-item">
+            <span class="ngd-record-label">WAVES SURVIVED</span>
+            <span class="ngd-record-val" id="ngd-go-wave">0</span>
+          </div>
+          <div class="ngd-record-divider" aria-hidden="true"></div>
+          <div class="ngd-record-item">
+            <span class="ngd-record-label">FINAL SCORE</span>
+            <span class="ngd-record-val" id="ngd-go-score">0</span>
+          </div>
+        </div>
+
+        <div class="ngd-records-panel ngd-records-secondary">
+          <div class="ngd-record-item">
+            <span class="ngd-record-label">BOTS ELIMINATED</span>
+            <span class="ngd-record-val" id="ngd-go-kills">0</span>
+          </div>
+          <div class="ngd-record-divider" aria-hidden="true"></div>
+          <div class="ngd-record-item">
+            <span class="ngd-record-label">RECORD SCORE</span>
+            <span class="ngd-record-val" id="ngd-go-best">0</span>
+          </div>
+        </div>
+
+        <div class="ngd-modal-actions">
+          <button type="button" class="ngd-btn ngd-btn-primary ngd-btn-block" id="ngd-btn-restart">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>REBOOT DEFENSE PROTOCOL (R)</span>
+          </button>
+          
+          <button type="button" class="ngd-btn ngd-btn-secondary ngd-btn-block" id="ngd-btn-back-menu">
+            <span>RETURN TO MAIN MENU</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW TO PLAY DIALOG -->
+    <dialog class="ngd-dialog" id="ngd-guide-dialog" aria-labelledby="ngd-guide-title">
+      <div class="ngd-dialog-card">
+        <header class="ngd-dialog-header">
+          <div class="ngd-dialog-title-wrap">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#00f0ff" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <h2 class="ngd-dialog-title" id="ngd-guide-title">FIELD MANUAL: CORE PROTOCOL</h2>
+          </div>
+          <button type="button" class="ngd-btn-icon-sm" id="ngd-guide-close" aria-label="Close field manual">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </header>
+
+        <div class="ngd-dialog-content">
+          <!-- Section 1: Objective -->
+          <section class="ngd-guide-section">
+            <h3 class="ngd-guide-heading">1. MISSION OBJECTIVE</h3>
+            <p>
+              Rogue cyber bots advance along the neon conduit towards your <strong>Energy Core Vault</strong> on the right. 
+              Prevent bots from reaching the Core. If the Core Integrity drops to 0%, the sector collapses and the protocol fails.
+            </p>
+          </section>
+
+          <!-- Section 2: Defenses -->
+          <section class="ngd-guide-section">
+            <h3 class="ngd-guide-heading">2. DEFENSE ARSENAL</h3>
+            <div class="ngd-guide-grid">
+              <div class="ngd-guide-card">
+                <div class="ngd-card-header-cyan">
+                  <span class="ngd-card-pip ngd-pip-cyan"></span>
+                  <strong>PULSE TURRET (100 CR)</strong>
+                </div>
+                <p>Balanced firing speed and damage. Reliable foundation for perimeter chokepoints. Effective across all bot classes.</p>
+              </div>
+
+              <div class="ngd-guide-card">
+                <div class="ngd-card-header-blue">
+                  <span class="ngd-card-pip ngd-pip-blue"></span>
+                  <strong>RAPID BLASTER (125 CR)</strong>
+                </div>
+                <p>Ultra-high rate of fire with lighter plasma bolts. Essential for intercepting high-speed Scout drones before they break through.</p>
+              </div>
+
+              <div class="ngd-guide-card">
+                <div class="ngd-card-header-violet">
+                  <span class="ngd-card-pip ngd-pip-violet"></span>
+                  <strong>NOVA CANNON (175 CR)</strong>
+                </div>
+                <p>Heavy antimatter mortars that detonate in devastating Area-Of-Effect (AOE) shockwaves. Shreds clustered groups and armored mechs.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3: Hostile Units -->
+          <section class="ngd-guide-section">
+            <h3 class="ngd-guide-heading">3. IDENTIFIED HOSTILE CLASSES</h3>
+            <div class="ngd-guide-grid">
+              <div class="ngd-guide-card">
+                <div class="ngd-card-header-teal">
+                  <span class="ngd-card-pip ngd-pip-teal"></span>
+                  <strong>BASIC DRONE</strong>
+                </div>
+                <p>Standard recon assault drone. Moderate velocity and baseline shielding. Bounty: 15 Credits.</p>
+              </div>
+
+              <div class="ngd-guide-card">
+                <div class="ngd-card-header-yellow">
+                  <span class="ngd-card-pip ngd-pip-yellow"></span>
+                  <strong>SCOUT SKIMMER</strong>
+                </div>
+                <p>Extreme speed lightweight infiltrator. Sprints past slow-firing cannons. Deploy Rapid Blasters to counter. Bounty: 20 Credits.</p>
+              </div>
+
+              <div class="ngd-guide-card">
+                <div class="ngd-card-header-red">
+                  <span class="ngd-card-pip ngd-pip-red"></span>
+                  <strong>TITAN MECH</strong>
+                </div>
+                <p>Heavy reinforced armor plating. Slower movement but massive health pool and core impact damage. Bounty: 40 Credits.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 4: Economy & Upgrades -->
+          <section class="ngd-guide-section">
+            <h3 class="ngd-guide-heading">4. ECONOMY & UPGRADES</h3>
+            <p>
+              Earn credits by eliminating hostile bots and successfully clearing waves. Click any deployed turret on the grid to inspect its stats:
+            </p>
+            <ul class="ngd-guide-list">
+              <li><strong>Upgrade:</strong> Enhances damage output, increases targeting range, and accelerates firing cycle up to MK. IV.</li>
+              <li><strong>Recycle / Sell:</strong> Recovers <strong>70%</strong> of the total credits invested in the turret.</li>
+            </ul>
+          </section>
+
+          <!-- Section 5: Tactical Controls -->
+          <section class="ngd-guide-section">
+            <h3 class="ngd-guide-heading">5. COMMAND SHORTCUTS</h3>
+            <div class="ngd-controls-table">
+              <div class="ngd-ctrl-row"><kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd><span>Select Pulse / Rapid / Nova Turret</span></div>
+              <div class="ngd-ctrl-row"><kbd>Click / Tap</kbd><span>Select turret or place on valid grid cell</span></div>
+              <div class="ngd-ctrl-row"><kbd>N</kbd><span>Launch next enemy wave</span></div>
+              <div class="ngd-ctrl-row"><kbd>U</kbd><span>Upgrade selected turret</span></div>
+              <div class="ngd-ctrl-row"><kbd>S</kbd><span>Sell selected turret for refund</span></div>
+              <div class="ngd-ctrl-row"><kbd>Space</kbd><span>Pause / Resume operations</span></div>
+              <div class="ngd-ctrl-row"><kbd>Esc</kbd><span>Deselect turret or close active modal</span></div>
+              <div class="ngd-ctrl-row"><kbd>M</kbd><span>Toggle audio effects</span></div>
+              <div class="ngd-ctrl-row"><kbd>R</kbd><span>Restart sector (with confirmation)</span></div>
+            </div>
+          </section>
+        </div>
+
+        <footer class="ngd-dialog-footer">
+          <button type="button" class="ngd-btn ngd-btn-primary" id="ngd-guide-ok">
+            <span>UNDERSTOOD • RETURN TO COMMAND</span>
+          </button>
+        </footer>
+      </div>
+    </dialog>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
