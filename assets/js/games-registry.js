@@ -58,6 +58,27 @@ const GAMES_REGISTRY = [
     "featured": true
   },
   {
+    "id": "cyber-runner_mistu7debnath",
+    "title": "Cyber Runner: Neon Rush",
+    "category": "Arcade",
+    "lucideIcon": "zap",
+    "description": "Dash through a futuristic neon metropolis across three lanes. Jump obstacles, slide under laser barriers, collect energy cores, and beat your best score.",
+    "author": "mistu7debnath",
+    "github": "mistu7debnath",
+    "role": "Arcade Developer",
+    "path": "games/cyber-runner_mistu7debnath/index.html",
+    "tags": [
+      "Arcade",
+      "Runner",
+      "Cyberpunk",
+      "Endless",
+      "NSOC26"
+    ],
+    "stars": 28,
+    "featured": true,
+    "difficulty": "Intermediate"
+  },
+  {
     "id": "cyber-snake_babin",
     "title": "Cyber Snake Matrix",
     "category": "Retro",
