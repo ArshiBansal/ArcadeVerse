@@ -173,6 +173,26 @@ const GAMES_REGISTRY = [
     "releaseDate": "2026-10-22"
   },
   {
+    "id": "neon-drift-racer_joitapaul",
+    "title": "Neon Drift Racer",
+    "category": "Arcade",
+    "lucideIcon": "car-front",
+    "description": "Dodge neon traffic, collect energy orbs, and survive as the road gets faster.",
+    "author": "Joita Paul",
+    "github": "joitapaul",
+    "role": "Contributor",
+    "path": "games/neon-drift-racer_joitapaul/index.html",
+    "tags": [
+      "Arcade",
+      "Racing",
+      "Survival",
+      "NSOC26"
+    ],
+    "stars": 0,
+    "featured": false,
+    "difficulty": "Intermediate"
+  },
+  {
     "id": "neon-runner_babin",
     "title": "Neon Beat Runner",
     "category": "Rhythm",
