@@ -37,6 +37,18 @@ const GAMES_REGISTRY = [
     tags: ["Arcade", "Retro", "Paddle"],
     stars: 32,
     featured: true
+  },
+  {
+    id: "neon-drift-racer_joitapaul",
+    title: "Neon Drift Racer",
+    category: "Arcade",
+    icon: "🚗",
+    description: "Dodge neon traffic, collect energy orbs, and survive as the road gets faster.",
+    author: "Joita Paul",
+    github: "joitapaul",
+    role: "Contributor",
+    path: "games/neon-drift-racer_joitapaul/index.html",
+    tags: ["Racing", "Arcade", "Action"]
   }
 ];
 
