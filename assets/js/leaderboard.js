@@ -617,9 +617,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       console.warn("GitHub API notice:", err.message);
       if (syncStatusText) {
-        syncStatusText.textContent = err.message === "RATE_LIMIT"
-          ? `⚠️ GitHub API rate limit reached (60/hr). Showing cached/local data.`
+        syncStatusText.innerHTML = err.message === "RATE_LIMIT"
+          ? `<i data-lucide="alert-triangle" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px; color: #f59e0b;"></i> GitHub API rate limit reached (60/hr). Showing cached/local data.`
           : `Offline/Cached state: ${repo} (Rate limit safe)`;
+        if (window.lucide) lucide.createIcons();
       }
     }
 
@@ -632,11 +633,13 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchBtn.addEventListener("click", () => {
       const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
       fetchBtn.disabled = true;
-      fetchBtn.textContent = "⏳ Syncing...";
+      fetchBtn.innerHTML = `<i data-lucide="loader-2" class="spin" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> Syncing...`;
+      if (window.lucide) lucide.createIcons();
       fetchLiveGitHubContributions(repo, true).finally(() => {
         setTimeout(() => {
           fetchBtn.disabled = false;
-          fetchBtn.textContent = "🔄 Refresh Stats";
+          fetchBtn.innerHTML = `<i data-lucide="refresh-cw" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> Refresh Stats`;
+          if (window.lucide) lucide.createIcons();
         }, 1000);
       });
     });

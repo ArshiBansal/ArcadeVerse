@@ -713,8 +713,19 @@ body {
 }
 
 .pill-fav-icon {
-  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
+}
+
+.pill-fav-icon svg,
+.pill-fav-icon i {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.5;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .favorites-count-badge {

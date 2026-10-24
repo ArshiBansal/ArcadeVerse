@@ -30,7 +30,15 @@
 }
 
 .share-toast-icon {
-  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10b981;
+}
+
+.share-toast-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
 .btn-icon-share {

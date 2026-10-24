@@ -13,10 +13,11 @@
     toast.id = TOAST_ID;
     toast.className = "share-toast";
     toast.innerHTML = `
-      <span class="share-toast-icon">🔗</span>
+      <span class="share-toast-icon"><i data-lucide="link-2"></i></span>
       <span class="share-toast-msg">Direct link copied to clipboard!</span>
     `;
     document.body.appendChild(toast);
+    if (window.lucide) lucide.createIcons();
   }
 
   function showToast(msg) {

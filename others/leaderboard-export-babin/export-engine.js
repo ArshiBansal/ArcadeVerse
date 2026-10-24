@@ -132,12 +132,13 @@
       const container = document.createElement("div");
       container.className = "export-controls-container";
       container.innerHTML = `
-        <button id="btn-export-csv" class="btn-export" title="Export as CSV">📊 Export CSV</button>
-        <button id="btn-export-json" class="btn-export" title="Export as JSON">{ } Export JSON</button>
-        <button id="btn-gen-cert" class="btn-export cert-highlight" title="Download Champion Certificate">🏆 Certificate</button>
+        <button id="btn-export-csv" class="btn-export" title="Export as CSV"><i data-lucide="file-spreadsheet"></i> Export CSV</button>
+        <button id="btn-export-json" class="btn-export" title="Export as JSON"><i data-lucide="file-code"></i> Export JSON</button>
+        <button id="btn-gen-cert" class="btn-export cert-highlight" title="Download Champion Certificate"><i data-lucide="award"></i> Certificate</button>
       `;
 
       headerActions.appendChild(container);
+      if (window.lucide) lucide.createIcons();
 
       document.getElementById("btn-export-csv").addEventListener("click", exportCSV);
       document.getElementById("btn-export-json").addEventListener("click", exportJSON);

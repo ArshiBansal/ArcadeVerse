@@ -33,7 +33,18 @@
 }
 
 .pwa-icon {
-  font-size: 1.8rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.pwa-icon svg {
+  width: 26px;
+  height: 26px;
 }
 
 .pwa-text {

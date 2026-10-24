@@ -43,7 +43,7 @@
     banner.className = "pwa-banner";
     banner.innerHTML = `
       <div class="pwa-banner-content">
-        <span class="pwa-icon">🕹️</span>
+        <span class="pwa-icon"><i data-lucide="download"></i></span>
         <div class="pwa-text">
           <strong>Install ArcadeVerse</strong>
           <span>Play retro arcade games offline anywhere</span>
@@ -56,6 +56,7 @@
     `;
 
     document.body.appendChild(banner);
+    if (window.lucide) lucide.createIcons();
 
     document.getElementById("pwa-install-btn").addEventListener("click", () => {
       if (deferredPrompt) {
@@ -101,8 +102,9 @@
     const badge = document.createElement("div");
     badge.id = "pwa-offline-badge";
     badge.className = "pwa-offline-badge";
-    badge.innerHTML = `<span>⚠️ Offline Mode — Cached Games Active</span>`;
+    badge.innerHTML = `<span><i data-lucide="wifi-off" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 5px;"></i> Offline Mode — Cached Games Active</span>`;
     document.body.appendChild(badge);
+    if (window.lucide) lucide.createIcons();
   }
 
   function hideOfflineNotice() {

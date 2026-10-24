@@ -32,7 +32,7 @@
     modal.innerHTML = `
       <div class="omnibar-card">
         <div class="omnibar-input-row">
-          <span class="omnibar-icon">🔍</span>
+          <span class="omnibar-icon"><i data-lucide="search"></i></span>
           <input type="text" id="omnibar-input" class="omnibar-input" placeholder="Type a game, category, or command... (e.g. 'puzzle', 'snake')" autocomplete="off" />
           <kbd class="omnibar-kbd">ESC</kbd>
         </div>
@@ -46,6 +46,7 @@
     `;
 
     document.body.appendChild(modal);
+    if (window.lucide) lucide.createIcons();
 
     const input = document.getElementById("omnibar-input");
     const resultsContainer = document.getElementById("omnibar-results");

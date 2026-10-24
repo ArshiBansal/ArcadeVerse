@@ -127,8 +127,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const toolsPill = document.createElement("button");
     toolsPill.className = "pill pill-tools";
     toolsPill.setAttribute("data-category", "tools");
-    toolsPill.innerHTML = `<span>🛠️ Arcade Tools</span> <span class="favorites-count-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">${standaloneTools.length}</span>`;
+    toolsPill.innerHTML = `<span><i data-lucide="wrench" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i>Arcade Tools</span> <span class="favorites-count-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">${standaloneTools.length}</span>`;
     categoryPillsContainer.appendChild(toolsPill);
+    if (window.lucide) {
+      lucide.createIcons();
+    }
     toolsPill.addEventListener("click", () => {
       document.querySelectorAll(".category-pills .pill").forEach((p) => p.classList.remove("active"));
       toolsPill.classList.add("active");

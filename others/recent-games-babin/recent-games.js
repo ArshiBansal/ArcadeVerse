@@ -52,7 +52,7 @@
     trigger.title = "View Recently Played Games";
     trigger.setAttribute("aria-label", "View Recently Played Games");
     trigger.innerHTML = `
-      <span class="trigger-icon">🕒</span>
+      <span class="trigger-icon"><i data-lucide="clock"></i></span>
       <span class="trigger-label">Recent</span>
       <span id="recent-count-badge" class="recent-badge">0</span>
     `;
@@ -67,7 +67,7 @@
     drawer.innerHTML = `
       <div class="recent-drawer-header">
         <div class="drawer-title-row">
-          <span class="drawer-icon">🕹️</span>
+          <span class="drawer-icon"><i data-lucide="gamepad-2"></i></span>
           <h3>Recently Played</h3>
         </div>
         <button id="recent-drawer-close" class="recent-close-btn" aria-label="Close drawer">&times;</button>
@@ -79,6 +79,7 @@
     `;
 
     document.body.appendChild(drawer);
+    if (window.lucide) lucide.createIcons();
 
     // Backdrop
     const backdrop = document.createElement("div");
@@ -132,11 +133,12 @@
     if (list.length === 0) {
       listContainer.innerHTML = `
         <div class="recent-empty">
-          <span class="empty-icon">🎮</span>
+          <span class="empty-icon"><i data-lucide="gamepad-2"></i></span>
           <p>No recently played games yet.</p>
           <small>Launch any game from the catalog to record your play history!</small>
         </div>
       `;
+      if (window.lucide) lucide.createIcons();
       return;
     }
 

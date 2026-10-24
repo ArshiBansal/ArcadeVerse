@@ -9,35 +9,35 @@
       id: "first_coin",
       title: "Insert Coin",
       description: "Launch your first web arcade game inside the player modal.",
-      icon: "🪙",
+      icon: "coins",
       condition: (stats) => stats.gamesLaunched >= 1
     },
     {
       id: "arcade_explorer",
       title: "Arcade Explorer",
       description: "Play at least 3 distinct community games.",
-      icon: "🎮",
+      icon: "gamepad-2",
       condition: (stats) => stats.distinctGames && stats.distinctGames.length >= 3
     },
     {
       id: "contributor_reader",
       title: "Open Source Scholar",
       description: "Read the official ArcadeVerse Contributor Guide (CONTRIBUTING.md).",
-      icon: "📜",
+      icon: "book-open",
       condition: (stats) => stats.visitedContributing === true
     },
     {
       id: "fame_scout",
       title: "Hall of Fame Scout",
       description: "Audit the live GitHub Contributor Leaderboard.",
-      icon: "🏆",
+      icon: "trophy",
       condition: (stats) => stats.visitedLeaderboard === true
     },
     {
       id: "veteran_gamer",
       title: "Arcade Veteran",
       description: "Launch 10 game sessions across the platform.",
-      icon: "⚡",
+      icon: "zap",
       condition: (stats) => stats.gamesLaunched >= 10
     }
   ];
@@ -58,7 +58,7 @@
     const toast = document.createElement("div");
     toast.className = "achievement-toast";
     toast.innerHTML = `
-      <div class="toast-icon">${achievement.icon}</div>
+      <div class="toast-icon"><i data-lucide="${achievement.icon}"></i></div>
       <div class="toast-body">
         <span class="toast-tag">ACHIEVEMENT UNLOCKED!</span>
         <strong>${achievement.title}</strong>
@@ -67,6 +67,7 @@
     `;
 
     document.body.appendChild(toast);
+    if (window.lucide) lucide.createIcons();
     setTimeout(() => {
       toast.classList.add("fade-out");
       setTimeout(() => toast.remove(), 400);
@@ -182,15 +183,22 @@
       const isUnlocked = playerStats.unlockedAchievements.includes(ach.id);
       const item = document.createElement("div");
       item.className = `achievement-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+      const statusIcon = isUnlocked 
+        ? '<i data-lucide="check" class="ach-status-check"></i>' 
+        : '<i data-lucide="lock" class="ach-status-lock"></i>';
       item.innerHTML = `
-        <div class="ach-icon">${ach.icon}</div>
+        <div class="ach-icon"><i data-lucide="${ach.icon}"></i></div>
         <div class="ach-info">
-          <h4>${ach.title} ${isUnlocked ? '✓' : '🔒'}</h4>
+          <h4>${ach.title} ${statusIcon}</h4>
           <p>${ach.description}</p>
         </div>
       `;
       listEl.appendChild(item);
     });
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
 
     modal.classList.add("active");
   }
