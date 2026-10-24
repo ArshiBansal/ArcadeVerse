@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Physical Gamepad & Haptic Hub</title>
+  <link rel="stylesheet" href="hub.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="padhub-body">
+  <div class="padhub-container">
+    <header class="padhub-header">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; color: #fff;">Physical Gamepad & Haptic Hub</h1>
+        <p style="margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.9rem;">HTML5 Gamepad API Bridge, Dual-Shock Rumble Actuator & Button Mapper</p>
+      </div>
+      <a href="../../index.html" style="color: var(--padhub-cyan); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Controller Visualizer Stage -->
+    <div class="controller-stage">
+      <div style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 0.5rem;" id="gamepad-status-line">
+        Waiting for USB or Bluetooth Controller input... (Press any button on your controller)
+      </div>
+
+      <!-- SVG Controller Visualizer -->
+      <svg class="gamepad-svg-layout" viewBox="0 0 500 320">
+        <!-- Body Chassis -->
+        <path d="M120,40 Q250,20 380,40 Q460,80 480,220 Q480,300 420,300 Q360,300 320,200 Q250,220 180,200 Q140,300 80,300 Q20,300 20,220 Q40,80 120,40 Z" fill="#131926" stroke="rgba(0, 240, 255, 0.3)" stroke-width="3"/>
+        
+        <!-- D-Pad -->
+        <rect id="gp-btn-12" class="gp-part" x="110" y="110" width="25" height="35" rx="4"/>
+        <rect id="gp-btn-13" class="gp-part" x="110" y="165" width="25" height="35" rx="4"/>
+        <rect id="gp-btn-14" class="gp-part" x="80" y="142" width="35" height="25" rx="4"/>
+        <rect id="gp-btn-15" class="gp-part" x="130" y="142" width="35" height="25" rx="4"/>
+
+        <!-- Action Buttons (A, B, X, Y) -->
+        <circle id="gp-btn-0" class="gp-part active-magenta" cx="370" cy="180" r="14"/> <!-- A -->
+        <circle id="gp-btn-1" class="gp-part" cx="400" cy="150" r="14"/> <!-- B -->
+        <circle id="gp-btn-2" class="gp-part" cx="340" cy="150" r="14"/> <!-- X -->
+        <circle id="gp-btn-3" class="gp-part" cx="370" cy="120" r="14"/> <!-- Y -->
+
+        <!-- Left & Right Analog Sticks -->
+        <circle id="gp-stick-left" class="gp-part" cx="190" cy="190" r="28"/>
+        <circle id="gp-stick-right" class="gp-part" cx="310" cy="190" r="28"/>
+      </svg>
+
+      <!-- Haptic Vibration Trigger Tests -->
+      <h3 style="margin: 1.5rem 0 0.5rem; color: #fff; font-size: 1.1rem;">DualRumble Vibration Motor Test</h3>
+      <div class="rumble-panel">
+        <button class="btn-rumble" data-effect="hit">Test Hit Pulse</button>
+        <button class="btn-rumble" data-effect="damage">Test Damage Shock</button>
+        <button class="btn-rumble" data-effect="explosion">Test Heavy Explosion</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="gamepad-manager.js"></script>
+  <script src="haptic-rumble.js"></script>
+  <script src="input-mapper.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const statusLine = document.getElementById('gamepad-status-line');
+      const rumbleButtons = document.querySelectorAll('.btn-rumble');
+
+      window.addEventListener('arcadeverse:gamepad-connected', (e) => {
+        statusLine.textContent = `Connected: ${e.detail.id} (Controller #${e.detail.index})`;
+        statusLine.style.color = '#00ff88';
+      });
+
+      window.addEventListener('arcadeverse:gamepad-disconnected', () => {
+        statusLine.textContent = 'Controller disconnected. Plug in a USB or Bluetooth controller.';
+        statusLine.style.color = '#94a3b8';
+      });
+
+      window.addEventListener('arcadeverse:gamepad-state', (e) => {
+        const state = e.detail;
+        // Highlight active buttons
+        state.buttons.forEach((btn, idx) => {
+          const el = document.getElementById(`gp-btn-${idx}`);
+          if (el) {
+            if (btn.pressed) el.classList.add('active');
+            else el.classList.remove('active');
+          }
+        });
+      });
+
+      rumbleButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const effect = btn.getAttribute('data-effect');
+          const success = await window.ArcadeHapticRumble.triggerEffect(effect);
+          if (!success) {
+            alert('Haptic feedback is not supported or no controller with vibration actuators is currently active.');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

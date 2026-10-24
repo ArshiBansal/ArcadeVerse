@@ -1,0 +1,17 @@
+{
+  "id": "code-linter-babin",
+  "title": "Arcade Submission Code Linter",
+  "category": "Developer Tool",
+  "type": "standalone-tool",
+  "lucideIcon": "check-circle",
+  "description": "Client-side AST checker validating game files against 4-file rules, no-emoji policy, and DOM safety.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "linter.html",
+  "tags": [
+    "Linter",
+    "AST",
+    "Validation",
+    "QA"
+  ]
+}

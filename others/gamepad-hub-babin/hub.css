@@ -1,0 +1,103 @@
+/* ==========================================================================
+   ArcadeVerse Physical Gamepad Hub Stylesheet
+   ========================================================================== */
+
+:root {
+  --padhub-bg: #0b0e14;
+  --padhub-card: #141b24;
+  --padhub-cyan: #00f0ff;
+  --padhub-magenta: #ff007f;
+  --padhub-green: #00ff88;
+  --padhub-border: rgba(0, 240, 255, 0.25);
+  --padhub-text: #e2e8f0;
+}
+
+body.padhub-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--padhub-bg);
+  color: var(--padhub-text);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.padhub-container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.padhub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--padhub-border);
+  padding-bottom: 1.5rem;
+}
+
+/* Controller Visualizer Stage */
+.controller-stage {
+  background: var(--padhub-card);
+  border: 1px solid var(--padhub-border);
+  border-radius: 14px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+.gamepad-svg-layout {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.gp-part {
+  fill: #1e293b;
+  stroke: var(--padhub-border);
+  stroke-width: 2;
+  transition: all 0.1s;
+}
+
+.gp-part.active {
+  fill: var(--padhub-cyan);
+  filter: drop-shadow(0 0 10px var(--padhub-cyan));
+}
+
+.gp-part.active-magenta {
+  fill: var(--padhub-magenta);
+  filter: drop-shadow(0 0 10px var(--padhub-magenta));
+}
+
+/* Rumble test buttons */
+.rumble-panel {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-rumble {
+  background: var(--padhub-card);
+  border: 1px solid var(--padhub-border);
+  color: #fff;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.btn-rumble:hover {
+  border-color: var(--padhub-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  transform: translateY(-2px);
+}

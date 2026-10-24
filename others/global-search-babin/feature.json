@@ -1,0 +1,18 @@
+{
+  "id": "global-search-babin",
+  "title": "Global Quick Search Modal",
+  "category": "Navigation",
+  "type": "background-plugin",
+  "lucideIcon": "search",
+  "description": "Quick-access Ctrl+K search popup with fuzzy matching across games, categories, tags, and authors.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "js": "search-modal.js",
+  "css": "search-modal.css",
+  "tags": [
+    "Search",
+    "Hotkeys",
+    "Modal",
+    "Navigation"
+  ]
+}

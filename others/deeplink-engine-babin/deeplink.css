@@ -1,0 +1,74 @@
+/* ArcadeVerse Deep Link & Sharing UI Styles */
+
+.share-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(13, 17, 23, 0.95);
+  border: 1px solid var(--accent-neon-green, #10b981);
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
+  color: #f1f5f9;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 99999;
+  transform: translateY(100px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.share-toast.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.share-toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10b981;
+}
+
+.share-toast-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-icon-share {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: 6px;
+}
+
+.btn-icon-share:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #10b981;
+  transform: scale(1.05);
+}
+
+.deeplink-highlight {
+  animation: deeplinkPulse 2s ease forwards;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.8) !important;
+}
+
+@keyframes deeplinkPulse {
+  0% { transform: scale(1); outline: 3px solid #10b981; }
+  50% { transform: scale(1.03); outline: 4px solid #3b82f6; }
+  100% { transform: scale(1); outline: 1px solid transparent; }
+}

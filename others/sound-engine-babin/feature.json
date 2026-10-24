@@ -1,0 +1,18 @@
+{
+  "id": "sound-engine-babin",
+  "title": "Retro Audio & SFX Engine",
+  "category": "Audio",
+  "type": "background-plugin",
+  "lucideIcon": "volume-2",
+  "description": "Web Audio API synthesized sound effects for buttons, cards, modal popups, and global audio toggle.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "js": "sound-engine.js",
+  "css": "sound-toggle.css",
+  "tags": [
+    "SFX",
+    "WebAudio",
+    "Sound",
+    "Haptics"
+  ]
+}

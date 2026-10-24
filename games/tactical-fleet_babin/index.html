@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tactical Fleet Commander | ArcadeVerse</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-left">
+        <h1 class="game-title">Tactical <span class="accent">Fleet</span></h1>
+        <span class="game-subtitle">Naval Radar Command Simulation</span>
+      </div>
+      <div class="header-right">
+        <button id="rules-btn" class="btn btn-secondary">How to Play</button>
+      </div>
+    </header>
+
+    <div class="hud-bar">
+      <div class="hud-item">
+        <span class="hud-label">ENEMY SHIPS</span>
+        <span class="hud-value" id="ships-left-display">4 / 4</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">BASE INTEGRITY</span>
+        <span class="hud-value" id="base-hp-display">100%</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">TURNS</span>
+        <span class="hud-value" id="turns-display">0</span>
+      </div>
+    </div>
+
+    <!-- Radar Controls Bar -->
+    <div class="radar-actions-bar">
+      <button id="sonar-scan-btn" class="sonar-btn" title="Scan 2x2 grid sector (1 charge)">
+        📡 Sonar Scan: <strong id="sonar-charges">1</strong>
+      </button>
+      <span class="status-intel" id="status-intel">Awaiting coordinates...</span>
+    </div>
+
+    <!-- 7x7 Radar Grid -->
+    <div class="radar-board-wrapper">
+      <div class="radar-grid" id="radar-grid"></div>
+    </div>
+
+    <!-- Battle Log -->
+    <div class="battle-log" id="battle-log">
+      <div class="log-entry system">Radar operational. Target enemy carrier group.</div>
+    </div>
+
+    <!-- Victory/Defeat Modal -->
+    <div id="result-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="result-title">Victory Achieved</h3>
+          <button id="close-result-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="result-icon" id="result-icon">⚓</div>
+          <p id="result-message">All hostile fleet elements have been neutralized!</p>
+          <div class="stats-recap">
+            <div class="recap-row"><span>Total Turns:</span><strong id="final-turns">0</strong></div>
+            <div class="recap-row"><span>Base Integrity:</span><strong id="final-hp">100%</strong></div>
+          </div>
+          <button id="modal-restart-btn" class="btn btn-primary" style="width: 100%;">Engage Next Theater</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules Modal for PA Review -->
+    <div id="rules-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>How to Play (PA Review)</h3>
+          <button id="close-rules-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <ul class="rules-list">
+            <li><strong>Objective:</strong> Locate and sink all 4 enemy vessels concealed beneath the fog of war.</li>
+            <li><strong>Fleet Composition:</strong>
+              <ul>
+                <li>Carrier (4 cells)</li>
+                <li>Battleship (3 cells)</li>
+                <li>Cruiser (2 cells)</li>
+                <li>Submarine (2 cells)</li>
+              </ul>
+            </li>
+            <li><strong>Turn Mechanics:</strong> Every time you launch a missile strike, the enemy counter-attacks your coastal defense base (-10% to -15% HP).</li>
+            <li><strong>Sonar Scan:</strong> Use your 1-time tactical Sonar Scan to ping a 2x2 grid sector for submerged vessels.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Beat Runner | ArcadeVerse</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-left">
+        <h1 class="game-title">Neon Beat <span class="accent">Runner</span></h1>
+        <span class="game-subtitle">4-Lane Procedural Rhythm Arcade</span>
+      </div>
+      <div class="header-right">
+        <button id="rules-btn" class="btn btn-secondary">How to Play</button>
+      </div>
+    </header>
+
+    <div class="scoreboard-bar">
+      <div class="score-card">
+        <span class="label">SCORE</span>
+        <span class="value" id="score-display">0</span>
+      </div>
+      <div class="score-card">
+        <span class="label">COMBO</span>
+        <span class="value combo-val" id="combo-display">0x</span>
+      </div>
+      <div class="score-card">
+        <span class="label">BEST</span>
+        <span class="value" id="best-score">0</span>
+      </div>
+    </div>
+
+    <!-- Rhythm Canvas Stage -->
+    <div class="stage-wrapper">
+      <canvas id="rhythm-canvas" width="360" height="520"></canvas>
+
+      <!-- Hit Feedback Banner -->
+      <div class="feedback-banner" id="feedback-banner">READY</div>
+
+      <!-- Start Overlay -->
+      <div id="start-overlay" class="overlay active">
+        <div class="overlay-card">
+          <div class="overlay-icon">🎵</div>
+          <h2>Neon Beat Runner</h2>
+          <p>Sync your keypresses to descending neon pulses with millisecond precision to build combo streaks!</p>
+          <button id="start-btn" class="btn btn-primary">Start Track</button>
+          <span class="hint-text">Keys: <strong>D • F • J • K</strong></span>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="gameover-overlay" class="overlay">
+        <div class="overlay-card">
+          <div class="overlay-icon">🎧</div>
+          <h2>Track Completed!</h2>
+          <div class="stats-recap">
+            <div class="recap-row"><span>Final Score:</span><strong id="final-score">0</strong></div>
+            <div class="recap-row"><span>Max Combo:</span><strong id="final-combo">0x</strong></div>
+            <div class="recap-row"><span>Perfect Hits:</span><strong id="final-perfects">0</strong></div>
+          </div>
+          <button id="restart-btn" class="btn btn-primary">Replay Track</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Touch Lanes -->
+    <div class="touch-lanes">
+      <button class="lane-touch-btn" id="touch-0" aria-label="Lane 1 Key D">D</button>
+      <button class="lane-touch-btn" id="touch-1" aria-label="Lane 2 Key F">F</button>
+      <button class="lane-touch-btn" id="touch-2" aria-label="Lane 3 Key J">J</button>
+      <button class="lane-touch-btn" id="touch-3" aria-label="Lane 4 Key K">K</button>
+    </div>
+
+    <!-- Rules Modal for PA Review -->
+    <div id="rules-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>How to Play (PA Review)</h3>
+          <button id="close-rules-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <ul class="rules-list">
+            <li><strong>Objective:</strong> Press corresponding lane keys when neon pulses strike the target judgment line at the bottom.</li>
+            <li><strong>Controls:</strong>
+              <ul>
+                <li>Lane 1: <kbd>D</kbd> or <kbd>1</kbd></li>
+                <li>Lane 2: <kbd>F</kbd> or <kbd>2</kbd></li>
+                <li>Lane 3: <kbd>J</kbd> or <kbd>3</kbd></li>
+                <li>Lane 4: <kbd>K</kbd> or <kbd>4</kbd></li>
+              </ul>
+            </li>
+            <li><strong>Hit Ratings:</strong>
+              <ul>
+                <li>✨ <strong>PERFECT:</strong> Exact line alignment (+100 pts, builds multiplier)</li>
+                <li>👍 <strong>GOOD:</strong> Close proximity (+50 pts)</li>
+                <li>❌ <strong>MISS:</strong> Pulse passes the target line (combo reset)</li>
+              </ul>
+            </li>
+            <li><strong>Audio Engine:</strong> Native Web Audio synthesizer generates percussion beats and chime feedback.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

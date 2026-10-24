@@ -1,0 +1,17 @@
+{
+  "id": "chiptune-jukebox-babin",
+  "title": "8-Bit Chiptune Retro Jukebox",
+  "category": "Audio",
+  "type": "standalone-tool",
+  "lucideIcon": "music",
+  "description": "Retro 8-bit web audio chiptune synthesizer with real-time waveform spectrum visualizer.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "jukebox.html",
+  "tags": [
+    "Audio",
+    "Chiptune",
+    "8-bit",
+    "Synth"
+  ]
+}

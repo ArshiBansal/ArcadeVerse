@@ -1,0 +1,17 @@
+{
+  "id": "fps-telemetry-babin",
+  "title": "FPS & Frame Latency Telemetry",
+  "category": "Diagnostics",
+  "type": "standalone-tool",
+  "lucideIcon": "gauge",
+  "description": "Real-time FPS overlay HUD, frame time latency graphs, and dynamic quality performance scaler.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "telemetry.html",
+  "tags": [
+    "FPS",
+    "Telemetry",
+    "Performance",
+    "Benchmark"
+  ]
+}

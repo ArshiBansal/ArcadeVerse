@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Contributor Code Quality & Canvas Linter</title>
+  <link rel="stylesheet" href="linter.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="linter-body">
+  <div class="linter-container">
+    <header class="linter-header">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; color: #fff;">Contributor Code Quality & Canvas Linter</h1>
+        <p style="margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.9rem;">Pre-Flight Static Validator, Emoji Checker & PR QA Report Generator</p>
+      </div>
+      <a href="../../index.html" style="color: var(--lint-cyan); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Code Editor Card -->
+    <div class="editor-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <span style="font-weight: 700; color: #fff; font-size: 1rem;">Paste Your Game Code Below (game.js or index.html)</span>
+        <span style="font-size: 0.8rem; color: #94a3b8;">Validates rules from CONTRIBUTING.md</span>
+      </div>
+      <textarea class="code-textarea" id="code-input">// Paste your game code here to audit compliance
+function startGame() {
+  console.log("Game Loaded! 🚀"); // Warning: Emoji detected!
+  requestAnimationFrame(loop); // Warning: No cancelAnimationFrame
+}
+      </textarea>
+      <div class="linter-actions">
+        <button class="btn-lint" id="btn-run-lint">Audit Code Compliance</button>
+        <button class="btn-lint" id="btn-sample-clean" style="background: transparent; color: var(--lint-cyan); border: 1px solid var(--lint-border);">Load Clean Code Sample</button>
+      </div>
+    </div>
+
+    <!-- Findings Card -->
+    <div class="findings-card" id="findings-container">
+      <h2 style="margin: 0 0 1rem; font-size: 1.25rem; color: #fff;">Audit Findings</h2>
+      <div id="findings-list">
+        <div style="color: #64748b; font-size: 0.9rem;">Click "Audit Code Compliance" to run rules engine.</div>
+      </div>
+    </div>
+
+    <!-- Export Markdown Card -->
+    <div class="findings-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <h3 style="margin: 0; font-size: 1.1rem; color: #fff;">Generated PR QA Audit Markdown</h3>
+        <button id="btn-copy-md" style="background: #1e293b; color: #fff; border: 1px solid var(--lint-border); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer;">
+          Copy to Clipboard
+        </button>
+      </div>
+      <div class="report-output-box" id="markdown-output">Run audit to generate PR Markdown report...</div>
+    </div>
+  </div>
+
+  <script src="rules-engine.js"></script>
+  <script src="ast-checker.js"></script>
+  <script src="report-exporter.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const codeInput = document.getElementById('code-input');
+      const runBtn = document.getElementById('btn-run-lint');
+      const sampleBtn = document.getElementById('btn-sample-clean');
+      const findingsList = document.getElementById('findings-list');
+      const mdOutput = document.getElementById('markdown-output');
+      const copyBtn = document.getElementById('btn-copy-md');
+
+      let currentReport = null;
+
+      runBtn.addEventListener('click', () => {
+        const code = codeInput.value;
+        const report = window.ArcadeAstChecker.lintProject({ 'game.js': code });
+        currentReport = report;
+
+        findingsList.innerHTML = '';
+        const findings = report.fileReports['game.js'] || [];
+
+        if (findings.length === 0) {
+          findingsList.innerHTML = '<div style="color: #00ff88; font-weight: 600; padding: 1rem; display: flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> All compliance checks passed! Code is 100% ready for PR submission.</div>';
+        } else {
+          findings.forEach(f => {
+            const row = document.createElement('div');
+            row.className = 'finding-row';
+            row.innerHTML = `
+              <span class="finding-badge ${f.severity === 'error' ? 'badge-error' : 'badge-warning'}">
+                ${f.severity.toUpperCase()}
+              </span>
+              <span style="color: #94a3b8; font-family: monospace; font-size: 0.8rem;">Line ${f.line}</span>
+              <span style="color: #fff; font-size: 0.85rem;">${f.message}</span>
+            `;
+            findingsList.appendChild(row);
+          });
+        }
+
+        const md = window.ArcadeReportExporter.generateMarkdownReport(report);
+        mdOutput.textContent = md;
+      });
+
+      sampleBtn.addEventListener('click', () => {
+        codeInput.value = `// Clean ArcadeVerse Canvas Loop Example
+let animId = null;
+
+function startLoop() {
+  function loop() {
+    // Canvas update & render
+    animId = requestAnimationFrame(loop);
+  }
+  animId = requestAnimationFrame(loop);
+}
+
+function stopLoop() {
+  if (animId) cancelAnimationFrame(animId);
+}
+
+window.addEventListener('touchstart', (e) => {
+  // Mobile touch handler
+}, { passive: false });`;
+      });
+
+      copyBtn.addEventListener('click', () => {
+        if (currentReport) {
+          const md = window.ArcadeReportExporter.generateMarkdownReport(currentReport);
+          window.ArcadeReportExporter.copyToClipboard(md)
+            .then(() => alert('Copied QA Audit Report to Clipboard!'))
+            .catch(() => alert('Could not access clipboard'));
+        }
+      });
+    });
+  </script>
+</body>
+</html>

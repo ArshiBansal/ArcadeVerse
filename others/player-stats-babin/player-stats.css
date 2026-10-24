@@ -1,0 +1,209 @@
+/* Player Stats & Achievements Styles */
+.achievements-nav-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  padding: 0 !important;
+  border-radius: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  margin-right: 0.25rem;
+}
+
+.achievements-nav-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  display: block;
+}
+
+.achievements-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+.achievement-pill {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #fbbf24;
+  color: #070913;
+  font-size: 0.65rem;
+  font-weight: 800;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+}
+
+/* Achievement Toast Notification */
+.achievement-toast {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: rgba(13, 20, 38, 0.95);
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(251, 191, 36, 0.3);
+  backdrop-filter: blur(12px);
+  z-index: 100000;
+  animation: slideInRight 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.achievement-toast.fade-out {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.4s ease;
+}
+
+.toast-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fbbf24;
+}
+
+.toast-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.toast-body {
+  font-size: 0.8rem;
+}
+
+.toast-tag {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #fbbf24;
+  letter-spacing: 0.5px;
+}
+
+.toast-body strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #fff;
+  margin: 0.1rem 0;
+}
+
+.toast-body p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Modal Inner */
+.achievements-progress-bar {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.progress-track {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.35rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00f0ff, #fbbf24);
+  transition: width 0.4s ease;
+}
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.achievement-item.unlocked {
+  border-color: rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.05);
+}
+
+.achievement-item.locked {
+  opacity: 0.5;
+}
+
+.ach-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fbbf24;
+  flex-shrink: 0;
+}
+
+.ach-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.ach-info h4 {
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 0.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.ach-status-check {
+  width: 14px;
+  height: 14px;
+  color: #10b981;
+  vertical-align: -1px;
+  margin-left: 6px;
+}
+
+.ach-status-lock {
+  width: 14px;
+  height: 14px;
+  color: #94a3b8;
+  vertical-align: -1px;
+  margin-left: 6px;
+}
+
+.ach-info p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}

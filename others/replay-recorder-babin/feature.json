@@ -1,0 +1,17 @@
+{
+  "id": "replay-recorder-babin",
+  "title": "Gameplay Replay & Canvas Recorder",
+  "category": "Media",
+  "type": "standalone-tool",
+  "lucideIcon": "video",
+  "description": "Canvas capture video recorder, WebM clip exporter, and high-resolution screenshot generator.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "recorder.html",
+  "tags": [
+    "Record",
+    "Video",
+    "Replay",
+    "Screenshot"
+  ]
+}

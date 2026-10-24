@@ -1,0 +1,17 @@
+{
+  "title": "Cyber Tower Stacker",
+  "category": "Arcade",
+  "lucideIcon": "layers",
+  "description": "Stack swinging neon slabs with precision timing. Unaligned edges are sliced off as the tower grows!",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "role": "Arcade Developer",
+  "tags": [
+    "Arcade",
+    "Timing",
+    "Slicing",
+    "Physics"
+  ],
+  "stars": 30,
+  "featured": true
+}

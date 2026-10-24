@@ -1,0 +1,18 @@
+{
+  "id": "leaderboard-export-babin",
+  "title": "Leaderboard Analytics & Export Engine",
+  "category": "Analytics",
+  "type": "background-plugin",
+  "lucideIcon": "download",
+  "description": "Export live leaderboard standings to CSV, JSON, and printable Hall of Fame certificates.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "js": "export-engine.js",
+  "css": "export-engine.css",
+  "tags": [
+    "Export",
+    "CSV",
+    "JSON",
+    "Certificate"
+  ]
+}

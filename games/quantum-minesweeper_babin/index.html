@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Minesweeper | ArcadeVerse</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-left">
+        <h1 class="game-title">Quantum <span class="accent">Minesweeper</span></h1>
+        <span class="game-subtitle">Subatomic Hazard Neutralization</span>
+      </div>
+      <div class="header-right">
+        <button id="rules-btn" class="btn btn-secondary">How to Play</button>
+      </div>
+    </header>
+
+    <div class="hud-bar">
+      <div class="hud-item">
+        <span class="hud-label">MINES</span>
+        <span class="hud-value" id="mine-count">10</span>
+      </div>
+      <div class="hud-item center-face">
+        <button id="face-btn" class="face-btn" title="Reset Field">🙂</button>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">TIME</span>
+        <span class="hud-value" id="timer-display">000</span>
+      </div>
+    </div>
+
+    <div class="controls-toolbar">
+      <div class="difficulty-group">
+        <button class="diff-btn active" data-diff="easy">9x9 (10)</button>
+        <button class="diff-btn" data-diff="medium">12x12 (20)</button>
+      </div>
+      <button id="flag-toggle-btn" class="flag-toggle-btn" title="Toggle Mobile Flag Mode">
+        🚩 Flag Mode: <strong id="flag-mode-state">OFF</strong>
+      </button>
+    </div>
+
+    <!-- Minesweeper Grid -->
+    <div class="board-wrapper">
+      <div class="minefield" id="minefield"></div>
+    </div>
+
+    <!-- Win/Loss Overlay Modal -->
+    <div id="result-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="result-title">Field Cleared</h3>
+          <button id="close-result-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="result-icon" id="result-icon">🏆</div>
+          <p id="result-message">All subatomic quantum hazards have been safely neutralized!</p>
+          <div class="stats-recap">
+            <div class="recap-row"><span>Time Elapsed:</span><strong id="result-time">0s</strong></div>
+            <div class="recap-row"><span>Difficulty:</span><strong id="result-diff">9x9</strong></div>
+          </div>
+          <button id="modal-restart-btn" class="btn btn-primary" style="width: 100%;">Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules Modal for PA Review -->
+    <div id="rules-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>How to Play (PA Review)</h3>
+          <button id="close-rules-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <ul class="rules-list">
+            <li><strong>Objective:</strong> Uncover all safe tiles without detonating any hidden quantum mines.</li>
+            <li><strong>First-Click Safety:</strong> Your very first click is guaranteed to be safe and initiates recursive flood fill.</li>
+            <li><strong>Numbers:</strong> A number shows how many mines are adjacent in the 8 surrounding cells.</li>
+            <li><strong>Flagging Mines:</strong> Right-click on desktop, or toggle the <strong>Flag Mode</strong> on touch devices.</li>
+            <li><strong>Victory:</strong> Reveal every single non-mine tile on the grid to win!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

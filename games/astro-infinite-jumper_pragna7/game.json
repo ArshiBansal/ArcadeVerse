@@ -1,0 +1,14 @@
+{
+  "title": "Astro Infinite Jumper",
+  "category": "Arcade",
+  "lucideIcon": "arrow-up-circle",
+  "difficulty": "Intermediate",
+  "releaseDate": "2026-10-23",
+  "description": "Bounce continuously upward across floating space platforms, collecting jetpacks and dodging black holes.",
+  "author": "Pragna Seetha",
+  "github": "pragna7",
+  "role": "Contributor",
+  "tags": ["Arcade", "Space", "Platformer", "NSOC26"],
+  "featured": true,
+  "stars": 10
+}

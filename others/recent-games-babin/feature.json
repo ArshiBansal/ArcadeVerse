@@ -1,0 +1,18 @@
+{
+  "id": "recent-games-babin",
+  "title": "Recently Played Games Tray",
+  "category": "Navigation",
+  "type": "background-plugin",
+  "lucideIcon": "history",
+  "description": "Sticky quick-launch dock remembering recently played games in chronological order.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "js": "recent-games.js",
+  "css": "recent-games.css",
+  "tags": [
+    "History",
+    "Recent",
+    "QuickLaunch",
+    "Dock"
+  ]
+}

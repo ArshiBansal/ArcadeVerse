@@ -1,0 +1,18 @@
+{
+  "id": "pwa-engine-babin",
+  "title": "Progressive Web App Offline Engine",
+  "category": "Platform",
+  "type": "background-plugin",
+  "lucideIcon": "wifi",
+  "description": "Service Worker offline asset caching, background synchronization, and install prompt banner.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "js": "pwa-client.js",
+  "css": "pwa.css",
+  "tags": [
+    "PWA",
+    "Offline",
+    "ServiceWorker",
+    "Install"
+  ]
+}

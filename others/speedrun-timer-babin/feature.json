@@ -1,0 +1,17 @@
+{
+  "id": "speedrun-timer-babin",
+  "title": "Speedrun Split Timer Overlay",
+  "category": "Utility",
+  "type": "standalone-tool",
+  "lucideIcon": "timer",
+  "description": "High-precision floating split timer overlay for speedruns with split tracking and local comparisons.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "timer.html",
+  "tags": [
+    "Speedrun",
+    "Timer",
+    "Splits",
+    "Precision"
+  ]
+}

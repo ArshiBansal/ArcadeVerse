@@ -1,0 +1,17 @@
+{
+  "title": "Quantum 2048",
+  "category": "Puzzle",
+  "lucideIcon": "atom",
+  "description": "Slide and merge radioactive isotopes on a 4x4 containment grid to synthesize the 2048 singularity.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "role": "Arcade Developer",
+  "tags": [
+    "Puzzle",
+    "Math",
+    "Retro",
+    "Synthesis"
+  ],
+  "stars": 28,
+  "featured": true
+}

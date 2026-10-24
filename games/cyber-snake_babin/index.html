@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Snake Matrix | ArcadeVerse</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-left">
+        <h1 class="game-title">Cyber <span class="accent">Snake</span></h1>
+        <span class="game-subtitle">Neon Matrix Protocol</span>
+      </div>
+      <div class="header-right">
+        <button id="rules-btn" class="btn btn-secondary">How to Play</button>
+      </div>
+    </header>
+
+    <div class="scoreboard-bar">
+      <div class="score-card">
+        <span class="label">ENERGY BITS</span>
+        <span class="value" id="score-display">0</span>
+      </div>
+      <div class="score-card">
+        <span class="label">SPEED TIER</span>
+        <span class="value speed-val" id="speed-display">1x</span>
+      </div>
+      <div class="score-card">
+        <span class="label">BEST RECORD</span>
+        <span class="value" id="best-score">0</span>
+      </div>
+    </div>
+
+    <!-- Canvas Matrix -->
+    <div class="canvas-wrapper">
+      <canvas id="game-canvas" width="400" height="400"></canvas>
+
+      <!-- Start Overlay -->
+      <div id="start-overlay" class="overlay active">
+        <div class="overlay-card">
+          <div class="overlay-icon">🐍</div>
+          <h2>Cyber Snake Matrix</h2>
+          <p>Navigate the cyber grid, consume quantum energy bits, and expand your cybernetic memory tail!</p>
+          <button id="start-btn" class="btn btn-primary">Initialize Protocol</button>
+          <span class="hint-text">Arrows or <strong>W • A • S • D</strong> to steer</span>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="gameover-overlay" class="overlay">
+        <div class="overlay-card">
+          <div class="overlay-icon">💥</div>
+          <h2>Matrix Desync!</h2>
+          <div class="stats-recap">
+            <div class="recap-row"><span>Energy Bits:</span><strong id="final-score">0</strong></div>
+            <div class="recap-row"><span>Snake Length:</span><strong id="final-length">3</strong></div>
+            <div class="recap-row"><span>All-Time Best:</span><strong id="final-best">0</strong></div>
+          </div>
+          <button id="restart-btn" class="btn btn-primary">Reboot Snake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile D-Pad Controls -->
+    <div class="dpad-container">
+      <div class="dpad-row">
+        <button class="dpad-btn" id="dpad-up" aria-label="Up">▲</button>
+      </div>
+      <div class="dpad-row middle">
+        <button class="dpad-btn" id="dpad-left" aria-label="Left">◀</button>
+        <div class="dpad-center"></div>
+        <button class="dpad-btn" id="dpad-right" aria-label="Right">▶</button>
+      </div>
+      <div class="dpad-row">
+        <button class="dpad-btn" id="dpad-down" aria-label="Down">▼</button>
+      </div>
+    </div>
+
+    <!-- Rules Modal for PA Review -->
+    <div id="rules-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>How to Play (PA Review)</h3>
+          <button id="close-rules-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <ul class="rules-list">
+            <li><strong>Objective:</strong> Guide the cyber snake to collect glowing energy bits without colliding into your own tail.</li>
+            <li><strong>Controls:</strong> Use <kbd>W / A / S / D</kbd>, Arrow keys, or the on-screen touch D-Pad.</li>
+            <li><strong>Power-Up Bits:</strong>
+              <ul>
+                <li>💎 <strong>Cyan Energy Bit:</strong> +10 Pts, +1 length</li>
+                <li>⭐ <strong>Golden Quantum Bit:</strong> +50 Pts, temporary double points</li>
+              </ul>
+            </li>
+            <li><strong>Screen Portals:</strong> Passing through canvas edges warps the snake smoothly to the opposite boundary!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

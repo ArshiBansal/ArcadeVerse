@@ -1,0 +1,17 @@
+{
+  "title": "Neon Beat Runner",
+  "category": "Rhythm",
+  "lucideIcon": "music-2",
+  "description": "Sync key presses with descending neon pulses synchronized to procedural web audio tempos across 4 lanes.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "role": "Arcade Developer",
+  "tags": [
+    "Rhythm",
+    "Music",
+    "Reflex",
+    "WebAudio"
+  ],
+  "stars": 37,
+  "featured": true
+}

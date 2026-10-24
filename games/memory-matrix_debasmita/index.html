@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Memory Matrix</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="game-container">
+    <div class="header">
+      <div class="title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <i data-lucide="puzzle"></i> QUANTUM MEMORY
+      </div>
+      <div class="meta">
+        <div class="meta-item">MOVES: <span id="moves-count">0</span></div>
+        <div class="meta-item">PAIRS: <span id="pairs-count">0</span>/8</div>
+        <div class="meta-item time">TIME: <span id="timer-val">00:00</span></div>
+      </div>
+    </div>
+
+    <div class="matrix-grid" id="matrix-grid">
+      <!-- 16 memory cards injected by JS -->
+    </div>
+
+    <div class="controls">
+      <button id="restart-btn" class="glow-button">RESET MATRIX</button>
+    </div>
+
+    <!-- Win Overlay -->
+    <div id="win-overlay" class="overlay hidden">
+      <div class="overlay-card">
+        <h2>DECRYPTION COMPLETE!</h2>
+        <p id="win-summary">You solved the matrix in 14 moves and 32 seconds.</p>
+        <button id="play-again-btn" class="glow-button">NEW ENCRYPTION</button>
+      </div>
+    </div>
+  </div>
+  <script src="game.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

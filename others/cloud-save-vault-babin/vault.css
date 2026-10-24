@@ -1,0 +1,341 @@
+/* ==========================================================================
+   ArcadeVerse Cloud Save Vault Stylesheet
+   Dark Cyberpunk / Glassmorphic Aesthetic
+   ========================================================================== */
+
+:root {
+  --vault-bg: #0b0e14;
+  --vault-surface: #141b24;
+  --vault-surface-hover: #1c2633;
+  --vault-border: rgba(0, 240, 255, 0.2);
+  --vault-border-bright: #00f0ff;
+  --vault-cyan: #00f0ff;
+  --vault-magenta: #ff007f;
+  --vault-green: #00ff88;
+  --vault-text: #e0f2fe;
+  --vault-text-dim: #94a3b8;
+  --vault-font: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body.vault-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--vault-bg);
+  color: var(--vault-text);
+  font-family: var(--vault-font);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 0, 127, 0.05) 0%, transparent 40%);
+  min-height: 100vh;
+}
+
+.vault-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.vault-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--vault-border);
+  padding-bottom: 1.5rem;
+}
+
+.vault-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vault-logo-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--vault-cyan), var(--vault-magenta));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.vault-logo-icon svg {
+  stroke: #fff;
+}
+
+.vault-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #fff, var(--vault-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vault-subtitle {
+  margin: 0.25rem 0 0 0;
+  color: var(--vault-text-dim);
+  font-size: 0.9rem;
+}
+
+.vault-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--vault-surface);
+  color: var(--vault-cyan);
+  border: 1px solid var(--vault-border);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.vault-back-btn:hover {
+  background: var(--vault-surface-hover);
+  border-color: var(--vault-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+/* Metric Gauges */
+.vault-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--vault-surface);
+  border: 1px solid var(--vault-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--vault-cyan);
+}
+
+.metric-card.accent-magenta::before {
+  background: var(--vault-magenta);
+}
+
+.metric-card.accent-green::before {
+  background: var(--vault-green);
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: var(--vault-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metric-val {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.metric-detail {
+  font-size: 0.8rem;
+  color: var(--vault-text-dim);
+}
+
+/* Slots Section */
+.vault-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.slot-card {
+  background: var(--vault-surface);
+  border: 1px solid var(--vault-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.slot-card:hover {
+  border-color: var(--vault-border-bright);
+  transform: translateY(-2px);
+}
+
+.slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.slot-name {
+  font-weight: 700;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.slot-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--vault-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.slot-info {
+  font-size: 0.85rem;
+  color: var(--vault-text-dim);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.slot-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-vault {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-vault-primary {
+  background: var(--vault-cyan);
+  color: #0b0e14;
+}
+
+.btn-vault-primary:hover {
+  background: #33f3ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.btn-vault-secondary {
+  background: var(--vault-surface-hover);
+  color: var(--vault-text);
+  border: 1px solid var(--vault-border);
+}
+
+.btn-vault-secondary:hover {
+  border-color: var(--vault-cyan);
+  color: #fff;
+}
+
+/* File Import Dropzone */
+.dropzone-container {
+  border: 2px dashed var(--vault-border);
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: rgba(20, 27, 36, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 2rem;
+}
+
+.dropzone-container:hover,
+.dropzone-container.drag-active {
+  border-color: var(--vault-cyan);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.dropzone-icon {
+  margin-bottom: 0.75rem;
+  color: var(--vault-cyan);
+}
+
+.dropzone-text {
+  font-size: 1rem;
+  color: var(--vault-text);
+  margin-bottom: 0.5rem;
+}
+
+.dropzone-hint {
+  font-size: 0.8rem;
+  color: var(--vault-text-dim);
+}
+
+/* Toast styling */
+.vault-toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vault-toast {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #141b24;
+  color: #fff;
+  border: 1px solid var(--vault-border);
+  border-left: 4px solid var(--vault-cyan);
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.vault-toast-success {
+  border-left-color: var(--vault-green);
+}
+
+.vault-toast-error {
+  border-left-color: var(--vault-magenta);
+}
+
+.vault-toast-fade {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

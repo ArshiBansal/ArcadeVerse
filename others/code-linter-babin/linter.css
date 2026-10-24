@@ -1,0 +1,128 @@
+/* ==========================================================================
+   ArcadeVerse Contributor Code Linter Stylesheet
+   ========================================================================== */
+
+:root {
+  --lint-bg: #0b0e14;
+  --lint-card: #141b24;
+  --lint-cyan: #00f0ff;
+  --lint-green: #00ff88;
+  --lint-amber: #ffaa00;
+  --lint-red: #ff3366;
+  --lint-border: rgba(0, 240, 255, 0.25);
+  --lint-text: #e2e8f0;
+}
+
+body.linter-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--lint-bg);
+  color: var(--lint-text);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.linter-container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.linter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--lint-border);
+  padding-bottom: 1.5rem;
+}
+
+.editor-card {
+  background: var(--lint-card);
+  border: 1px solid var(--lint-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.code-textarea {
+  width: 100%;
+  height: 220px;
+  background: #090d16;
+  border: 1px solid var(--lint-border);
+  border-radius: 8px;
+  color: #a7f3d0;
+  font-family: 'Fira Code', monospace;
+  padding: 1rem;
+  box-sizing: border-box;
+  resize: vertical;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  outline: none;
+}
+
+.code-textarea:focus {
+  border-color: var(--lint-cyan);
+}
+
+.linter-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-lint {
+  padding: 0.65rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: var(--lint-cyan);
+  color: #0b0e14;
+  transition: all 0.2s;
+}
+
+.btn-lint:hover {
+  background: #33f3ff;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+/* Findings List */
+.findings-card {
+  background: var(--lint-card);
+  border: 1px solid var(--lint-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.finding-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.finding-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.badge-error { background: rgba(255, 51, 102, 0.2); color: var(--lint-red); border: 1px solid var(--lint-red); }
+.badge-warning { background: rgba(255, 170, 0, 0.2); color: var(--lint-amber); border: 1px solid var(--lint-amber); }
+
+.report-output-box {
+  background: #090d16;
+  border: 1px solid var(--lint-border);
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  white-space: pre-wrap;
+  max-height: 200px;
+  overflow-y: auto;
+}

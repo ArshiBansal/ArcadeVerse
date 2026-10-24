@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Cloud Save & State Vault</title>
+  <link rel="stylesheet" href="vault.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="vault-body">
+  <div class="vault-container">
+    <header class="vault-header">
+      <div class="vault-brand">
+        <div class="vault-logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="vault-title">Cloud Save & State Vault</h1>
+          <p class="vault-subtitle">Cross-Game Snapshot Backup, Quota Telemetry & Restore Engine</p>
+        </div>
+      </div>
+      <a href="../../index.html" class="vault-back-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Metrics Grid -->
+    <section class="vault-metrics-grid">
+      <div class="metric-card">
+        <span class="metric-label">Game Keys Tracked</span>
+        <span class="metric-val" id="stat-total-keys">0</span>
+        <span class="metric-detail">Active local storage records</span>
+      </div>
+      <div class="metric-card accent-magenta">
+        <span class="metric-label">Arcade Data Footprint</span>
+        <span class="metric-val" id="stat-arcade-weight">0.0 KB</span>
+        <span class="metric-detail">High scores, settings, unlocked perks</span>
+      </div>
+      <div class="metric-card accent-green">
+        <span class="metric-label">Browser Quota Used</span>
+        <span class="metric-val" id="stat-quota-percent">0.0%</span>
+        <span class="metric-detail">Estimated 5MB client allocation</span>
+      </div>
+    </section>
+
+    <!-- Save Slots Grid -->
+    <h2 class="vault-section-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10v4H7zM7 17h10"/>
+      </svg>
+      Snapshot Storage Slots
+    </h2>
+    <div class="slots-grid">
+      <!-- Slot 1 -->
+      <div class="slot-card">
+        <div>
+          <div class="slot-header">
+            <span class="slot-name">Slot 1 — Primary</span>
+            <span class="slot-badge">Local Slot</span>
+          </div>
+          <div class="slot-info" id="slot-1-info">Scanning storage...</div>
+        </div>
+        <div class="slot-actions">
+          <button id="slot-1-save" class="btn-vault btn-vault-primary">Save State</button>
+          <button id="slot-1-load" class="btn-vault btn-vault-secondary" disabled>Restore</button>
+        </div>
+      </div>
+
+      <!-- Slot 2 -->
+      <div class="slot-card">
+        <div>
+          <div class="slot-header">
+            <span class="slot-name">Slot 2 — Secondary</span>
+            <span class="slot-badge">Local Slot</span>
+          </div>
+          <div class="slot-info" id="slot-2-info">Scanning storage...</div>
+        </div>
+        <div class="slot-actions">
+          <button id="slot-2-save" class="btn-vault btn-vault-primary">Save State</button>
+          <button id="slot-2-load" class="btn-vault btn-vault-secondary" disabled>Restore</button>
+        </div>
+      </div>
+
+      <!-- Slot 3 -->
+      <div class="slot-card">
+        <div>
+          <div class="slot-header">
+            <span class="slot-name">Slot 3 — Backup</span>
+            <span class="slot-badge">Local Slot</span>
+          </div>
+          <div class="slot-info" id="slot-3-info">Scanning storage...</div>
+        </div>
+        <div class="slot-actions">
+          <button id="slot-3-save" class="btn-vault btn-vault-primary">Save State</button>
+          <button id="slot-3-load" class="btn-vault btn-vault-secondary" disabled>Restore</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backup Import/Export Dropzone -->
+    <h2 class="vault-section-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>
+      </svg>
+      Import / Export Vault Bundle
+    </h2>
+    <div class="dropzone-container" id="vault-dropzone">
+      <div class="dropzone-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9m-4-4 4 4 4-4"/>
+        </svg>
+      </div>
+      <div class="dropzone-text">Drag & drop your <code>.arcadeverse-save</code> bundle file here, or click to browse</div>
+      <div class="dropzone-hint">Integrity checksum is cryptographically verified upon import</div>
+      <input type="file" id="vault-file-input" accept=".arcadeverse-save,.json" style="display: none;">
+    </div>
+
+    <!-- Master Actions -->
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <button id="btn-export-all" class="btn-vault btn-vault-primary" style="padding: 0.8rem 1.5rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
+        </svg>
+        Download Master Vault Backup (.arcadeverse-save)
+      </button>
+      <button id="btn-clear-arcade" class="btn-vault btn-vault-secondary" style="padding: 0.8rem 1.5rem; color: #ff007f; border-color: rgba(255, 0, 127, 0.4);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+        </svg>
+        Purge Local Arcade Data
+      </button>
+    </div>
+  </div>
+
+  <script src="storage-adapter.js"></script>
+  <script src="snapshot-modal.js"></script>
+  <script src="vault.js"></script>
+</body>
+</html>

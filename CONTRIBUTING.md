@@ -1,183 +1,276 @@
 # 🌟 ArcadeVerse — Contribution & Contributor Hub (Nexus Spring Of Code – Winter Edition 2026)
 
-> ### 👑 **PROJECT ADMIN:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0))
-> ### ❄️ **EVENT:** **Nexus Spring Of Code – Winter Edition 2026**
-> ### ⚡ **TECH STACK:** **100% Pure Vanilla HTML5 + CSS3 + Modern JavaScript (NO Python, NO Frameworks, NO Bundlers)**
+> - 👑 **Project Admin:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0))
+> - ❄️ **Event:** **Nexus Spring Of Code – Winter Edition 2026**
+> - ⚡ **Tech Stack:** **100% Pure Vanilla HTML5 + CSS3 + Modern JavaScript (NO Python, NO Frameworks, NO Bundlers)**
 
 ---
 
-# 🎯 **ABOUT ARCADEVERSE**
+## 🎯 Welcome from the Project Admin
 
-ArcadeVerse is an open-source arcade gaming ecosystem crafted to offer an accessible, scalable, and conflict-free foundation where developers worldwide can build and showcase their creations.
+Welcome to **ArcadeVerse**! I am **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)), your Project Admin (PA) and Lead Architect for **Nexus Spring Of Code – Winter Edition 2026**.
 
-- From beginners writing their first HTML5 canvas loop to intermediate developers building full game mechanics, every skill level has a place here.
-- Our maintainer team actively reviews Pull Requests, offers constructive code reviews, and helps contributors refine their web engineering skills.
-- Every contribution here is **real, meaningful, and permanent** — celebrated on our live **Hall of Fame Leaderboard**!
+I created ArcadeVerse to provide an accessible, scalable, and conflict-free open-source gaming ecosystem where developers at all stages—from beginners writing their first HTML5 Canvas loop to advanced developers crafting complex mechanics—can build, collaborate, and showcase their creations.
+
+As your Project Admin, I personally review your Pull Requests, provide constructive code feedback, help you refine your web engineering skills, and ensure your contributions are permanently celebrated on our live **Hall of Fame Leaderboard**!
+
+Please read my advice and instructions below carefully before you begin contributing.
 
 ---
 
-# 🎖️ **CONTRIBUTOR TIERS, ROLES & HALL OF FAME BADGES**
+## 🎖️ Official Contributor Recognition & Hall of Fame Badges
 
-Every contributor in ArcadeVerse earns official recognition titles displayed live on our **Hall of Fame & Leaderboard**:
+To reward your hard work during the 45-day **Nexus Spring Of Code – Winter Edition 2026**, I have established a **Balanced 2-Track Contributor Recognition System**. Your badges and titles are calculated dynamically and showcased live on our [Hall of Fame & Leaderboard](leaderboard.html).
 
-### 🏆 **Points-Based Contributor Milestones**
-
-| Tier Title | Points Required | Description |
-| :--- | :---: | :--- |
-| **🚀 Project Contributor** | **10+ Points** | Getting started — verified PRs, bug fixes, or small features |
-| **🌟 Novice Contributor** | **25+ Points** | Consistent contributions across the codebase |
-| **💎 Elite Contributor** | **50+ Points** | Major features, complex game mechanics, and active reviews |
-| **🏆 Master Contributor** | **100+ Points** | Outstanding leadership and top-tier open-source impact |
-
-> 💡 Points are earned via merged PRs labelled `level1` (3 pts), `level2` (5 pts), or `level3` (10 pts) by the Project Admin.
-
-### 🕹️ **Dedicated `games/` Developer Tiers**
+### 🕹️ Track 1: Dedicated Game Creators Track `(in the 'games' folder)`
 
 | Developer Title | Requirement | Description |
 | :--- | :---: | :--- |
-| **🕹️ Arcade Developer** | 1 verified game | Authored and polished a playable game in `games/game-name_contributor-name/` |
-| **⚡ Hyper Game Developer** | 2+ verified games | Authored multiple high-performance web arcade games |
+| **🕹️ Arcade Explorer** | **1–3 verified games** | Authored and integrated your first playable game in `games/game-name_your-name/` |
+| **🎮 Arcade Developer** | **4–7 verified games** | Authored multiple polished games across arcade categories |
+| **⚡ Hyper Game Developer** | **8–14 verified games** | Authored diverse, high-performance web arcade games |
+| **👑 Master Game Architect** | **15+ verified games** | Master arcade author with top-tier game mechanics |
 
-> 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
+### 💻 Track 2: Platform & Universal Engineering Track `(Codebase & Core Modifications)`
 
----
-
-# 🛠️ **SCOPE OF CONTRIBUTIONS**
-
-Contributions may include:
-- 🐛 **Bug fixes** — game bugs, UI glitches, responsive layout fixes
-- ✨ **Feature development** — new mini-games, AI gameplay, new modes
-- 📖 **Documentation** — guides, tutorials, code comments
-- 🎨 **UI/UX improvements** — CSS transitions, accessibility, typography
-- ⚡ **Code optimization** — `requestAnimationFrame` loops, lightweight assets
-- 🌐 **Website improvements** — portal enhancements, responsive fixes
-- 🔧 **Project maintenance** — registry cleanup, file structure hygiene
-
----
-
-# 💰 **POINTS SYSTEM**
-
-Points are assigned strictly by the **Level label** that the Project Admin puts on your **merged PR**.
-
-| **Label** | **Points** | **Type of Work** |
+| Tier Title | In-App Points Required | Description |
 | :--- | :---: | :--- |
-| `level1` | **3 points** | Documentation, typo fixes, and other small work |
-| `level2` | **5 points** | UI and frontend work: layouts, components, styling, page-level changes |
-| `level3` | **10 points** | Core logic, game mechanics, complex features |
+| **🌱 Active Contributor** | **15–99 Points** | Getting started — first verified bug fix, touch control, or documentation PR |
+| **⚡ Platform Contributor** | **100–249 Points** | Consistent contributions — UI portals, search/filter engines, or isolated feature integration |
+| **💎 Elite Contributor** | **250–749 Points** | Major platform features, multiple games, and active commit development |
+| **🛡️ Master Core Architect** | **750+ Points** | Outstanding architectural leadership, core platform engines, and top-tier impact |
+
+> 👑 **Project Lead & Admin:** I ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) personally review, verify, and merge all contributions.
+>
+> 🔄 **Live Leaderboard Caching & Sync:** Leaderboard rankings are calculated dynamically using verified GitHub commits, games count, and files added. To prevent GitHub API rate limits, responses are cached in `localStorage` with a 30-minute TTL.
+
+---
+
+## 💰 Dual Point Systems: NSoC Points vs. In-App Arcade Points
+
+To keep your journey rewarding and transparent, ArcadeVerse utilizes two distinct, complementary point systems that work together:
+
+### 1. 🏛️ Official Nexus Spring Of Code (NSoC '26) Program Points
+
+These are the official program points recorded on the central NSoC evaluation sheet. As your Project Admin, I will personally review your Pull Request, assign the official labels, and award NSoC program points upon merging:
+
+| PR Label | NSoC Points | Scope & Type of Work |
+| :--- | :---: | :--- |
+| `level1` | **3 points** | Typo corrections, minor cosmetic fixes, or approved documentation updates |
+| `level2` | **5 points** | Frontend UI enhancements, responsive styling, navigation, component layouts |
+| `level3` | **10 points** | Verified playable games in the `'games'` folder, complex game physics, core architecture |
 
 > [!IMPORTANT]
-> - The **`nsoc26` tag is mandatory** on every PR. Without it, your PR will **not be counted**.
-> - **Admins decide the level.** Do not argue for a higher level on a small change.
-> - Points are given only for **merged** PRs that follow all the rules.
-> - A tiny change (10–20 line edit) will **not** be accepted as Level 2 or Level 3.
+>
+> - **Do NOT worry about adding labels:** You do not need to add the `nsoc26` or level labels yourself. As the Project Admin, I will personally attach `nsoc26` and the appropriate `level1`, `level2`, or `level3` label when I review and merge your PR.
+> - **Level labels are assigned exclusively by me** based on the verified complexity, originality, and impact of your merged code.
+> - A minor patch will not be upgraded to Level 2 or Level 3.
+
+### 2. ⚡ In-App Gamified Arcade Points (Live Application Scoring)
+
+These points power the real-time [Hall of Fame Leaderboard](leaderboard.html) rankings and dynamically synthesize your rank badges. This universal formula scores all types of contributions:
+
+$$\mathbf{Arcade\ Score} = (\text{Games} \times 100) + (\text{Mechanics} \times 25) + (\text{Features} \times 50) + (\text{Fixes} \times 25) + (\mathbf{Commits} \times \mathbf{5})$$
+
+- 🎮 **Verified Standalone Game:** `+100 pts` base per playable game integrated in `games/`
+- ⚡ **Mechanics & Physics Bonus:** `+25 pts` for custom Canvas rendering, 60fps loops, sound FX, physics, or touch controls
+- 🚀 **Platform Feature PR:** `+50 pts` per merged feature/UI PR (portals, dev tools, engines, navigation)
+- 🛠️ **Quality & Bug Fix PR:** `+25 pts` per merged bug fix, responsive styling, or documentation enhancement
+- 📦 **Merged Git Commits:** `+5 pts` per verified commit (rewards sustained, iterative code development)
 
 ---
 
-# 🚀 **STEP-BY-STEP: YOUR FIRST MERGED PR**
+## 🚀 Step-by-Step: How to Get Your PR Merged
 
-1. **Create an issue.** Find a bug or pick an open issue, raise it, and **wait for assignment**.
-2. **Fork and clone.** Fork the repo, clone it, and add the upstream remote.
-3. **Create a branch.** One branch per issue — e.g. `fix/issue-123`.
-4. **Code and commit.** Follow this guide, test your work, write a clear commit message.
-5. **Open the PR.** Push, open a PR, add `Closes #123` and a short summary. Include `nsoc26`.
-6. **Review and merge.** Address feedback. The Project Admin merges, adds labels, and your points hit the leaderboard.
+Here is my recommended workflow for getting your contribution merged smoothly:
+
+1. **Create or pick an issue:** Browse open issues or open a new one proposing your idea, comment on it, and **wait for me to assign it to you**. Please do not start coding before assignment.
+2. **Issue Assignment & Submission Timeline (5-Day Target / 7-Day Auto-Unassign):**
+   - **Target Deadline (5 Days):** Once I assign an issue to you, please submit your Pull Request within **5 days (120 hours)**. If there is no progress or PR submitted by day 5, I will check in with you.
+   - **Official NSoC Inactivity Policy (7 Days):** As per official NSoC rules, if an assigned contributor remains inactive with no PR submitted after **7 days**, the issue will automatically be unassigned and reassigned to another contributor waiting in line.
+3. **Fork and clone:** Fork the repository to your GitHub account, clone it locally, and add the upstream remote.
+4. **Create a separate branch:** Never work directly on `main`! Create a dedicated branch per issue — e.g., `fix/issue-123` or `feat/game-name`.
+5. **Code and commit:** Follow my folder and file rules strictly, keep all changes inside your dedicated folder, test thoroughly, and write clear commit messages.
+6. **Open the PR:** Push your branch, open a PR within the 5-day window, reference your issue with `Closes #123`, and provide a clear, concise summary of what you built.
+7. **Review and merge:** I will review your code promptly. If changes are needed, address my feedback. Once approved, I will merge your PR, attach the official `nsoc26` and level labels, and your points will reflect on the leaderboard!
 
 **Quick commands:**
+
 ```bash
 git checkout -b fix/issue-123
 git commit -m "Fix #123: <short description>"
 git push origin fix/issue-123
 ```
 
-**Flow:** Find Issue → Wait for Assignment → Fork → Clone → Branch → Code → Test → Commit → Push → Open PR → Review → Merge ✅
+**Workflow:** Find/Raise Issue → Wait for Assignment from PA → Fork & Clone → Create Separate Branch → Code (Submit within 5 Days) → Test → Commit → Push → Open PR → PA Review → Merged by PA ✅
 
 ---
 
-# ⚠️ **CRITICAL: STRICT FOLDER NAMING CONVENTION**
+## ⚠️ My Advice & Critical Rules: Folder Naming & File Isolation
+
+To keep this project scalable and prevent hundreds of merge conflicts, I have established strict structural rules. Every contributor must follow these rules without exception:
 
 > [!CAUTION]
-> ### 🚨 **MANDATORY FOLDER NOTATION: `games/game-name_contributor-name/`**
-> Every game submission **MUST** be placed inside a folder following this exact syntax:
+>
+> **🚨 1. GAME CREATION FILE & ICON REQUIREMENTS (MOST IMPORTANT)**
+>
+> When you create a game folder under `games/<game-name_your-name>/`:
+>
+> - **Strictly 4 Files Only (1 HTML, 1 CSS, 1 JS, 1 JSON):** Every game folder must contain **strictly and exclusively** these 4 files:
+>   1. `index.html` (Game canvas & markup — use SVG/Lucide icons only, **NO emojis**)
+>   2. `style.css` (Game styling)
+>   3. `game.js` (Game logic)
+>   4. `game.json` (Game metadata for automated registry compilation)
+> - **NO README / Extra Assets / Documentation:** **No `README.md` or any documentation files are allowed or accepted** in game folders. Do NOT include binaries, images, audio files, zip archives, or subfolders. Explain your game in `game.json` and in your PR description.
+> - **Use Icons ONLY (NO Emojis):** Instead of emojis, **only SVG or Lucide icons must be used** across your game interface, buttons, and HUD displays. Emojis are strictly prohibited.
+>
+> ---
+>
+> **🚨 2. NEVER MODIFY ROOT FILES: `index.html`, `leaderboard.html`, OR `games-registry.js`**
+>
+> **You must NEVER edit or touch ANY existing root files in the main codebase!**
+>
+> - **Strictly Forbidden:** Modifying `index.html`, `leaderboard.html`, or `assets/js/games-registry.js` in your Pull Request is strictly prohibited.
+> - **Why?** When multiple contributors edit shared root files simultaneously, merge conflicts happen on every PR.
+> - **Zero need for you to touch root files:**
+>   - Game and feature registrations are handled automatically by our GitHub Actions workflow scanning `game.json` and `feature.json`.
+>   - The platform dynamic loader automatically registers and connects your components.
+> - **Any PR that touches `index.html`, `leaderboard.html`, or `games-registry.js` will be rejected immediately, and you will be instructed to revert root changes and strictly follow `CONTRIBUTING.md`.**
+>
+> ---
+>
+> **🚨 3. ALL NON-GAME FEATURES, UI ENHANCEMENTS & TOOLS MUST BE UNDER `others/`**
+>
+> Due to our rapidly growing contributor base, to keep the repository root clean and structured, **all new features, platform enhancements, dev tools, or bug fixes other than games MUST be placed inside the `others/` folder**:
 >
 > ```text
-> games/game-name_contributor-name/
+> others/<feature-name>-<your-name>/
 > ```
 >
-> **Examples:**
-> - ✅ `games/cyber-pong_rohit/`
-> - ✅ `games/quantum-2048_sneha/`
-> - ✅ `games/flappy-jet_arjun/`
-> - ❌ `games/pong/` *(ambiguous & collision-prone — will NOT be accepted)*
-> - ❌ `games/my-game/` *(will NOT be accepted)*
+> - **What belongs here?** Any kind of contribution other than games — UI portals, telemetry engines, sound engines, theme customizers, accessibility tools, search modals, etc.
+> - **STRICTLY NO GAMES IN `others/`:** You must **NEVER** create a game inside the `others/` folder! The `games/` folder is strictly and mandatorily the ONLY place where games are created. Any game submitted in `others/` will be rejected immediately.
+> - Inside your dedicated folder (`others/<feature-name>-<your-name>/`), create your respective component files along with a `feature.json` metadata file (e.g. `feature.html`, `feature.css`, `feature.js`, `feature.json`).
+> - **Do NOT add `README.md` or documentation files inside this folder** — explain your changes directly in your GitHub Pull Request description so I can review them.
+> - **Examples:** `others/accessibility-engine-your-name/`, `others/sound-engine-your-name/`, `others/theme-customizer-your-name/`, `others/global-search-your-name/`
 >
-> **Pull Requests not following this notation will be closed and asked to rename.**
+> ---
+>
+> **🚨 4. NO LOOSE FILES OR INDIVIDUAL FOLDERS IN ROOT DIRECTORY**
+>
+> **Do NOT create, add, or dump loose files or individual feature folders directly in the repository root / home directory.**
+> The root directory must remain clean and pristine:
+>
+> - All game submissions must live strictly inside `games/<game-name_your-name>/`.
+> - All non-game features, tools, and UI components must live strictly inside `others/<feature-name>-<your-name>/`.
+>
+> ---
+>
+> **🚨 5. GAME FOLDER NAMING CONVENTION: `games/game-name_your-name/` (MANDATORY FOR GAMES)**
+>
+> Every game submission **MUST** be placed inside a dedicated subfolder in `games/` following this exact syntax:
+>
+> ```text
+> games/game-name_your-name/
+> ```
+>
+> 🕹️ **Games folder ei game create mandatory!** Creating a game anywhere else (such as inside `others/` or the root directory) is strictly prohibited and will result in immediate PR rejection.
+>
+> **Examples:**
+>
+> - ✅ `games/cyber-pong_your-name/`
+> - ✅ `games/quantum-2048_your-name/`
+> - ✅ `games/flappy-jet_your-name/`
+> - ❌ `games/pong/` *(ambiguous & collision-prone — will NOT be accepted)*
+> - ❌ `others/cyber-pong_your-name/` *(GAMES ARE FORBIDDEN IN `others/` — will NOT be accepted)*
+> - ❌ `my-game-your-name/` *(DO NOT create game folders in root — will NOT be accepted)*
+>
+> 💡 **My Review Requirement as Project Admin (PA):**
+> Every game must include a built-in **"How to Play / Controls & Rules"** screen or modal so that I can easily test, verify, and evaluate your game mechanics during my review.
+>
+> **Pull Requests not following these folder conventions will be closed and asked to reorganize.**
 
 ---
 
-# 💻 **HOW TO RUN THIS PROJECT LOCALLY**
+## 💻 How to Run This Project Locally
 
 This project is **100% native web tech** — no backend, no Python app, no heavy dependencies!
 
 ### 🔹 Method 1: Instant Browser Launch (Recommended)
 
 **Windows:**
+
 ```powershell
 start chrome "$PWD\index.html"
 ```
+
 **macOS:**
+
 ```bash
 open index.html
 ```
+
 **Linux:**
+
 ```bash
 xdg-open index.html
 ```
 
 ### 🔹 Method 2: VS Code Live Server
+
 1. Open the project folder in **VS Code**
 2. Right-click `index.html` → **"Open with Live Server"**
 
 ### 🔹 Method 3: Node Static Server (Optional)
+
 ```bash
 npx -y live-server --port=5500
 ```
+
 Open: `http://localhost:5500`
 
 ---
 
-# 📂 **DIRECTORY ARCHITECTURE**
+## 📂 Directory Architecture
 
 ```text
 ArcadeVerse/
 │
-├── index.html                           # 🎮 Central Arcade Station
-├── CONTRIBUTING.md                      # 📖 This Guide
+├── index.html                           # 🎮 Central Arcade Station (Linked by PA)
+├── CONTRIBUTING.md                      # 📖 This Guide (PA Advice & Rules - READ FIRST)
 ├── README.md                            # 🌟 Project Overview
 ├── LICENSE                              # 📜 MIT License
 ├── leaderboard.html                     # 🏆 Live Hall of Fame Leaderboard
-├── ideas.html                           # 💡 Ideas Vault
 │
 ├── assets/
 │   ├── css/style.css                    # Theme Stylesheet
 │   └── js/
-│       ├── app.js                       # Platform Engine & Filter Logic
-│       ├── ideas.js                     # Idea Vault Roulette Engine
+│       ├── app.js                       # Platform Engine, Filter & Dynamic Loader
 │       ├── leaderboard.js               # Live GitHub API Sync Engine
-│       └── games-registry.js            # Registry where your game gets listed
+│       └── games-registry.js            # Auto-compiled from game.json & feature.json by GitHub Actions
 │
-└── games/                               # 🕹️ ALL COMMUNITY GAMES LIVE HERE
-    ├── memory-matrix/                   # Starter game by Project Lead
-    └── <game-name_contributor-name>/    # 🚀 YOUR ISOLATED GAME FOLDER
-        ├── index.html
-        ├── style.css
-        └── game.js
+├── games/                               # 🕹️ MANDATORY Games Directory (Games ONLY!)
+│   └── <game-name_your-name>/           # 🚀 Isolated Game Folder (Strictly 4 files)
+│       │                                # (NO README/docs, SVG/Lucide icons only, NO emojis)
+│       ├── index.html                   # Game canvas & markup
+│       ├── style.css                    # Game styling
+│       ├── game.js                      # Game logic
+│       └── game.json                    # Game metadata (Automated registry compilation)
+│
+└── others/                              # 🛠️ MANDATORY Non-Game Features & Tools Directory
+    └── <feature-name>-<your-name>/      # 🚀 Isolated Feature Folder (NO games allowed here!)
+        │                                # (For UI enhancements, tools, plugins — NO README/docs)
+        ├── component.html               # Feature page (required for standalone tools)
+        ├── component.css                # Feature styling (if applicable)
+        ├── component.js                 # Feature logic / engine (if applicable)
+        └── feature.json                 # Feature metadata (Automated registry & dynamic loader)
 ```
 
 ---
 
-# 📋 **HOW TO CONTRIBUTE: STEP-BY-STEP WORKFLOW**
+## 📋 How to Contribute: Step-by-Step Workflow
 
 ### 📌 STEP 1: FORK & CLONE
+
 ```bash
 git clone https://github.com/<your-username>/ArcadeVerse.git
 cd ArcadeVerse
@@ -185,132 +278,207 @@ git remote add upstream https://github.com/DebasmitaBose0/ArcadeVerse.git
 ```
 
 ### 📌 STEP 2: CREATE A FEATURE BRANCH
+
 **Never push directly to `main`!**
+
 ```bash
-git checkout -b game/game-name_your-username
+git checkout -b game/game-name_your-name
 ```
 
 ### 📌 STEP 3: CREATE YOUR GAME FOLDER
-```bash
-mkdir games/game-name_your-username
-```
-Inside your folder, create:
-- `index.html`
-- `style.css`
-- `game.js`
 
+```bash
+mkdir games/game-name_your-name
+```
+
+Inside your folder, create **ONLY** these 4 files:
+
+- `index.html` (Game interface — use SVG or Lucide icons only, **NO emojis**)
+- `style.css` (Game styling)
+- `game.js` (Game logic)
+- `game.json` (Game metadata — enables automated registration!)
+
+> ⚠️ **STRICT FILE & ICON RESTRICTIONS:**
+>
+> - **No README / Documentation files needed:** Do NOT create a `README.md` or any documentation files in your game folder. Keep the folder strictly limited to your game code (`index.html`, `style.css`, `game.js`, `game.json`).
+> - **No other files allowed:** Do NOT include extra asset files (PNG/JPG images, MP3 audio, zip archives, or subfolders).
+> - **Icons Only (NO Emojis):** Instead of emojis, use clean SVG or Lucide icons throughout your UI, HUD, and buttons. Emojis are strictly disallowed.
+>
+> ---
+>
+> 🎮 **MANDATORY IN-GAME GUIDELINES & CONTROLS:**
+> Every submitted game **MUST provide clear, visible in-game "How to Play / Game Guidelines"** (via a modal, start screen overlay, or instructions drawer).
+> This allows me as the **Project Admin (PA)** and community players to immediately understand:
+>
+> 1. **Controls:** Keyboard keys (e.g. WASD / Arrow keys / Spacebar), mouse clicks, or touch swipe gestures.
+> 2. **Game Objective & Rules:** What the player needs to accomplish to win or survive.
+> 3. **Scoring System:** How points/combos are earned and recorded.
+> 4. **Restart & Pause Controls:** How to restart or pause the game.
+>
+> *Submissions without clear in-game instructions or controls will be asked to add them before approval.*
+>
 > 🧪 **Tip:** No external CDNs or frameworks. Pure Vanilla HTML/CSS/JS only!
 
-### 📌 STEP 4: REGISTER IN `assets/js/games-registry.js`
-Add your entry to the `GAMES_REGISTRY` array:
-```javascript
+### 📌 STEP 4: ADD YOUR `game.json` OR `feature.json` METADATA
+
+Inside your game folder (`games/game-name_your-name/`), create `game.json`:
+
+```json
 {
-  id: "game-name_your-username",
-  title: "Your Game Title",
-  category: "Arcade", // Arcade | Retro | Puzzle | Action
-  icon: "🕹️",
-  description: "Short description of your game.",
-  author: "Your Name",
-  github: "your-github-username",
-  role: "Contributor",
-  path: "games/game-name_your-username/index.html",
-  tags: ["Arcade", "NSOC26"]
+  "title": "Your Game Title",
+  "category": "Arcade",
+  "lucideIcon": "gamepad-2",
+  "description": "Short description of your game mechanics and objective.",
+  "author": "Your Full Name",
+  "github": "your-github-username",
+  "role": "Arcade Developer",
+  "tags": ["Arcade", "Action", "NSOC26"],
+  "featured": true
 }
 ```
 
-### 📌 STEP 5: ADD YOUR NAME TO THE CONTRIBUTORS TABLE
-Add your row to the Hall of Fame table below!
+For non-game features inside `others/<feature-name>-<your-name>/`, create `feature.json`. Choose the template matching your contribution type:
 
-### 📌 STEP 6: COMMIT, PUSH & OPEN PULL REQUEST
-```bash
-git add .
-git commit -m "feat(game): add <game-name> by @<your-username>"
-git push origin game/game-name_your-username
+**Option A: Standalone Tool (opens a dedicated tool page in the portal / Tools tab)**
+```json
+{
+  "id": "feature-name-your-name",
+  "title": "Your Tool Title",
+  "category": "DevTools",
+  "type": "standalone-tool",
+  "lucideIcon": "tool",
+  "description": "Short description of what your standalone tool does.",
+  "author": "Your Full Name",
+  "github": "your-github-username",
+  "entryHtml": "tool.html",
+  "tags": ["DevTools", "Utility", "NSOC26"]
+}
 ```
+
+**Option B: Background Plugin / Engine (automatically injected into `index.html` by the dynamic loader)**
+```json
+{
+  "id": "feature-name-your-name",
+  "title": "Your Feature Title",
+  "category": "Platform",
+  "type": "background-plugin",
+  "lucideIcon": "cpu",
+  "description": "Short description of your platform engine or background plugin.",
+  "author": "Your Full Name",
+  "github": "your-github-username",
+  "js": "feature.js",
+  "css": "feature.css",
+  "tags": ["Platform", "Engine", "NSOC26"]
+}
+```
+
+> ⚡ **ZERO MERGE CONFLICT WORKFLOW:**
+>
+> - **Do NOT edit `assets/js/games-registry.js` or `index.html`.**
+> - When I merge your Pull Request into `main`, our **GitHub Actions automated workflow** will instantly detect your `game.json` or `feature.json` and compile the registries automatically!
+> - The automated dynamic loader will display and activate your component on `index.html`.
+>
+> ⚠️ **STRICT COMPLIANCE & PA REVIEW NOTICE:**
+> - If any contributor **does not obey these rules** (e.g. editing `index.html` or `games-registry.js`, omitting `game.json` or `feature.json`, adding emojis/unauthorized files, or using non-compliant folder structures), I will **manually instruct them in the PR review to strictly follow the `CONTRIBUTING.md` file**.
+> - You will be required to reorganize your files and adhere strictly to these guidelines before your Pull Request can be approved or merged.
+
+### 📌 STEP 5: COMMIT, PUSH & OPEN PULL REQUEST
+
+```bash
+git add games/game-name_your-name/
+git commit -m "feat(game): add <game-name> by @<your-username>"
+git push origin game/game-name_your-name
+```
+
 Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
-- Add `Closes #<issue-number>` in the PR description
-- Add the `nsoc26` label — **mandatory!**
+
+- Add `Closes #<issue-number>` in the PR description along with a clear summary of your work.
+- **Do not worry about labels:** As the Project Admin, I will personally add the `nsoc26` label and the appropriate level label (`level1`, `level2`, or `level3`) when I review your PR.
 
 ---
 
-# 👤 **CONTRIBUTOR RESPONSIBILITIES**
+## 👤 Contributor Responsibilities & PA Advice
+
+As your Project Admin, here is what I expect from every contributor:
 
 - Read this contributing guide **before** you start coding.
-- **Wait for assignment** before you start working on an issue.
+- **Wait for me to assign the issue to you** before you begin working.
+- **Target 5-Day Submission Timeline:** Submit your Pull Request within **5 days (120 hours)** of being assigned. In accordance with official NSoC rules, after **7 days** of total inactivity without a PR, I will unassign the issue and reassign it to another contributor waiting in line.
+- **Always use a separate branch:** Create a dedicated branch for every issue. Never push or open PRs directly from `main`.
 - Keep PRs **small, focused, and linked** to a single issue.
-- Create a **separate branch** for each issue.
-- Respond to review feedback **promptly**.
-- Be **respectful and professional** with admins and fellow contributors.
-- You may work on **2 or more issues** — there is no upper limit.
+- Respond to my review feedback **promptly**.
+- Be **respectful and professional** with me and your fellow contributors.
+- You may work on **2 or more issues** — there is no upper limit, as long as each is submitted within the 5-day window!
 
 ---
 
-# 🚫 **RULES — WHAT IS NOT ALLOWED**
+## 🚫 Rules — What is Not Allowed
 
 > [!CAUTION]
 > The following are **strictly prohibited** and will result in PR rejection or disqualification:
 >
-> - ❌ **Fake PRs** or meaningless contributions
-> - ❌ **Bulk PRs** submitted all at once
-> - ❌ **AI-generated spam** — unverified, broken AI dump code without manual testing
-> - ❌ **PRs without an assigned issue** — these will be closed immediately
-> - ❌ **Non-compliant folder paths** — outside `games/game-name_contributor-name/`
-> - ❌ **Frameworks or heavy dependencies** — React, Vue, Angular, jQuery, Python backends are NOT allowed
-> - ❌ **Malicious code** — cryptominers, tracking scripts, harmful iframes
-> - ❌ **Tiny changes presented as bigger work** — a 10–20 line edit will not be accepted as Level 2/3
-> - ❌ **Multiple PRs from one shared branch** for the same issue
+> - ❌ **Modifying `games-registry.js`, `index.html`, or root core files** — contributors must NOT edit `assets/js/games-registry.js`, `index.html`, or `leaderboard.html`. Registration is automated via `game.json` and `feature.json`, and components are dynamically loaded by the platform.
+> - ❌ **Adding README or documentation files inside game or feature folders** — no `README.md` or doc files are allowed in `games/<game-name_your-name>/` or `others/<feature-name>-<your-name>/`. Describe your changes in your PR description.
+> - ❌ **Loose files or individual folders in the home/root directory** — creating or dumping any files or feature folders directly in the root directory.
+> - ❌ **Creating games inside `others/`** — games must STRICTLY and MANDATORILY be placed under `games/<game-name_your-name>/` (games folder ei game create mandatory!). The `others/` folder is strictly reserved for non-game features and tools.
+> - ❌ **Non-compliant folder paths** — all non-game enhancements/UI/bug fixes must be inside `others/<feature-name>-<your-name>/` (and game submissions inside `games/<game-name_your-name>/` within the `games/` folder).
+> - ❌ **Exceeding the 7-day inactivity threshold** without opening a PR or communicating progress.
+> - ❌ **Working directly on the `main` branch** — contributions must come from a separate feature/fix branch.
+> - ❌ **Fake PRs** or meaningless contributions.
+> - ❌ **Bulk PRs** submitted all at once.
+> - ❌ **AI-generated spam** — unverified, broken AI dump code without manual testing.
+> - ❌ **PRs without an assigned issue** — these will be closed immediately.
+> - ❌ **Frameworks or heavy dependencies** — React, Vue, Angular, jQuery, Python backends are NOT allowed.
+> - ❌ **Malicious code** — cryptominers, tracking scripts, harmful iframes, or unescaped XSS injections.
+> - ❌ **Tiny changes presented as bigger work** — a 10–20 line edit will not be accepted as Level 2/3.
+> - ❌ **Multiple PRs from one shared branch** for the same issue.
 
 ---
 
-# ⚖️ **ENFORCEMENT**
+## 📜 Community Health, Code of Conduct & Security
+
+ArcadeVerse is committed to providing a safe, welcoming, and inclusive community for all contributors:
+
+- **Code of Conduct:** All participants must abide by our [Code of Conduct](CODE_OF_CONDUCT.md). Harassment, disrespect, plagiarism, or manipulative behavior will lead to disqualification.
+- **Security Policy:** Review our [Security Policy](SECURITY.md) for vulnerability reporting guidelines and client-side web security best practices.
+- **License Agreement:** All contributions are subject to the permissive open-source terms of the [MIT License](LICENSE).
+
+---
+
+## ⚖️ Enforcement & Project Integrity
 
 > [!WARNING]
-> - **First violation** (spam, low quality, improper practices): your points are normalized and deducted.
+> As Project Admin, I maintain strict standards to ensure a fair and rewarding experience for everyone:
+>
+> - **First violation** (spam, low quality, improper practices): your points will be normalized and deducted.
 > - **Repeat violation:** direct disqualification with no further warning. Severe violations may lead to a permanent ban.
 > - **Cheating** (self-controlled project manipulation, fake contributions, manipulating activity): **immediate permanent ban**. No warnings, no second chances, no appeals once evidence is verified.
 > - **Report violations** with proper proof — verified reports may be rewarded with **Grace Points**.
 
 ---
 
-# ✅ **QUICK CHECKLIST — BEFORE YOU OPEN A PR**
+## ✅ Quick Checklist — Before You Open a PR
 
-Before submitting, make sure every box is checked:
+Before submitting your PR to me, make sure every box is checked:
 
-- [ ] The issue is assigned to me
-- [ ] I have read this contributing guide
-- [ ] My change is meaningful, tested, and written by me
-- [ ] I used a separate branch for this issue
+- [ ] The issue was officially assigned to me by the Project Admin
+- [ ] I am submitting this PR **within the 5-day target window** (and well before the 7-day NSoC inactivity limit)
+- [ ] I created and worked on a **separate branch** (not `main`)
+- [ ] I have read this contributing guide and the [Code of Conduct](CODE_OF_CONDUCT.md)
+- [ ] My change is meaningful, tested, and written by me (100% Vanilla JS/HTML/CSS)
+- [ ] **No files or folders were created directly in the home/root directory**
+- [ ] **I have NOT modified any root files (`index.html`, `leaderboard.html`, `games-registry.js`)**
+- [ ] All new non-game features, UI enhancements, or bug fixes are isolated inside `others/<feature-name>-<your-name>/` with `feature.json` (NO games in `others/`!)
+- [ ] Games are strictly and mandatorily inside `games/<game-name_your-name>/` *(games folder ei game create mandatory)*
+- [ ] Game contains **ONLY** `index.html`, `style.css`, `game.js`, and `game.json` (strictly 4 files — no `README.md`, no documentation files, and no extraneous assets/binaries)
+- [ ] Used **icons only (SVG / Lucide)** in the game UI — **NO emojis**
+- [ ] Added `game.json` (for games) or `feature.json` (for features in `others/`) (I have **NOT** edited `assets/js/games-registry.js` or `index.html`)
 - [ ] The PR says `Closes #issue-number` with a short summary
-- [ ] The PR includes the `nsoc26` tag
+- [ ] I understand that the Project Admin will add the `nsoc26` and level labels during review
 - [ ] I am not submitting multiple PRs at once
-- [ ] Folder strictly follows `games/game-name_contributor-name/` *(for game submissions)*
-- [ ] Entry added to `assets/js/games-registry.js` *(for game submissions)*
 
 ---
 
-# 🏆 **COMMUNITY CONTRIBUTORS HALL OF FAME**
-
-All merged contributors are permanently honored below and synced in [leaderboard.html](leaderboard.html):
-
-| # | Contributor Name | GitHub Handle | Game / Component Name | Strict Folder Path |
-| :---: | :--- | :--- | :--- | :--- |
-| 👑 | **Debasmita Bose (Project Admin)** | [@DebasmitaBose0](https://github.com/DebasmitaBose0) | **Quantum Memory Matrix & Cyber Neon Pong** | `games/memory-matrix/`, `games/gamesbydb/` |
-| 1 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/game-name_contributor-name/` |
-
----
-
-# 💡 **GAME IDEAS READY TO CLAIM**
-
-Visit the **[Ideas Vault](ideas.html)** or claim any of these concepts:
-- 🚀 **Flappy Cyber Jet** (`games/flappy-jet_contributor/`)
-- 🔢 **Quantum 2048** (`games/quantum-2048_contributor/`)
-- 🏓 **Neon Cyber Pong (PvP / AI)** (`games/cyber-pong_contributor/`)
-- 🏢 **Cyber Tower Stacker** (`games/tower-stacker_contributor/`)
-- 🛸 **Space Invaders 2026** (`games/space-invaders_contributor/`)
-- 🐛 **Whack-A-Bug Developer** (`games/whack-bug_contributor/`)
-- 🔤 **Cryptic Wordle Hack** (`games/wordle-hack_contributor/`)
-- 🦘 **Astro Infinite Jumper** (`games/astro-jumper_contributor/`)
-- 💣 **Quantum Minesweeper** (`games/minesweeper_contributor/`)
-- 🎹 **Synth-Wave Simon Says** (`games/simon-says_contributor/`)
-
-Happy Coding & Welcome to **Nexus Spring Of Code – Winter Edition 2026**! 🎉
+Happy Coding & Welcome to **Nexus Spring Of Code – Winter Edition 2026**! 🎉  
+Let's build an amazing arcade together!  
+— **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)), Project Admin & Lead

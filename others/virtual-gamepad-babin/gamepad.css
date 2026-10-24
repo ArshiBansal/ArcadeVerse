@@ -1,0 +1,178 @@
+/* ==========================================================================
+   ArcadeVerse Virtual Gamepad & Touch Overlay Stylesheet
+   ========================================================================== */
+
+:root {
+  --pad-bg: #0b0e14;
+  --pad-cyan: #00f0ff;
+  --pad-magenta: #ff007f;
+  --pad-glass: rgba(20, 27, 36, 0.7);
+  --pad-border: rgba(0, 240, 255, 0.3);
+}
+
+body.gamepad-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--pad-bg);
+  color: #e0f2fe;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.gamepad-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.gamepad-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--pad-border);
+  padding-bottom: 1.5rem;
+}
+
+/* Sandbox Testing Arena */
+.gamepad-sandbox {
+  background: #141b24;
+  border: 1px solid var(--pad-border);
+  border-radius: 12px;
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.sandbox-player {
+  width: 32px;
+  height: 32px;
+  background: var(--pad-cyan);
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px var(--pad-cyan);
+  transition: transform 0.05s linear;
+}
+
+/* Floating Joystick Styles */
+.v-joystick-container {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  pointer-events: none;
+  display: none;
+  z-index: 1000;
+}
+
+.v-joystick-base {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 240, 255, 0.15);
+  border: 2px solid var(--pad-cyan);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+.v-joystick-thumb {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--pad-cyan), #00a8ff);
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+  transition: transform 0.02s linear;
+}
+
+/* Digital DPad Cluster */
+.v-dpad-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+  user-select: none;
+}
+
+.dpad-middle-row {
+  display: flex;
+  align-items: center;
+}
+
+.dpad-center {
+  width: 44px;
+  height: 44px;
+  background: #141b24;
+}
+
+.dpad-btn {
+  width: 44px;
+  height: 44px;
+  background: #1a2332;
+  border: 1px solid var(--pad-border);
+  color: var(--pad-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.1s ease;
+}
+
+.dpad-up { border-radius: 8px 8px 0 0; }
+.dpad-down { border-radius: 0 0 8px 8px; }
+.dpad-left { border-radius: 8px 0 0 8px; }
+.dpad-right { border-radius: 0 8px 8px 0; }
+
+.dpad-btn:active, .dpad-btn.dpad-pressed {
+  background: var(--pad-cyan);
+  color: #0b0e14;
+  box-shadow: 0 0 15px var(--pad-cyan);
+  transform: scale(0.95);
+}
+
+/* Action Buttons */
+.action-buttons-cluster {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.btn-action-round {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1c2633, #141b24);
+  border: 2px solid var(--pad-border);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.1s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-action-round.btn-action-a {
+  border-color: var(--pad-cyan);
+  color: var(--pad-cyan);
+}
+
+.btn-action-round.btn-action-b {
+  border-color: var(--pad-magenta);
+  color: var(--pad-magenta);
+}
+
+.btn-action-round:active, .btn-action-round.action-pressed {
+  transform: scale(0.92);
+  box-shadow: 0 0 20px currentColor;
+}

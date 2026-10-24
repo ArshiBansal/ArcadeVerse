@@ -1,0 +1,138 @@
+/* ==========================================================================
+   ArcadeVerse Chiptune Jukebox Stylesheet
+   Neon Cassette Lounge & Retro Synthwave Theme
+   ========================================================================== */
+
+:root {
+  --juke-bg: #0b0e14;
+  --juke-surface: #141b24;
+  --juke-cyan: #00f0ff;
+  --juke-magenta: #ff007f;
+  --juke-border: rgba(0, 240, 255, 0.25);
+  --juke-text: #e2e8f0;
+}
+
+body.juke-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--juke-bg);
+  color: var(--juke-text);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.juke-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.juke-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--juke-border);
+  padding-bottom: 1.5rem;
+}
+
+/* Boombox Deck */
+.boombox-card {
+  background: var(--juke-surface);
+  border: 1px solid var(--juke-border);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  margin-bottom: 2rem;
+}
+
+.visualizer-screen {
+  background: #000;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.juke-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn-juke {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.btn-juke-play {
+  background: linear-gradient(135deg, var(--juke-cyan), #00a8ff);
+  color: #0b0e14;
+}
+
+.btn-juke-play:hover {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-juke-stop {
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid var(--juke-border);
+}
+
+.btn-juke-stop:hover {
+  background: #334155;
+}
+
+.vol-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.vol-slider-group input[type="range"] {
+  accent-color: var(--juke-cyan);
+}
+
+/* Playlist Cards */
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.track-item {
+  background: var(--juke-surface);
+  border: 1px solid var(--juke-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.track-item:hover, .track-item.track-active {
+  border-color: var(--juke-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.track-item-title {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+
+.track-item-bpm {
+  font-size: 0.8rem;
+  color: var(--juke-cyan);
+}

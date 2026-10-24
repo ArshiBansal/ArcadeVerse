@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Speedrun & Challenge Timer Hub</title>
+  <link rel="stylesheet" href="timer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="speedrun-body">
+  <div class="speedrun-container">
+    <header class="speedrun-header">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; color: #fff;">Speedrun & Challenge Timer</h1>
+        <p style="margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.9rem;">LiveSplit-Style Precision Split Timer, Personal Best Tracker & Delta Engine</p>
+      </div>
+      <a href="../../index.html" style="color: var(--timer-cyan); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Category Tabs -->
+    <div class="cat-tabs" id="cat-tabs-container">
+      <button class="cat-tab-btn active" data-game="cyber-snake">Cyber Snake (100 Pts)</button>
+      <button class="cat-tab-btn" data-game="space-invaders">Space Invaders (Wave 3)</button>
+      <button class="cat-tab-btn" data-game="quantum-2048">Quantum 2048 (512 Tile)</button>
+    </div>
+
+    <!-- Live Timer Mount Point (Rendered by timer-overlay.js) -->
+    <div id="speedrun-mount" style="display: flex; justify-content: center;"></div>
+
+    <!-- Controls Guidance Card -->
+    <div style="background: var(--timer-surface); border: 1px solid var(--timer-border); border-radius: 10px; padding: 1.5rem; margin-top: 1.5rem;">
+      <h3 style="margin: 0 0 0.75rem; color: #fff; font-size: 1.1rem;">Keyboard Speedrun Hotkeys</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.9rem; color: #cbd5e1;">
+        <div><kbd style="background: #1e293b; padding: 2px 6px; border-radius: 4px; color: var(--timer-cyan);">Spacebar</kbd> Start Timer / Trigger Split</div>
+        <div><kbd style="background: #1e293b; padding: 2px 6px; border-radius: 4px; color: var(--timer-red);">R</kbd> Reset Timer to 00:00.00</div>
+        <div><kbd style="background: #1e293b; padding: 2px 6px; border-radius: 4px; color: #ffd700;">Green / Red</kbd> Segment delta vs Personal Best</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="speedrun-engine.js"></script>
+  <script src="split-storage.js"></script>
+  <script src="timer-overlay.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const overlay = new window.ArcadeTimerOverlay();
+      const mount = document.getElementById('speedrun-mount');
+      const hudEl = document.getElementById('arcade-speedrun-hud');
+      if (mount && hudEl) {
+        mount.appendChild(hudEl);
+      }
+
+      // Switch categories
+      const buttons = document.querySelectorAll('.cat-tab-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const gameId = btn.getAttribute('data-game');
+          overlay.loadCategory(gameId);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

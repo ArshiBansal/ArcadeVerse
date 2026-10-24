@@ -1,0 +1,17 @@
+{
+  "title": "Synth-Wave Simon Says",
+  "category": "Retro",
+  "lucideIcon": "music",
+  "description": "Watch and listen to synthwave audio sequences, then repeat the exact musical pattern under acceleration.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "role": "Arcade Developer",
+  "tags": [
+    "Retro",
+    "Memory",
+    "Audio",
+    "WebAudio"
+  ],
+  "stars": 32,
+  "featured": true
+}

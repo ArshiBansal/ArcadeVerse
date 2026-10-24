@@ -1,0 +1,18 @@
+{
+  "title": "Neon Drift Racer",
+  "category": "Arcade",
+  "lucideIcon": "car-front",
+  "difficulty": "Intermediate",
+  "description": "Dodge neon traffic, collect energy orbs, and survive as the road gets faster.",
+  "author": "Joita Paul",
+  "github": "joitapaul",
+  "role": "Contributor",
+  "tags": [
+    "Arcade",
+    "Racing",
+    "Survival",
+    "NSOC26"
+  ],
+  "stars": 0,
+  "featured": false
+}

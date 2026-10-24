@@ -1,0 +1,18 @@
+{
+  "id": "theme-customizer-babin",
+  "title": "Cyber Theme & Palette Customizer",
+  "category": "Theme",
+  "type": "background-plugin",
+  "lucideIcon": "palette",
+  "description": "Real-time theme engine supporting Cyber Neon, Synthwave, Matrix Green, and Midnight Blue palettes.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "js": "theme-customizer.js",
+  "css": "theme-customizer.css",
+  "tags": [
+    "Themes",
+    "Palettes",
+    "CSS",
+    "Customizer"
+  ]
+}

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Astro Infinite Jumper</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="layout">
+      <header>
+        <div class="brand">✦ ASTRO <span>INFINITE JUMPER</span></div>
+        <button id="help">How to Play</button>
+      </header>
+
+      <section class="columns">
+        <div class="game">
+          <div class="hud">
+            <div>ALTITUDE<strong id="altitude">0 m</strong></div>
+            <div>BEST<strong id="best">0 m</strong></div>
+            <div>ROCKETS<strong id="rockets">0</strong></div>
+          </div>
+
+          <div class="stage">
+            <canvas id="c" width="480" height="680"></canvas>
+            <div id="overlay">
+              <div class="modal">
+                <small>ARCADE / SPACE SURVIVAL</small>
+                <h1 id="title">Astro Infinite Jumper</h1>
+                <p id="message">Bounce upward across floating platforms. Collect rocket boosters, land on springs, and dodge black holes!</p>
+                <button id="start">Start Jumping</button>
+                <p class="hint">← → or A / D to move · Space to pause</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="touch">
+            <button id="left">←</button>
+            <span>MOVE</span>
+            <button id="right">→</button>
+          </div>
+        </div>
+
+        <aside>
+          <article>
+            <small>MISSION BRIEF</small>
+            <h2>Reach for the stars.</h2>
+            <p>Keep bouncing from platform to platform. The camera follows your climb, and every new height brings a new challenge.</p>
+          </article>
+
+          <article>
+            <h2>Power-ups & hazards</h2>
+            <p>🟢 <b>Spring</b> — launches you higher.</p>
+            <p>🟠 <b>Rocket</b> — collect for a powerful burst.</p>
+            <p>💗 <b>Fragile platform</b> — breaks after landing.</p>
+            <p>🩵 <b>Moving platform</b> — time your landing.</p>
+            <p>🟣 <b>Black hole</b> — avoid it!</p>
+          </article>
+
+          <article>
+            <h2>Controls</h2>
+            <p><kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd> Move</p>
+            <p><kbd>Space</kbd> Pause / resume</p>
+            <p><kbd>Enter</kbd> Start / restart</p>
+          </article>
+        </aside>
+      </section>
+
+      <footer> </footer>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>

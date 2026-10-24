@@ -1,0 +1,150 @@
+/* ==========================================================================
+   ArcadeVerse Developer Debug Terminal & Cheat Console Stylesheet
+   Retro Green Phosphor Quake Terminal Styling
+   ========================================================================== */
+
+:root {
+  --term-bg: rgba(10, 15, 20, 0.96);
+  --term-green: #00ff66;
+  --term-cyan: #00f0ff;
+  --term-red: #ff3366;
+  --term-dim: #4ade80;
+  --term-border: rgba(0, 255, 102, 0.3);
+}
+
+body.cheat-body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0e14;
+  color: #e2e8f0;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.cheat-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.cheat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+  padding-bottom: 1.5rem;
+}
+
+/* Quake Dropdown Terminal */
+.debug-terminal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 380px;
+  background: var(--term-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--term-green);
+  box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-100%);
+  transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
+  font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+.debug-terminal.terminal-open {
+  transform: translateY(0);
+}
+
+.terminal-header {
+  padding: 0.5rem 1rem;
+  background: rgba(0, 255, 102, 0.1);
+  color: var(--term-green);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--term-border);
+}
+
+.terminal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--term-green);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.terminal-output {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+}
+
+.term-line {
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.term-normal { color: #d1fae5; }
+.term-system { color: #6ee7b7; font-style: italic; }
+.term-prompt { color: var(--term-green); font-weight: bold; }
+.term-success { color: var(--term-green); }
+.term-error { color: var(--term-red); }
+.term-info { color: var(--term-cyan); }
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--term-border);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.term-prompt {
+  color: var(--term-green);
+  font-weight: bold;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.term-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+/* Cheat Toast */
+.cheat-notification-toast {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: #101826;
+  border: 1px solid var(--term-green);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+  z-index: 100001;
+  font-size: 0.9rem;
+  animation: slideDown 0.3s ease;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

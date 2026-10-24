@@ -1,0 +1,18 @@
+{
+  "id": "player-stats-babin",
+  "title": "Player Stats & Streak Tracker",
+  "category": "Analytics",
+  "type": "background-plugin",
+  "lucideIcon": "trophy",
+  "description": "Local player telemetry tracking games played, session duration, high scores, and daily activity streaks.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "js": "player-stats.js",
+  "css": "player-stats.css",
+  "tags": [
+    "Stats",
+    "Streaks",
+    "Telemetry",
+    "Achievements"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "virtual-gamepad-babin",
+  "title": "Mobile Touch Virtual Gamepad",
+  "category": "Input",
+  "type": "standalone-tool",
+  "lucideIcon": "smartphone",
+  "description": "On-screen virtual D-Pad, dual analog joysticks, and touch event dispatcher for mobile devices.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "gamepad.html",
+  "tags": [
+    "Touch",
+    "Mobile",
+    "Joystick",
+    "Virtual"
+  ]
+}

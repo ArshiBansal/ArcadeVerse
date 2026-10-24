@@ -1,0 +1,129 @@
+/* ==========================================================================
+   ArcadeVerse Cache & Offline Health Inspector Stylesheet
+   ========================================================================== */
+
+:root {
+  --cache-bg: #0b0e14;
+  --cache-card: #141b24;
+  --cache-cyan: #00f0ff;
+  --cache-green: #00ff88;
+  --cache-red: #ff3366;
+  --cache-border: rgba(0, 240, 255, 0.25);
+  --cache-text: #e2e8f0;
+}
+
+body.cache-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--cache-bg);
+  color: var(--cache-text);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.cache-container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.cache-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--cache-border);
+  padding-bottom: 1.5rem;
+}
+
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.metric-panel {
+  background: var(--cache-card);
+  border: 1px solid var(--cache-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.metric-panel-title {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.metric-panel-val {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0.4rem 0 0.2rem;
+}
+
+/* Asset Table */
+.assets-card {
+  background: var(--cache-card);
+  border: 1px solid var(--cache-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.asset-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.asset-table th {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--cache-border);
+  color: #94a3b8;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.asset-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-chip {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status-ok {
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--cache-green);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.status-err {
+  background: rgba(255, 51, 102, 0.15);
+  color: var(--cache-red);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+}
+
+.btn-cache {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: var(--cache-cyan);
+  color: #0b0e14;
+  transition: all 0.2s;
+}
+
+.btn-cache:hover {
+  background: #33f3ff;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse 8-Bit Chiptune Jukebox & Retro BGM Lounge</title>
+  <link rel="stylesheet" href="jukebox.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="juke-body">
+  <div class="juke-container">
+    <header class="juke-header">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; color: #fff;">8-Bit Chiptune Jukebox & BGM Lounge</h1>
+        <p style="margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.9rem;">Web Audio Multi-Voice Sound Synthesizer & Real-time Spectrum Visualizer</p>
+      </div>
+      <a href="../../index.html" style="color: var(--juke-cyan); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Boombox Player Deck -->
+    <div class="boombox-card">
+      <div class="visualizer-screen">
+        <canvas id="juke-visualizer" width="840" height="200" style="width: 100%; height: 200px; display: block;"></canvas>
+      </div>
+
+      <div class="juke-controls">
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="btn-juke btn-juke-play" id="btn-play">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span id="play-label">Play Soundtrack</span>
+          </button>
+          <button class="btn-juke btn-juke-stop" id="btn-stop">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <rect width="14" height="14" x="5" y="5"/>
+            </svg>
+            Stop
+          </button>
+        </div>
+
+        <div class="vol-slider-group">
+          <span style="font-size: 0.85rem; color: #94a3b8;">Master Volume:</span>
+          <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.3">
+        </div>
+      </div>
+    </div>
+
+    <!-- Track Selector -->
+    <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: #fff;">Available Arcade Soundtracks</h2>
+    <div class="playlist-grid" id="playlist-container"></div>
+  </div>
+
+  <script src="chiptune-synth.js"></script>
+  <script src="tracker-player.js"></script>
+  <script src="audio-visualizer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const player = window.ArcadeTrackerPlayer;
+      const synth = window.ArcadeChiptuneSynth;
+      const canvas = document.getElementById('juke-visualizer');
+      const visualizer = new window.ArcadeAudioVisualizer(canvas);
+
+      const playBtn = document.getElementById('btn-play');
+      const playLabel = document.getElementById('play-label');
+      const stopBtn = document.getElementById('btn-stop');
+      const volSlider = document.getElementById('vol-slider');
+      const playlist = document.getElementById('playlist-container');
+
+      // Populate tracks
+      const tracks = player.getTracks();
+      tracks.forEach((t, idx) => {
+        const item = document.createElement('div');
+        item.className = `track-item ${idx === 0 ? 'track-active' : ''}`;
+        item.id = `track-${t.id}`;
+        item.innerHTML = `
+          <div class="track-item-title">${t.title}</div>
+          <div class="track-item-bpm">${t.bpm} BPM | 8-Bit NES Pulse & Noise</div>
+        `;
+        item.addEventListener('click', () => {
+          document.querySelectorAll('.track-item').forEach(el => el.classList.remove('track-active'));
+          item.classList.add('track-active');
+          player.selectTrack(t.id);
+          playLabel.textContent = 'Play Soundtrack';
+        });
+        playlist.appendChild(item);
+      });
+
+      playBtn.addEventListener('click', () => {
+        if (!player.isPlaying) {
+          player.play();
+          visualizer.start();
+          playLabel.textContent = 'Playing...';
+        } else {
+          player.stop();
+          visualizer.stop();
+          playLabel.textContent = 'Play Soundtrack';
+        }
+      });
+
+      stopBtn.addEventListener('click', () => {
+        player.stop();
+        visualizer.stop();
+        playLabel.textContent = 'Play Soundtrack';
+      });
+
+      volSlider.addEventListener('input', (e) => {
+        synth.setVolume(parseFloat(e.target.value));
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+/* ==========================================================================
+   ArcadeVerse Speedrun & Challenge Timer Stylesheet
+   LiveSplit Retro Neon Aesthetics
+   ========================================================================== */
+
+:root {
+  --timer-bg: #090d16;
+  --timer-surface: #121824;
+  --timer-cyan: #00f0ff;
+  --timer-green: #00ff88;
+  --timer-red: #ff3366;
+  --timer-gold: #ffd700;
+  --timer-border: rgba(0, 240, 255, 0.25);
+  --timer-text: #e2e8f0;
+}
+
+body.speedrun-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--timer-bg);
+  color: var(--timer-text);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.speedrun-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.speedrun-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--timer-border);
+  padding-bottom: 1.5rem;
+}
+
+/* Floating LiveSplit HUD Layout */
+.speedrun-hud {
+  width: 320px;
+  background: rgba(18, 24, 36, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--timer-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  user-select: none;
+  margin: 0 auto 2rem;
+}
+
+.hud-header {
+  background: rgba(0, 240, 255, 0.08);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--timer-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hud-game-name {
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.hud-hotkey-badge {
+  font-size: 0.7rem;
+  color: var(--timer-cyan);
+}
+
+.hud-splits-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.split-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.split-row-active {
+  background: rgba(0, 240, 255, 0.12);
+  border-left: 3px solid var(--timer-cyan);
+}
+
+.split-name {
+  color: #cbd5e1;
+  flex: 1;
+}
+
+.split-delta {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-right: 0.75rem;
+}
+
+.delta-ahead { color: var(--timer-green); }
+.delta-behind { color: var(--timer-red); }
+
+.split-pb {
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.hud-timer-footer {
+  padding: 1rem;
+  background: #090d16;
+  text-align: right;
+  border-top: 1px solid var(--timer-border);
+}
+
+.hud-main-time {
+  font-family: monospace;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--timer-cyan);
+}
+
+.hud-main-time.timer-finished {
+  color: var(--timer-green);
+  text-shadow: 0 0 15px var(--timer-green);
+}
+
+/* Category Switcher Tabs */
+.cat-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.cat-tab-btn {
+  background: var(--timer-surface);
+  border: 1px solid var(--timer-border);
+  color: var(--timer-text);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.cat-tab-btn.active, .cat-tab-btn:hover {
+  background: var(--timer-cyan);
+  color: #090d16;
+}

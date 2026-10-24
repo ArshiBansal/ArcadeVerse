@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Performance Telemetry & FPS Profiler</title>
+  <link rel="stylesheet" href="telemetry.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="telemetry-body">
+  <div class="telemetry-container">
+    <header class="telemetry-header">
+      <div>
+        <h1 class="telemetry-title">Performance Telemetry & FPS Profiler</h1>
+        <p class="telemetry-subtitle">Real-time Delta-Time Sampler, Frame-Drop Counter & Dynamic Quality Scaler</p>
+      </div>
+      <a href="../../index.html" style="color: var(--telemetry-cyan); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Metrics Grid -->
+    <div class="telemetry-grid">
+      <div class="stat-box">
+        <div class="stat-box-title">Current Framerate</div>
+        <div class="stat-box-val" id="page-fps">60 FPS</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-title">Frametime Latency</div>
+        <div class="stat-box-val" id="page-ms">16.6 ms</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-title">1% Low FPS</div>
+        <div class="stat-box-val" id="page-low">58 FPS</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-title">Frame Drops Detected</div>
+        <div class="stat-box-val" id="page-drops">0</div>
+      </div>
+    </div>
+
+    <!-- Canvas Stress Benchmarker -->
+    <div class="benchmark-canvas-card">
+      <h2 style="margin: 0 0 0.5rem; font-size: 1.25rem; color: #fff;">Interactive Canvas Stress Benchmark</h2>
+      <p style="margin: 0 0 1rem; color: #8b949e; font-size: 0.85rem;">Spawn particles to observe how your browser's compositor handles high canvas workloads.</p>
+      <canvas id="bench-canvas" width="940" height="340" style="width: 100%; height: 340px; background: #0b0e14; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);"></canvas>
+      <div class="benchmark-controls">
+        <button class="btn-bench" id="btn-add-particles">Spawn +500 Particles</button>
+        <button class="btn-bench" id="btn-clear-particles" style="background: transparent; color: #f85149; border: 1px solid rgba(248,81,73,0.4);">Reset Particles</button>
+        <span style="font-size: 0.9rem; color: #8b949e;">Active Count: <strong id="particle-count" style="color: #fff;">0</strong></span>
+        <span style="margin-left: auto; font-size: 0.8rem; color: #8b949e;">Press <kbd style="background: #21262d; padding: 2px 6px; border-radius: 4px; color: #fff;">Shift+F2</kbd> to toggle in-game HUD</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="telemetry-engine.js"></script>
+  <script src="quality-scaler.js"></script>
+  <script src="fps-overlay.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pageFps = document.getElementById('page-fps');
+      const pageMs = document.getElementById('page-ms');
+      const pageLow = document.getElementById('page-low');
+      const pageDrops = document.getElementById('page-drops');
+
+      window.addEventListener('arcadeverse:fps-update', (e) => {
+        const snap = e.detail;
+        if (pageFps) pageFps.textContent = snap.fps + ' FPS';
+        if (pageMs) pageMs.textContent = snap.frameTime + ' ms';
+        if (pageLow) pageLow.textContent = snap.onePercentLow + ' FPS';
+        if (pageDrops) pageDrops.textContent = snap.frameDrops;
+      });
+
+      // Simple particle benchmark
+      const canvas = document.getElementById('bench-canvas');
+      const ctx = canvas.getContext('2d');
+      const particles = [];
+      const particleCountEl = document.getElementById('particle-count');
+
+      class Particle {
+        constructor(w, h) {
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+          this.vx = (Math.random() - 0.5) * 4;
+          this.vy = (Math.random() - 0.5) * 4;
+          this.radius = Math.random() * 3 + 1;
+          this.hue = Math.random() * 60 + 170; // Cyan to Blue
+        }
+        update(w, h) {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > w) this.vx *= -1;
+          if (this.y < 0 || this.y > h) this.vy *= -1;
+        }
+        draw(ctx) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
+          ctx.fill();
+        }
+      }
+
+      function addParticles(count) {
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle(canvas.width, canvas.height));
+        }
+        if (particleCountEl) particleCountEl.textContent = particles.length;
+      }
+
+      document.getElementById('btn-add-particles').addEventListener('click', () => addParticles(500));
+      document.getElementById('btn-clear-particles').addEventListener('click', () => {
+        particles.length = 0;
+        if (particleCountEl) particleCountEl.textContent = '0';
+      });
+
+      function animate() {
+        ctx.fillStyle = 'rgba(11, 14, 20, 0.2)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update(canvas.width, canvas.height);
+          particles[i].draw(ctx);
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    });
+  </script>
+</body>
+</html>

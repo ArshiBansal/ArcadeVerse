@@ -1,0 +1,17 @@
+{
+  "id": "cheat-console-babin",
+  "title": "Developer Debug CLI & Cheat Console",
+  "category": "Developer Tool",
+  "type": "standalone-tool",
+  "lucideIcon": "terminal",
+  "description": "Quake-style in-game dropdown debug terminal, Konami code detector, and game engine time dilation.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "console.html",
+  "tags": [
+    "CLI",
+    "Debug",
+    "Cheats",
+    "Terminal"
+  ]
+}

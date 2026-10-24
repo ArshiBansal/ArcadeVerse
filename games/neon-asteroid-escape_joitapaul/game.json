@@ -1,0 +1,19 @@
+{
+  "title": "Neon Asteroid Escape",
+  "category": "Arcade",
+  "lucideIcon": "rocket",
+  "difficulty": "Intermediate",
+  "releaseDate": "2026-10-22",
+  "description": "Pilot a neon starship through an asteroid field, dodge hazards, and collect energy orbs.",
+  "author": "Joita Paul",
+  "github": "joitapaul",
+  "role": "Contributor",
+  "tags": [
+    "Arcade",
+    "Space",
+    "Survival",
+    "NSOC26"
+  ],
+  "stars": 0,
+  "featured": false
+}

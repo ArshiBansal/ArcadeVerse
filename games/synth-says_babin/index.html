@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synth-Wave Simon Says | ArcadeVerse</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-left">
+        <h1 class="game-title">Synth-Wave <span class="accent">Simon</span></h1>
+        <span class="game-subtitle">Audio-Visual Memory Challenge</span>
+      </div>
+      <div class="header-right">
+        <button id="rules-btn" class="btn btn-secondary">How to Play</button>
+      </div>
+    </header>
+
+    <div class="scoreboard-bar">
+      <div class="score-card">
+        <span class="label">CURRENT SEQUENCE</span>
+        <span class="value" id="current-score">0</span>
+      </div>
+      <div class="score-card">
+        <span class="label">STATUS</span>
+        <span class="value status-val" id="game-status">IDLE</span>
+      </div>
+      <div class="score-card">
+        <span class="label">BEST RECORD</span>
+        <span class="value" id="best-score">0</span>
+      </div>
+    </div>
+
+    <div class="simon-wheel-wrapper">
+      <div class="simon-wheel">
+        <!-- 4 Glowing Synth Quadrants -->
+        <button class="pad pad-cyan" id="pad-0" data-index="0" aria-label="Cyan Synth Tone (1 / Q)">
+          <span class="key-hint">Q / 1</span>
+        </button>
+        <button class="pad pad-pink" id="pad-1" data-index="1" aria-label="Pink Synth Tone (2 / W)">
+          <span class="key-hint">W / 2</span>
+        </button>
+        <button class="pad pad-yellow" id="pad-2" data-index="2" aria-label="Yellow Synth Tone (3 / A)">
+          <span class="key-hint">A / 3</span>
+        </button>
+        <button class="pad pad-purple" id="pad-3" data-index="3" aria-label="Purple Synth Tone (4 / S)">
+          <span class="key-hint">S / 4</span>
+        </button>
+
+        <!-- Center Control Hub -->
+        <div class="center-hub">
+          <div class="hub-brand">SYNTH</div>
+          <button id="start-btn" class="hub-btn">PLAY</button>
+          <div class="hub-sub">MEMORIZE</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Modal / Overlay -->
+    <div id="gameover-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Simulation Failed</h3>
+          <button id="close-gameover-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="overlay-icon">🎛️</div>
+          <h2>Sequence Desynchronized!</h2>
+          <div class="stats-recap">
+            <div class="recap-row"><span>Sequence Reached:</span><strong id="final-score">0</strong></div>
+            <div class="recap-row"><span>All-Time Best:</span><strong id="final-best">0</strong></div>
+          </div>
+          <button id="retry-btn" class="btn btn-primary">Try Again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls & Rules Modal for PA Review -->
+    <div id="rules-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>How to Play & Controls (PA Review)</h3>
+          <button id="close-rules-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <ul class="rules-list">
+            <li><strong>Objective:</strong> Memorize the increasing sequence of synthesizer tones and glowing pads, then repeat them in exact order.</li>
+            <li><strong>Keyboard Controls:</strong>
+              <ul>
+                <li>Top-Left (Cyan): <kbd>Q</kbd> or <kbd>1</kbd> or <kbd>Up Arrow</kbd></li>
+                <li>Top-Right (Pink): <kbd>W</kbd> or <kbd>2</kbd> or <kbd>Right Arrow</kbd></li>
+                <li>Bottom-Left (Yellow): <kbd>A</kbd> or <kbd>3</kbd> or <kbd>Left Arrow</kbd></li>
+                <li>Bottom-Right (Purple): <kbd>S</kbd> or <kbd>4</kbd> or <kbd>Down Arrow</kbd></li>
+              </ul>
+            </li>
+            <li><strong>Audio Engine:</strong> Powered by zero-dependency procedural Web Audio API oscillators.</li>
+            <li><strong>Acceleration:</strong> Playback speed increases after every 3 successful sequences!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

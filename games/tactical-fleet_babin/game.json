@@ -1,0 +1,17 @@
+{
+  "title": "Tactical Fleet Commander",
+  "category": "Strategy",
+  "lucideIcon": "anchor",
+  "description": "Command a grid-based naval fleet. Plan radar strikes and strategically sink hidden enemy carrier units.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "role": "Arcade Developer",
+  "tags": [
+    "Strategy",
+    "Turn-Based",
+    "Naval",
+    "Radar"
+  ],
+  "stars": 36,
+  "featured": true
+}

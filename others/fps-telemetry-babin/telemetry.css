@@ -1,0 +1,178 @@
+/* ==========================================================================
+   ArcadeVerse Performance Telemetry & FPS HUD Stylesheet
+   ========================================================================== */
+
+:root {
+  --telemetry-bg: #0d1117;
+  --telemetry-surface: #161b22;
+  --telemetry-border: rgba(0, 240, 255, 0.25);
+  --telemetry-cyan: #00f0ff;
+  --telemetry-green: #3fb950;
+  --telemetry-amber: #d29922;
+  --telemetry-red: #f85149;
+  --telemetry-text: #c9d1d9;
+}
+
+body.telemetry-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--telemetry-bg);
+  color: var(--telemetry-text);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+}
+
+.telemetry-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.telemetry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--telemetry-border);
+  padding-bottom: 1.5rem;
+}
+
+.telemetry-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+}
+
+.telemetry-subtitle {
+  margin: 0.3rem 0 0;
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-box {
+  background: var(--telemetry-surface);
+  border: 1px solid var(--telemetry-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.stat-box-title {
+  font-size: 0.85rem;
+  color: #8b949e;
+  text-transform: uppercase;
+}
+
+.stat-box-val {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 0.4rem;
+}
+
+/* Stress test canvas */
+.benchmark-canvas-card {
+  background: var(--telemetry-surface);
+  border: 1px solid var(--telemetry-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.benchmark-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-bench {
+  background: var(--telemetry-cyan);
+  color: #0b0e14;
+  font-weight: 600;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-bench:hover {
+  background: #33f3ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+/* Floating HUD Widget */
+.fps-hud-widget {
+  position: fixed;
+  z-index: 99999;
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  user-select: none;
+  pointer-events: auto;
+}
+
+.fps-hud-widget.pos-top-right {
+  top: 1.2rem;
+  right: 1.2rem;
+}
+
+.hud-drag-handle {
+  display: flex;
+  justify-content: flex-end;
+  color: #8b949e;
+  cursor: grab;
+}
+
+.hud-main-readout {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.hud-fps-number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.fps-good { color: var(--telemetry-green); }
+.fps-med { color: var(--telemetry-amber); }
+.fps-bad { color: var(--telemetry-red); }
+
+.hud-fps-unit {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8b949e;
+}
+
+.hud-stats-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #8b949e;
+}
+
+.tier-good { color: var(--telemetry-green); }
+.tier-warn { color: var(--telemetry-amber); }
+
+.hud-sparkline {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  margin-top: 0.2rem;
+}

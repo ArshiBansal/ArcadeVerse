@@ -1,0 +1,17 @@
+{
+  "id": "cloud-save-vault-babin",
+  "title": "Cloud Save & State Vault",
+  "category": "Data Management",
+  "type": "standalone-tool",
+  "lucideIcon": "cloud",
+  "description": "Cross-game save state snapshot manager, JSON backup export/import, and quota telemetry.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "vault.html",
+  "tags": [
+    "SaveState",
+    "Cloud",
+    "Backup",
+    "Storage"
+  ]
+}

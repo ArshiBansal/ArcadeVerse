@@ -1,0 +1,17 @@
+{
+  "title": "Whack-A-Bug Panic",
+  "category": "Arcade",
+  "lucideIcon": "bug",
+  "description": "Whack unexpected production bugs emerging from server racks before CPU temperature reaches 100°C!",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "role": "Arcade Developer",
+  "tags": [
+    "Arcade",
+    "Reflex",
+    "Action",
+    "Developer"
+  ],
+  "stars": 33,
+  "featured": true
+}

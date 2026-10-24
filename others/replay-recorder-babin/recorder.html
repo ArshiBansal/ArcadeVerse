@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Replay & Screen Capture Studio</title>
+  <link rel="stylesheet" href="recorder.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="studio-body">
+  <div class="studio-container">
+    <header class="studio-header">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; color: #fff;">Gameplay Replay & Capture Studio</h1>
+        <p style="margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.9rem;">60FPS Canvas Video Recording, Watermarked Snapshots & Clip Exporter</p>
+      </div>
+      <a href="../../index.html" style="color: var(--studio-cyan); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Studio Stage -->
+    <div class="studio-stage-card">
+      <div class="studio-canvas-container">
+        <canvas id="studio-canvas" width="940" height="380" style="width: 100%; height: 380px; display: block;"></canvas>
+        <div class="rec-badge" id="rec-badge">
+          <span class="rec-dot"></span>
+          <span>REC <span id="rec-time">00:00</span></span>
+        </div>
+      </div>
+
+      <div class="studio-controls-bar">
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="btn-rec btn-rec-start" id="btn-toggle-rec">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+            </svg>
+            <span id="btn-rec-label">Start 60FPS Recording</span>
+          </button>
+          <button class="btn-rec btn-rec-snap" id="btn-snapshot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+            Capture Screenshot
+          </button>
+        </div>
+        <div style="font-size: 0.85rem; color: #94a3b8;">
+          Format: <strong>WebM (VP9/VP8)</strong> | Framerate: <strong>60 FPS</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exported Clips Gallery -->
+    <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: #fff;">Recorded Replay Clips</h2>
+    <div class="clips-gallery" id="clips-gallery">
+      <div style="color: #64748b; font-size: 0.9rem;" id="no-clips-msg">No clips recorded yet. Click "Start 60FPS Recording" above to capture gameplay.</div>
+    </div>
+  </div>
+
+  <script src="canvas-capture.js"></script>
+  <script src="screenshot-tool.js"></script>
+  <script src="clip-exporter.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('studio-canvas');
+      const ctx = canvas.getContext('2d');
+      const recBadge = document.getElementById('rec-badge');
+      const recTime = document.getElementById('rec-time');
+      const toggleRecBtn = document.getElementById('btn-toggle-rec');
+      const recLabel = document.getElementById('btn-rec-label');
+      const snapBtn = document.getElementById('btn-snapshot');
+      const gallery = document.getElementById('clips-gallery');
+      const noClipsMsg = document.getElementById('no-clips-msg');
+
+      // Animated cyber cube demo scene
+      let angle = 0;
+      function renderDemo() {
+        ctx.fillStyle = '#0b0e14';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Grid
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.1)';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 40) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, canvas.height);
+          ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 40) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(canvas.width, y);
+          ctx.stroke();
+        }
+
+        // Center rotating geometric element
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(angle);
+
+        ctx.strokeStyle = '#00f0ff';
+        ctx.lineWidth = 3;
+        ctx.shadowColor = '#00f0ff';
+        ctx.shadowBlur = 15;
+        ctx.strokeRect(-60, -60, 120, 120);
+
+        ctx.rotate(-angle * 2);
+        ctx.strokeStyle = '#ff3366';
+        ctx.shadowColor = '#ff3366';
+        ctx.strokeRect(-40, -40, 80, 80);
+
+        ctx.restore();
+        angle += 0.02;
+
+        requestAnimationFrame(renderDemo);
+      }
+      renderDemo();
+
+      // Recording handlers
+      window.ArcadeCanvasCapture.onDurationUpdate = (secs) => {
+        const m = String(Math.floor(secs / 60)).padStart(2, '0');
+        const s = String(secs % 60).padStart(2, '0');
+        recTime.textContent = `${m}:${s}`;
+      };
+
+      window.ArcadeCanvasCapture.onRecordingComplete = (blob, elapsedSecs) => {
+        if (noClipsMsg) noClipsMsg.style.display = 'none';
+
+        const card = document.createElement('div');
+        card.className = 'clip-card';
+
+        const previewVideo = window.ArcadeClipExporter.createVideoPreview(blob);
+        const cardInfo = document.createElement('div');
+        cardInfo.style.display = 'flex';
+        cardInfo.style.justifyContent = 'space-between';
+        cardInfo.style.alignItems = 'center';
+        cardInfo.innerHTML = `
+          <span style="font-size: 0.85rem; color: #94a3b8;">Duration: ${elapsedSecs}s</span>
+        `;
+
+        const downloadBtn = document.createElement('button');
+        downloadBtn.className = 'btn-rec btn-rec-snap';
+        downloadBtn.style.padding = '0.4rem 0.8rem';
+        downloadBtn.style.fontSize = '0.8rem';
+        downloadBtn.textContent = 'Download .webm';
+        downloadBtn.onclick = () => window.ArcadeClipExporter.downloadClip(blob);
+
+        cardInfo.appendChild(downloadBtn);
+        card.appendChild(previewVideo);
+        card.appendChild(cardInfo);
+        gallery.prepend(card);
+      };
+
+      toggleRecBtn.addEventListener('click', () => {
+        if (!window.ArcadeCanvasCapture.isRecording) {
+          try {
+            window.ArcadeCanvasCapture.startRecording(canvas);
+            recBadge.classList.add('recording-active');
+            recLabel.textContent = 'Stop Recording';
+            toggleRecBtn.style.background = '#e11d48';
+          } catch (err) {
+            alert('Recording error: ' + err.message);
+          }
+        } else {
+          window.ArcadeCanvasCapture.stopRecording();
+          recBadge.classList.remove('recording-active');
+          recLabel.textContent = 'Start 60FPS Recording';
+          toggleRecBtn.style.background = '';
+        }
+      });
+
+      snapBtn.addEventListener('click', () => {
+        const dataUrl = window.ArcadeScreenshotTool.captureSnapshot(canvas, {
+          title: 'ArcadeVerse Replay Studio',
+          score: 9999
+        });
+        if (dataUrl) {
+          window.ArcadeScreenshotTool.downloadSnapshot(dataUrl, 'ArcadeVerse_Capture.png');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

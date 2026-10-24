@@ -1,0 +1,15 @@
+{
+  "title": "Flappy Cyber Jet",
+  "category": "Arcade",
+  "lucideIcon": "rocket",
+  "description": "Pilot a futuristic cyber jet through neon obstacles, dodge collisions, and beat your high score.",
+  "author": "mistu7debnath",
+  "github": "mistu7debnath",
+  "role": "Contributor",
+  "tags": [
+    "Arcade",
+    "NSOC26"
+  ],
+  "stars": 18,
+  "featured": true
+}

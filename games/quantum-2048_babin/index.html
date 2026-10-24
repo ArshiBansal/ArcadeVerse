@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Quantum 2048 | ArcadeVerse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="game-wrapper">
+    <!-- Header & Scoreboard -->
+    <header class="game-header">
+      <div class="header-titles">
+        <h1 class="game-title" style="display: flex; align-items: center; gap: 8px;">
+          <i data-lucide="atom"></i> QUANTUM <span class="accent-text">2048</span>
+        </h1>
+        <p class="game-subtitle">Synthesize atomic isotopes to unlock the 2048 Singularity</p>
+      </div>
+
+      <div class="scores-container">
+        <div class="score-card">
+          <span class="score-label">SCORE</span>
+          <span class="score-val" id="current-score">0</span>
+        </div>
+        <div class="score-card highlight">
+          <span class="score-label">BEST</span>
+          <span class="score-val" id="best-score">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Toolbar Controls -->
+    <div class="toolbar">
+      <div class="toolbar-actions">
+        <button id="undo-btn" class="tool-btn" title="Undo last move" disabled>
+          <span style="display: inline-flex; align-items: center; gap: 4px;"><i data-lucide="undo-2"></i> Undo</span>
+        </button>
+        <button id="sound-btn" class="tool-btn" title="Toggle audio synthesis">
+          <span id="sound-icon" style="display: inline-flex; align-items: center; gap: 4px;"><i data-lucide="volume-2"></i> Sound ON</span>
+        </button>
+      </div>
+      <button id="restart-btn" class="action-btn">
+        <span style="display: inline-flex; align-items: center; gap: 4px;"><i data-lucide="refresh-cw"></i> New Reaction</span>
+      </button>
+    </div>
+
+    <!-- 4x4 Grid Board -->
+    <div class="board-container" id="board-container" tabindex="0" role="region" aria-label="Quantum 2048 Grid Board">
+      <div class="grid-background">
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+      </div>
+      <div class="tile-container" id="tile-container">
+        <!-- Tiles dynamically injected by game.js -->
+      </div>
+    </div>
+
+    <!-- Instructions / Guide -->
+    <footer class="game-guide">
+      <p><strong>Desktop:</strong> Use <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> keys.</p>
+      <p><strong>Mobile / Tablet:</strong> Swipe in any direction across the grid.</p>
+    </footer>
+
+    <!-- Game Over Overlay -->
+    <div class="overlay hidden" id="game-over-overlay" role="dialog" aria-modal="true" aria-labelledby="game-over-title">
+      <div class="overlay-card">
+        <div class="overlay-icon"><i data-lucide="alert-triangle"></i></div>
+        <h2 id="game-over-title">CONTAINMENT BREACH</h2>
+        <p class="overlay-desc">No valid quantum fusion pathways remaining.</p>
+        <div class="overlay-stats">
+          <div>Final Score: <strong id="game-over-score">0</strong></div>
+        </div>
+        <button id="overlay-restart-btn" class="action-btn">
+          <span style="display: inline-flex; align-items: center; gap: 4px;"><i data-lucide="refresh-cw"></i> Try Again</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Victory Overlay -->
+    <div class="overlay hidden" id="victory-overlay" role="dialog" aria-modal="true" aria-labelledby="victory-title">
+      <div class="overlay-card victory">
+        <div class="overlay-icon"><i data-lucide="trophy"></i></div>
+        <h2 id="victory-title">QUANTUM SINGULARITY REACHED!</h2>
+        <p class="overlay-desc">You successfully synthesized the elusive 2048 element!</p>
+        <div class="overlay-stats">
+          <div>Winning Score: <strong id="victory-score">0</strong></div>
+        </div>
+        <div class="overlay-actions">
+          <button id="continue-btn" class="tool-btn">
+            <span style="display: inline-flex; align-items: center; gap: 4px;">Keep Playing <i data-lucide="play"></i></span>
+          </button>
+          <button id="victory-restart-btn" class="action-btn">
+            <span style="display: inline-flex; align-items: center; gap: 4px;"><i data-lucide="refresh-cw"></i> New Game</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

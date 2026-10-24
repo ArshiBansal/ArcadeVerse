@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Virtual Gamepad & Touch Overlay Hub</title>
+  <link rel="stylesheet" href="gamepad.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="gamepad-body">
+  <div class="gamepad-container">
+    <header class="gamepad-header">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; color: #fff;">Virtual Gamepad & Touch Overlay</h1>
+        <p style="margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.9rem;">Cross-Device Mobile On-Screen Joystick & Arcade D-Pad Bridge</p>
+      </div>
+      <a href="../../index.html" style="color: var(--pad-cyan); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Sandbox Arena -->
+    <div class="gamepad-sandbox" id="touch-sandbox">
+      <div class="sandbox-player" id="sandbox-player"></div>
+      <div style="position: absolute; bottom: 1rem; left: 1rem; font-size: 0.8rem; color: #64748b;">
+        Touch / Drag on left side for Analog Stick. Use D-Pad on bottom right.
+      </div>
+    </div>
+
+    <!-- Controls Row -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+      <div id="dpad-mount"></div>
+
+      <div class="action-buttons-cluster">
+        <button class="btn-action-round btn-action-a" id="btn-action-a" aria-label="Action Button A">A</button>
+        <button class="btn-action-round btn-action-b" id="btn-action-b" aria-label="Action Button B">B</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="touch-dispatcher.js"></script>
+  <script src="virtual-joystick.js"></script>
+  <script src="dpad-controller.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sandbox = document.getElementById('touch-sandbox');
+      const player = document.getElementById('sandbox-player');
+      const dpadMount = document.getElementById('dpad-mount');
+
+      let posX = sandbox.clientWidth / 2;
+      let posY = sandbox.clientHeight / 2;
+
+      // Mount D-Pad
+      new window.ArcadeDPadController({
+        zone: dpadMount,
+        onDirectionChange: (dir, isPressed) => {
+          window.ArcadeTouchDispatcher.dispatchKey(dir, isPressed);
+          if (isPressed) {
+            if (dir === 'ArrowUp') posY = Math.max(16, posY - 20);
+            if (dir === 'ArrowDown') posY = Math.min(sandbox.clientHeight - 16, posY + 20);
+            if (dir === 'ArrowLeft') posX = Math.max(16, posX - 20);
+            if (dir === 'ArrowRight') posX = Math.min(sandbox.clientWidth - 16, posX + 20);
+            player.style.left = `${posX}px`;
+            player.style.top = `${posY}px`;
+          }
+        }
+      });
+
+      // Mount Joystick on Sandbox
+      new window.ArcadeVirtualJoystick({
+        zone: sandbox,
+        onMove: (vec) => {
+          posX = Math.max(16, Math.min(sandbox.clientWidth - 16, posX + vec.x * 6));
+          posY = Math.max(16, Math.min(sandbox.clientHeight - 16, posY + vec.y * 6));
+          player.style.left = `${posX}px`;
+          player.style.top = `${posY}px`;
+        }
+      });
+
+      // Action A & B
+      const btnA = document.getElementById('btn-action-a');
+      const btnB = document.getElementById('btn-action-b');
+
+      const bindAction = (btn, keyId) => {
+        const press = (e) => {
+          e.preventDefault();
+          btn.classList.add('action-pressed');
+          window.ArcadeTouchDispatcher.dispatchKey(keyId, true);
+        };
+        const release = (e) => {
+          e.preventDefault();
+          btn.classList.remove('action-pressed');
+          window.ArcadeTouchDispatcher.dispatchKey(keyId, false);
+        };
+        btn.addEventListener('touchstart', press, { passive: false });
+        btn.addEventListener('touchend', release, { passive: false });
+        btn.addEventListener('mousedown', press);
+        btn.addEventListener('mouseup', release);
+      };
+
+      bindAction(btnA, 'ActionA');
+      bindAction(btnB, 'ActionB');
+    });
+  </script>
+</body>
+</html>

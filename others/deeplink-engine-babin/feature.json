@@ -1,0 +1,18 @@
+{
+  "id": "deeplink-engine-babin",
+  "title": "Deep-Linking & Direct Sharing Engine",
+  "category": "Platform",
+  "type": "background-plugin",
+  "lucideIcon": "share-2",
+  "description": "URL hash routing (#game=id) supporting direct game launching, modal deep-linking, and social sharing.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "js": "deeplink.js",
+  "css": "deeplink.css",
+  "tags": [
+    "Routing",
+    "DeepLink",
+    "Share",
+    "URL"
+  ]
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Developer Cheats & Runtime Console</title>
+  <link rel="stylesheet" href="console.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="cheat-body">
+  <div class="cheat-container">
+    <header class="cheat-header">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; color: #fff;">Developer Debug CLI & Cheat Console</h1>
+        <p style="margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.9rem;">Quake-Style In-Game Terminal, Konami Code Detector & Time Dilation</p>
+      </div>
+      <a href="../../index.html" style="color: var(--term-green); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Interactive Launch Card -->
+    <div style="background: #141b24; border: 1px solid rgba(0, 255, 102, 0.3); border-radius: 12px; padding: 1.75rem; margin-bottom: 2rem;">
+      <h2 style="margin: 0 0 0.5rem; color: #fff; font-size: 1.25rem;">Terminal Quick Launch</h2>
+      <p style="margin: 0 0 1.25rem; color: #94a3b8; font-size: 0.9rem;">Press the <kbd style="background: #000; border: 1px solid var(--term-green); color: var(--term-green); padding: 2px 6px; border-radius: 4px;">\`</kbd> (tilde / backtick) key anywhere or click below to drop down the terminal.</p>
+      <button id="btn-open-term" style="background: var(--term-green); color: #0b0e14; border: none; font-weight: 700; padding: 0.7rem 1.4rem; border-radius: 6px; cursor: pointer;">
+        Toggle Terminal Console (\`)
+      </button>
+    </div>
+
+    <!-- Cheats & Hotkeys Reference Table -->
+    <h3 style="color: #fff; margin-bottom: 1rem;">Registered Cheat Passphrases</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+      <div style="background: #141b24; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem;">
+        <div style="font-family: 'Fira Code', monospace; color: var(--term-green); font-weight: bold; margin-bottom: 0.3rem;">↑ ↑ ↓ ↓ ← → ← → B A</div>
+        <div style="font-size: 0.85rem; color: #94a3b8;">Legendary Konami Code — 30 bonus lives & instant max power.</div>
+      </div>
+      <div style="background: #141b24; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem;">
+        <div style="font-family: 'Fira Code', monospace; color: var(--term-green); font-weight: bold; margin-bottom: 0.3rem;">type 'godmode'</div>
+        <div style="font-size: 0.85rem; color: #94a3b8;">Invincibility mode for testing high-difficulty boss levels.</div>
+      </div>
+      <div style="background: #141b24; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem;">
+        <div style="font-family: 'Fira Code', monospace; color: var(--term-green); font-weight: bold; margin-bottom: 0.3rem;">type 'turbospeed'</div>
+        <div style="font-size: 0.85rem; color: #94a3b8;">Overdrive physics speed for rapid playthrough verification.</div>
+      </div>
+      <div style="background: #141b24; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem;">
+        <div style="font-family: 'Fira Code', monospace; color: var(--term-green); font-weight: bold; margin-bottom: 0.3rem;">Keys: [ and ]</div>
+        <div style="font-size: 0.85rem; color: #94a3b8;">Time Dilation — slow down to 0.25x or speed up to 3.0x.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="cheat-engine.js"></script>
+  <script src="time-dilation.js"></script>
+  <script src="debug-terminal.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('btn-open-term').addEventListener('click', () => {
+        window.ArcadeDebugTerminal.toggle();
+      });
+    });
+  </script>
+</body>
+</html>

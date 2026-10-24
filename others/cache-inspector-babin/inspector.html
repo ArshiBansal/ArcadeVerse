@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse Cache & Offline Health Inspector</title>
+  <link rel="stylesheet" href="inspector.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="cache-body">
+  <div class="cache-container">
+    <header class="cache-header">
+      <div>
+        <h1 style="margin: 0; font-size: 1.75rem; color: #fff;">Cache & Offline Health Inspector</h1>
+        <p style="margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.9rem;">CacheStorage Analyzer, Device Quota Meter & Game Endpoint Probe</p>
+      </div>
+      <a href="../../index.html" style="color: var(--cache-cyan); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Back to Arcade
+      </a>
+    </header>
+
+    <!-- Metrics Row -->
+    <div class="metrics-row">
+      <div class="metric-panel">
+        <div class="metric-panel-title">Active Cache Storage</div>
+        <div class="metric-panel-val" id="metric-cache-weight">0.0 MB</div>
+        <div style="font-size: 0.8rem; color: #94a3b8;">Across Cache API namespaces</div>
+      </div>
+      <div class="metric-panel">
+        <div class="metric-panel-title">Client Storage Quota</div>
+        <div class="metric-panel-val" id="metric-quota-pct">0.0%</div>
+        <div style="font-size: 0.8rem; color: #94a3b8;"><span id="metric-quota-used">0</span> MB of <span id="metric-quota-total">0</span> MB used</div>
+      </div>
+      <div class="metric-panel">
+        <div class="metric-panel-title">PWA Service Worker</div>
+        <div class="metric-panel-val" id="metric-sw-status" style="font-size: 1.4rem; color: var(--cache-green);">DETECTING...</div>
+        <div style="font-size: 0.8rem; color: #94a3b8;">Offline background worker</div>
+      </div>
+    </div>
+
+    <!-- Health Probe Card -->
+    <div class="assets-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div>
+          <h2 style="margin: 0; font-size: 1.25rem; color: #fff;">Game Entrypoint Verification Probe</h2>
+          <p style="margin: 0.2rem 0 0; font-size: 0.85rem; color: #94a3b8;">Tests game routes for HTTP 200 responses and cache availability.</p>
+        </div>
+        <button class="btn-cache" id="btn-run-probe">Run Health Probe</button>
+      </div>
+
+      <table class="asset-table">
+        <thead>
+          <tr>
+            <th>Endpoint Route</th>
+            <th>HTTP Status</th>
+            <th>Latency</th>
+            <th>Readiness</th>
+          </tr>
+        </thead>
+        <tbody id="probe-tbody">
+          <tr>
+            <td colspan="4" style="color: #64748b; text-align: center; padding: 2rem;">Click "Run Health Probe" to test game endpoints.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Purge Cache Action -->
+    <div style="text-align: right;">
+      <button id="btn-purge-caches" style="background: transparent; border: 1px solid rgba(255, 51, 102, 0.4); color: var(--cache-red); padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600;">
+        Purge Stale Caches
+      </button>
+    </div>
+  </div>
+
+  <script src="cache-analyzer.js"></script>
+  <script src="storage-quota.js"></script>
+  <script src="offline-verifier.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cacheWeightEl = document.getElementById('metric-cache-weight');
+      const quotaPctEl = document.getElementById('metric-quota-pct');
+      const quotaUsedEl = document.getElementById('metric-quota-used');
+      const quotaTotalEl = document.getElementById('metric-quota-total');
+      const swStatusEl = document.getElementById('metric-sw-status');
+      const runProbeBtn = document.getElementById('btn-run-probe');
+      const probeTbody = document.getElementById('probe-tbody');
+      const purgeBtn = document.getElementById('btn-purge-caches');
+
+      // Check SW
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        swStatusEl.textContent = 'ACTIVE';
+        swStatusEl.style.color = '#00ff88';
+      } else {
+        swStatusEl.textContent = 'UNREGISTERED';
+        swStatusEl.style.color = '#94a3b8';
+      }
+
+      // Check Quota
+      const quota = await window.ArcadeStorageQuota.getQuotaMetrics();
+      if (quota.supported) {
+        quotaPctEl.textContent = quota.percentUsed + '%';
+        quotaUsedEl.textContent = quota.usageMb;
+        quotaTotalEl.textContent = quota.quotaMb;
+      }
+
+      // Probe Runner
+      runProbeBtn.addEventListener('click', async () => {
+        probeTbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 2rem; color: #00f0ff;">Probing endpoints in progress...</td></tr>';
+        const results = await window.ArcadeOfflineVerifier.verifyAll();
+        probeTbody.innerHTML = '';
+
+        results.forEach(res => {
+          const tr = document.createElement('tr');
+          const isOk = res.ok;
+          tr.innerHTML = `
+            <td><code>${res.url}</code></td>
+            <td>${res.status || 'FAILED'}</td>
+            <td>${res.latencyMs} ms</td>
+            <td>
+              <span class="status-chip ${isOk ? 'status-ok' : 'status-err'}">
+                ${isOk ? 'ONLINE & READY' : 'OFFLINE MISSING'}
+              </span>
+            </td>
+          `;
+          probeTbody.appendChild(tr);
+        });
+      });
+
+      // Purge action
+      purgeBtn.addEventListener('click', async () => {
+        if (confirm('Purge all browser application caches?')) {
+          const keys = await window.ArcadeCacheAnalyzer.listCaches();
+          for (const k of keys) {
+            await window.ArcadeCacheAnalyzer.purgeCache(k);
+          }
+          alert('CacheStorage purged.');
+          window.location.reload();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

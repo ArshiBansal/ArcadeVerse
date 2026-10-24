@@ -1,0 +1,16 @@
+{
+  "title": "Cyber Neon Pong",
+  "category": "Arcade",
+  "lucideIcon": "gamepad-2",
+  "description": "Classic retro pong arena with neon glow and dynamic canvas AI paddle physics.",
+  "author": "Debasmita Bose",
+  "github": "DebasmitaBose0",
+  "role": "Project Admin & Contributor",
+  "tags": [
+    "Arcade",
+    "Retro",
+    "Paddle"
+  ],
+  "stars": 32,
+  "featured": true
+}

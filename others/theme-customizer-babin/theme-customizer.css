@@ -1,0 +1,345 @@
+/* Cyberpunk Theme Customizer & Retro CRT Scanline Styles */
+
+/* Dynamic Theme Variable Definitions for root */
+:root[data-theme="cyan"] {
+  --accent-primary: #00f0ff;
+  --accent-primary-hover: #00c8d6;
+  --accent-secondary: #3b82f6;
+  --border-focus: #00f0ff;
+  --accent-cyan: #00f0ff;
+  --accent-glow: rgba(0, 240, 255, 0.45);
+  --accent-rgb: 0, 240, 255;
+  --accent-light: #67e8f9;
+}
+
+:root[data-theme="synthwave"] {
+  --accent-primary: #f43f5e;
+  --accent-primary-hover: #e11d48;
+  --accent-secondary: #a855f7;
+  --border-focus: #f43f5e;
+  --accent-cyan: #f43f5e;
+  --accent-glow: rgba(244, 63, 94, 0.45);
+  --accent-rgb: 244, 63, 94;
+  --accent-light: #fda4af;
+}
+
+:root[data-theme="matrix"] {
+  --accent-primary: #10b981;
+  --accent-primary-hover: #059669;
+  --accent-secondary: #06b6d4;
+  --border-focus: #10b981;
+  --accent-cyan: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.45);
+  --accent-rgb: 16, 185, 129;
+  --accent-light: #6ee7b7;
+}
+
+:root[data-theme="amber"] {
+  --accent-primary: #f59e0b;
+  --accent-primary-hover: #d97706;
+  --accent-secondary: #ef4444;
+  --border-focus: #f59e0b;
+  --accent-cyan: #f59e0b;
+  --accent-glow: rgba(245, 158, 11, 0.45);
+  --accent-rgb: 245, 158, 11;
+  --accent-light: #fcd34d;
+}
+
+/* Global Theme Bindings Across ArcadeVerse Components */
+[data-theme] .gradient-accent {
+  color: var(--accent-primary) !important;
+}
+
+[data-theme] .pixel-badge {
+  color: var(--accent-primary) !important;
+}
+
+[data-theme] .nsoc-tag {
+  background: rgba(var(--accent-rgb), 0.14) !important;
+  color: var(--accent-light) !important;
+  border-color: rgba(var(--accent-rgb), 0.35) !important;
+}
+
+[data-theme] .nav-item.badge-link {
+  background: rgba(var(--accent-rgb), 0.12) !important;
+  color: var(--accent-light) !important;
+  border-color: rgba(var(--accent-rgb), 0.3) !important;
+}
+
+[data-theme] .nav-item.badge-link:hover {
+  background: rgba(var(--accent-rgb), 0.25) !important;
+  color: #fff !important;
+}
+
+[data-theme] .orb-1 {
+  background: radial-gradient(circle, var(--accent-primary), transparent 70%) !important;
+}
+
+[data-theme] .orb-2 {
+  background: radial-gradient(circle, var(--accent-secondary), transparent 70%) !important;
+}
+
+[data-theme] .pill.active {
+  background: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.4) !important;
+}
+
+[data-theme] .btn-primary {
+  background: var(--accent-primary) !important;
+  color: #0c0e14 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.35) !important;
+}
+
+[data-theme] .btn-primary:hover {
+  background: var(--accent-primary-hover) !important;
+  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.45) !important;
+}
+
+[data-theme] .btn-play-trigger {
+  background: var(--accent-primary) !important;
+  color: #0c0e14 !important;
+}
+
+[data-theme] .game-card:hover {
+  border-color: rgba(var(--accent-rgb), 0.5) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 16px rgba(var(--accent-rgb), 0.25) !important;
+}
+
+[data-theme] .game-card-preview .game-icon i,
+[data-theme] .game-card-preview .game-icon svg {
+  color: var(--accent-primary) !important;
+  filter: drop-shadow(0 0 12px rgba(var(--accent-rgb), 0.55)) !important;
+}
+
+[data-theme] .game-badge,
+[data-theme] .badge,
+[data-theme] #modal-game-badge {
+  background: rgba(var(--accent-rgb), 0.16) !important;
+  color: var(--accent-light) !important;
+  border: 1px solid rgba(var(--accent-rgb), 0.35) !important;
+}
+
+[data-theme] .tool-portal-card:hover {
+  border-color: rgba(var(--accent-rgb), 0.5) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 16px rgba(var(--accent-rgb), 0.2) !important;
+}
+
+[data-theme] .tool-portal-card:hover .tool-link-text,
+[data-theme] .tool-link-text {
+  color: var(--accent-primary) !important;
+}
+
+[data-theme] .section-tag {
+  color: var(--accent-primary) !important;
+  background: rgba(var(--accent-rgb), 0.1) !important;
+  border-color: rgba(var(--accent-rgb), 0.25) !important;
+}
+
+[data-theme] .hero-stats .stat-number {
+  color: var(--accent-light) !important;
+}
+
+[data-theme] .search-bar:focus-within,
+[data-theme] .search-input:focus {
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2) !important;
+}
+
+[data-theme] #modal-play-btn,
+[data-theme] .modal-play-btn {
+  background: var(--accent-primary) !important;
+  color: #0c0e14 !important;
+  box-shadow: 0 4px 18px rgba(var(--accent-rgb), 0.4) !important;
+}
+
+[data-theme] #modal-play-btn:hover,
+[data-theme] .modal-play-btn:hover {
+  background: var(--accent-primary-hover) !important;
+}
+
+[data-theme] .status-indicator .status-dot {
+  background: var(--accent-primary) !important;
+  box-shadow: 0 0 8px var(--accent-primary) !important;
+}
+
+/* Theme Navbar Toggle Button */
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  padding: 0 !important;
+  border-radius: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 0.25rem;
+}
+
+.theme-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  display: block;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--accent-primary);
+  border-color: rgba(var(--accent-rgb, 0, 240, 255), 0.4);
+}
+
+/* Theme Panel Flyout */
+@keyframes themePanelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.theme-panel {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 270px;
+  background: rgba(13, 20, 38, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 1.15rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(var(--accent-rgb, 0, 240, 255), 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 100000;
+  display: none;
+}
+
+.theme-panel.open {
+  display: block;
+  animation: themePanelFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.theme-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.theme-panel-header h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.close-panel-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.35rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.15s ease;
+}
+
+.close-panel-btn:hover {
+  color: #fff;
+}
+
+.theme-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.6px;
+  margin-bottom: 0.6rem;
+}
+
+.theme-swatches {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.theme-swatch {
+  height: 36px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+}
+
+.theme-swatch:hover {
+  transform: scale(1.08);
+}
+
+.theme-swatch.active {
+  border-color: #ffffff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+}
+
+.theme-swatch.cyan {
+  background: linear-gradient(135deg, #00f0ff, #0099ff);
+}
+
+.theme-swatch.synthwave {
+  background: linear-gradient(135deg, #f43f5e, #a855f7);
+}
+
+.theme-swatch.matrix {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.theme-swatch.amber {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+}
+
+.theme-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0.9rem 0;
+}
+
+.crt-option {
+  font-size: 0.85rem;
+}
+
+.crt-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.crt-checkbox {
+  cursor: pointer;
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent-primary);
+}
+
+/* CRT Screen Scanline Overlay */
+.crt-screen-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 3px, 3px 100%;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.6);
+}

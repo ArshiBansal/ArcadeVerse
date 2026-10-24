@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Invaders 2026 | ArcadeVerse</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-left">
+        <h1 class="game-title">Space Invaders <span class="accent">2026</span></h1>
+        <span class="game-subtitle">Planetary Defense System</span>
+      </div>
+      <div class="header-right">
+        <button id="rules-btn" class="btn btn-secondary">How to Play</button>
+      </div>
+    </header>
+
+    <div class="hud-bar">
+      <div class="hud-item">
+        <span class="hud-label">SCORE</span>
+        <span class="hud-value" id="score-display">0000</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">WAVE</span>
+        <span class="hud-value" id="wave-display">1</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">SHIPS</span>
+        <div class="lives-container" id="lives-display">
+          <span class="life-icon">🚀</span>
+          <span class="life-icon">🚀</span>
+          <span class="life-icon">🚀</span>
+        </div>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">RECORD</span>
+        <span class="hud-value" id="hi-score-display">0000</span>
+      </div>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="game-canvas" width="480" height="600"></canvas>
+
+      <!-- Start Overlay -->
+      <div id="start-overlay" class="overlay active">
+        <div class="overlay-card">
+          <div class="overlay-icon">👾</div>
+          <h2>Space Invaders 2026</h2>
+          <p>Defend planet Earth from descending alien invasion waves. Shield behind defense bunkers and eliminate the mystery mothership!</p>
+          <button id="start-btn" class="btn btn-primary">Engage Defense</button>
+          <span class="hint-text">Arrows to move • <strong>Spacebar</strong> to fire</span>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="gameover-overlay" class="overlay">
+        <div class="overlay-card">
+          <div class="overlay-icon" id="gameover-icon">💥</div>
+          <h2 id="gameover-title">Mission Terminated</h2>
+          <div class="stats-recap">
+            <div class="recap-row"><span>Final Score:</span><strong id="final-score">0</strong></div>
+            <div class="recap-row"><span>Wave Reached:</span><strong id="final-wave">1</strong></div>
+            <div class="recap-row"><span>Aliens Neutralized:</span><strong id="final-kills">0</strong></div>
+          </div>
+          <button id="restart-btn" class="btn btn-primary">Deploy Next Ship</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Touch Controls -->
+    <div class="mobile-controls">
+      <button id="btn-left" class="touch-btn" aria-label="Move Left">◀</button>
+      <button id="btn-fire" class="touch-btn fire-btn" aria-label="Fire Cannon">FIRE ⚡</button>
+      <button id="btn-right" class="touch-btn" aria-label="Move Right">▶</button>
+    </div>
+
+    <!-- Controls & Rules Modal for PA Review -->
+    <div id="rules-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>How to Play & Controls (PA Review)</h3>
+          <button id="close-rules-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <ul class="rules-list">
+            <li><strong>Movement:</strong> Use <kbd>Left Arrow</kbd> / <kbd>Right Arrow</kbd> or <kbd>A</kbd> / <kbd>D</kbd> keys.</li>
+            <li><strong>Laser Cannon:</strong> Press <kbd>Spacebar</kbd> or tap the <strong>FIRE</strong> button.</li>
+            <li><strong>Defense Bunkers:</strong> Take cover behind the 3 destructible green energy bunkers. They degrade as lasers strike them.</li>
+            <li><strong>Mystery Mothership:</strong> High-value UFOs fly across the top for 100-300 bonus points.</li>
+            <li><strong>Invasion Loss:</strong> If any alien reaches the bottom bunker line, the planetary defense fails immediately.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

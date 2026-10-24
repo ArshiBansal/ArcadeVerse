@@ -1,0 +1,17 @@
+{
+  "id": "cache-inspector-babin",
+  "title": "Cache & Quota Storage Inspector",
+  "category": "Diagnostics",
+  "type": "standalone-tool",
+  "lucideIcon": "database",
+  "description": "Analyze browser Cache Storage partitions, test offline availability, and track client storage quotas.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "inspector.html",
+  "tags": [
+    "PWA",
+    "Storage",
+    "Cache",
+    "Diagnostics"
+  ]
+}

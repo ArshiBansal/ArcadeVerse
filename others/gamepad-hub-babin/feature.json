@@ -1,0 +1,17 @@
+{
+  "id": "gamepad-hub-babin",
+  "title": "HTML5 Gamepad & Rumble Hub",
+  "category": "Hardware",
+  "type": "standalone-tool",
+  "lucideIcon": "gamepad",
+  "description": "Standard HTML5 Gamepad controller manager, dynamic button remapping, and dual-motor haptic rumble test.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "entryHtml": "hub.html",
+  "tags": [
+    "Gamepad",
+    "Controller",
+    "Haptics",
+    "Input"
+  ]
+}

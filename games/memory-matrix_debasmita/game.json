@@ -1,0 +1,16 @@
+{
+  "title": "Quantum Memory Matrix",
+  "category": "Puzzle",
+  "lucideIcon": "puzzle",
+  "description": "Cyberpunk card flipping memory matrix test. Match cyber glyphs under timed pressure.",
+  "author": "Debasmita Bose",
+  "github": "DebasmitaBose0",
+  "role": "Project Admin",
+  "tags": [
+    "Cards",
+    "Mind",
+    "Timed"
+  ],
+  "stars": 24,
+  "featured": true
+}

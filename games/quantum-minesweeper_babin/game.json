@@ -1,0 +1,17 @@
+{
+  "title": "Quantum Minesweeper",
+  "category": "Puzzle",
+  "lucideIcon": "bomb",
+  "description": "Classic minefield sweeper with recursive flood fill, first-click safety, and subatomic hazard detection.",
+  "author": "Babin Bid",
+  "github": "Babin123456",
+  "role": "Arcade Developer",
+  "tags": [
+    "Puzzle",
+    "Logic",
+    "Strategy",
+    "Grid"
+  ],
+  "stars": 31,
+  "featured": true
+}

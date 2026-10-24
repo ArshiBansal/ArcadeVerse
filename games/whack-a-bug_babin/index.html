@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whack-A-Bug Developer Panic | ArcadeVerse</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-left">
+        <h1 class="game-title">Whack-A-Bug <span class="accent">Panic</span></h1>
+        <span class="game-subtitle">Production Server Crisis Defense</span>
+      </div>
+      <div class="header-right">
+        <button id="rules-btn" class="btn btn-secondary">How to Play</button>
+      </div>
+    </header>
+
+    <div class="scoreboard-bar">
+      <div class="score-card">
+        <span class="label">BUGS RESOLVED</span>
+        <span class="value" id="score-display">0</span>
+      </div>
+      <div class="score-card">
+        <span class="label">CPU TEMP</span>
+        <span class="value temp-val" id="temp-display">45°C</span>
+      </div>
+      <div class="score-card">
+        <span class="label">BEST RECORD</span>
+        <span class="value" id="best-score">0</span>
+      </div>
+    </div>
+
+    <!-- Temperature Progress Bar -->
+    <div class="temp-bar-wrapper">
+      <div class="temp-bar-fill" id="temp-bar-fill" style="width: 45%;"></div>
+    </div>
+
+    <!-- 3x3 Server Rack Grid -->
+    <div class="server-rack-wrapper">
+      <div class="server-rack" id="server-rack">
+        <!-- 9 server port slots injected by JS -->
+      </div>
+
+      <!-- Start Overlay -->
+      <div id="start-overlay" class="overlay active">
+        <div class="overlay-card">
+          <div class="overlay-icon">🐛</div>
+          <h2>Production Incident Alert!</h2>
+          <p>Production bugs are breaking server ports. Whack them before the CPU temperature overheats past 100°C!</p>
+          <button id="start-btn" class="btn btn-primary">Deploy Hotfix</button>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="gameover-overlay" class="overlay">
+        <div class="overlay-card">
+          <div class="overlay-icon">🔥</div>
+          <h2>Server Meltdown!</h2>
+          <div class="stats-recap">
+            <div class="recap-row"><span>Bugs Squashed:</span><strong id="final-score">0</strong></div>
+            <div class="recap-row"><span>Max Combo:</span><strong id="final-combo">0x</strong></div>
+            <div class="recap-row"><span>All-Time Best:</span><strong id="final-best">0</strong></div>
+          </div>
+          <button id="restart-btn" class="btn btn-primary">Reboot Server</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules Modal for PA Review -->
+    <div id="rules-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>How to Play (PA Review)</h3>
+          <button id="close-rules-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <ul class="rules-list">
+            <li><strong>Objective:</strong> Click or tap bugs emerging from server racks before they subvert server stability.</li>
+            <li><strong>Bug Types:</strong>
+              <ul>
+                <li>🐛 <strong>Syntax Error:</strong> +10 Pts, -2°C CPU</li>
+                <li>👾 <strong>Memory Leak:</strong> +25 Pts, -4°C CPU</li>
+                <li>⭐ <strong>Golden Patch:</strong> +50 Pts, -10°C CPU</li>
+                <li>🛡️ <strong>Firewall Trap:</strong> Penalty! +15°C CPU if clicked!</li>
+              </ul>
+            </li>
+            <li><strong>Meltdown Loss:</strong> If CPU temperature reaches 100°C, the server experiences a complete outage.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
