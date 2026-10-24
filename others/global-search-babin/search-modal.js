@@ -101,10 +101,12 @@
     if (filtered.length === 0) {
       resultsContainer.innerHTML = `
         <div class="omnibar-no-results">
-          <p>No games or commands found matching "<strong>${query}</strong>"</p>
+          <p>No games or commands found matching "<strong></strong>"</p>
           <small>Try searching for "Action", "Puzzle", or "Snake"</small>
         </div>
       `;
+      // The query is what the user typed, so show it as text, not markup.
+      resultsContainer.querySelector(".omnibar-no-results strong").textContent = query;
       return;
     }
 

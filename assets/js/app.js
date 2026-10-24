@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         emptyCard.innerHTML = `
           <div class="empty-state-icon"><i data-lucide="gamepad-2"></i></div>
-          <h3 class="empty-state-title">No games found in "${currentCategory !== "all" ? currentCategory : searchQuery}"</h3>
+          <h3 class="empty-state-title"></h3>
           <p class="empty-state-desc">
             Be the pioneer contributor! Build the first game for this category under <code>games/&lt;game-name&gt;_&lt;your-name&gt;/</code> and claim your spot on the leaderboard.
           </p>
@@ -220,6 +220,12 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
           </div>
         `;
+      }
+
+      // Category and search text come from the user, so set them as text, not markup.
+      const emptyTitle = emptyCard.querySelector(".empty-state-title");
+      if (currentCategory !== "favorites") {
+        emptyTitle.textContent = `No games found in "${currentCategory !== "all" ? currentCategory : searchQuery}"`;
       }
 
       emptyCard.querySelector("#reset-filter-btn").addEventListener("click", () => {

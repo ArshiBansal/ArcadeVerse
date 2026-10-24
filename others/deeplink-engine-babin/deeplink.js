@@ -72,7 +72,9 @@
     if (gameId) {
       // Wait for games grid to populate
       const checkInterval = setInterval(() => {
-        const targetCard = document.querySelector(`[data-game-id="${gameId}"], [data-game-id*="${gameId}"], [data-id="${gameId}"]`);
+        // CSS.escape keeps quotes or brackets in a shared link from breaking the selector.
+        const safeId = CSS.escape(gameId);
+        const targetCard = document.querySelector(`[data-game-id="${safeId}"], [data-game-id*="${safeId}"], [data-id="${safeId}"]`);
         if (targetCard) {
           clearInterval(checkInterval);
           targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
