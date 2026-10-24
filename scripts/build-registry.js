@@ -1,7 +1,7 @@
 /**
  * ArcadeVerse Registry Auto-Generator
  * Scans all games in games/<game-name_contributor-name>/game.json
- * Scans all platform features in others/<feature-name>-<contributor-name>/feature.json
+ * Scans all platform features in others/<feature-name>-<your-name>/feature.json
  * Compiles assets/js/games-registry.js cleanly and without merge conflicts.
  */
 

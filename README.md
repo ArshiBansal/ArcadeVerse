@@ -30,10 +30,10 @@
 ## ⚡ **KEY HIGHLIGHTS & ARCHITECTURAL ADVANTAGES**
 
 - 🚀 **100% Native Web Standards:** Pure HTML5, CSS3, & Modern Vanilla JS. Runs instantly in any web browser without any installation!
-- 📁 **Isolated Directory Pattern (`games/game-name_contributor-name/`):** Every participant works inside their own isolated folder. **Zero Git merge conflicts!**
+- 📁 **Isolated Directory Pattern (`games/game-name_your-name/` & `others/<feature-name>-<your-name>/`):** Every participant works inside their own isolated folder. **Zero Git merge conflicts!**
 - 🕹️ **Multi-Game Diversity:** Multiple contributors can build different versions of the same game idea without collision.
 - 📖 **Comprehensive Contributor Guide ([CONTRIBUTING.md](CONTRIBUTING.md)):** Detailed instructions, isolation rules, and architecture guidelines on how to contribute features and games.
-- 🛠️ **Conflict-Free Automated Contribution:** Contributors simply add their 4 game files (including `game.json`) in their dedicated `games/` folder — our automated GitHub Actions workflow compiles the registry without conflicts!
+- 🛠️ **Conflict-Free Automated Contribution:** Contributors simply add their files along with `game.json` (in `games/`) or `feature.json` (in `others/`) — our automated GitHub Actions workflow compiles the registry without conflicts!
 - 🏆 **Live GitHub Hall of Fame ([leaderboard.html](leaderboard.html)):** Real-time contribution scoring, podium champions, and custom rank badges fetched directly from the GitHub REST API!
 
 ---
@@ -99,11 +99,11 @@ Simply open your project folder in File Explorer and **double-click `index.html`
 ### 📌 **Quick Checklist for Contributors**
 
 1. 📖 **Read the Guidelines:** Review the complete [CONTRIBUTING.md](CONTRIBUTING.md) for official Nexus Spring Of Code – Winter Edition 2026 dual-point systems and 45-day program tiers.
-2. ⚠️ **Strict Folder Naming:** All game submissions **MUST** be placed in the `'games' folder` under `games/<game-name>_<contributor-name>/` (e.g., `games/cyber-pong_rohit/`). All site-wide enhancements must live under `<folder-name>-<your-name>/`.
+2. ⚠️ **Strict Folder Naming:** All game submissions **MUST** be placed in the `'games' folder` under `games/<game-name_your-name>/` (e.g., `games/cyber-pong_your-name/`). All site-wide enhancements must live under `others/<feature-name>-<your-name>/`.
 3. 🤝 **Adhere to Code of Conduct:** Read our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Plagiarism, toxic comments, broken AI dumps, or rule violations will result in PR rejection and event disqualification.
 4. 🛡️ **Review Security Rules:** Review [SECURITY.md](SECURITY.md) for web security requirements (pure vanilla JS, no external tracker scripts, no dynamic `eval()` execution, and strict DOM safety).
 5. ⏱️ **Submission Timeline:** Submit PRs within **5 days** of issue assignment (issues with 7 days of inactivity will be auto-reassigned).
-6. 📝 **Automated Game Registration:** Include `game.json` metadata in your game folder (`games/<game-name_username>/`). Do NOT edit root files or `games-registry.js` — registration is handled automatically by GitHub Actions!
+6. 📝 **Automated Game & Feature Registration:** Include `game.json` metadata in your game folder (`games/<game-name_your-name>/`) or `feature.json` in your feature folder (`others/<feature-name>-<your-name>/`). Do NOT edit root files or `games-registry.js` — registration is handled automatically by GitHub Actions!
 7. 🎖️ **Earn Contributor Badges:** Unlock official titles on our live [Hall of Fame Leaderboard](leaderboard.html) across both **Games Dedicated** (`Master Game Architect`, `Hyper Game Developer`, `Arcade Developer`, `Arcade Explorer`) and **Platform & Core** (`Master Core Architect`, `Elite Contributor`, `Platform Contributor`, `Active Contributor`) tracks.
 
 ---

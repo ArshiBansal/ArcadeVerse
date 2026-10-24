@@ -135,7 +135,7 @@ To keep this project scalable and prevent hundreds of merge conflicts, I have es
 > - **Zero need for you to touch root files:**
 >   - Game and feature registrations are handled automatically by our GitHub Actions workflow scanning `game.json` and `feature.json`.
 >   - The platform dynamic loader automatically registers and connects your components.
-> - **Any PR that touches `index.html`, `leaderboard.html`, or `games-registry.js` will be rejected immediately.**
+> - **Any PR that touches `index.html`, `leaderboard.html`, or `games-registry.js` will be rejected immediately, and you will be instructed to revert root changes and strictly follow `CONTRIBUTING.md`.**
 >
 > ---
 >
@@ -244,9 +244,9 @@ ArcadeVerse/
 ├── assets/
 │   ├── css/style.css                    # Theme Stylesheet
 │   └── js/
-│       ├── app.js                       # Platform Engine & Filter Logic
+│       ├── app.js                       # Platform Engine, Filter & Dynamic Loader
 │       ├── leaderboard.js               # Live GitHub API Sync Engine
-│       └── games-registry.js            # Auto-compiled from game.json by GitHub Actions
+│       └── games-registry.js            # Auto-compiled from game.json & feature.json by GitHub Actions
 │
 ├── games/                               # 🕹️ MANDATORY Games Directory (Games ONLY!)
 │   └── <game-name_your-name>/           # 🚀 Isolated Game Folder (Strictly 4 files)
@@ -258,10 +258,11 @@ ArcadeVerse/
 │
 └── others/                              # 🛠️ MANDATORY Non-Game Features & Tools Directory
     └── <feature-name>-<your-name>/      # 🚀 Isolated Feature Folder (NO games allowed here!)
-        │                                # (For UI enhancements, components, bug fixes — NO README/docs)
-        ├── component.html               # Feature structure/page (if applicable)
-        ├── component.css                # Feature styling
-        └── component.js                 # Feature logic / engine
+        │                                # (For UI enhancements, tools, plugins — NO README/docs)
+        ├── component.html               # Feature page (required for standalone tools)
+        ├── component.css                # Feature styling (if applicable)
+        ├── component.js                 # Feature logic / engine (if applicable)
+        └── feature.json                 # Feature metadata (Automated registry & dynamic loader)
 ```
 
 ---
@@ -336,13 +337,50 @@ Inside your game folder (`games/game-name_your-name/`), create `game.json`:
 }
 ```
 
-For non-game features inside `others/<feature-name>-<your-name>/`, create `feature.json` with your metadata (`id`, `title`, `category`, `type`, `author`, `github`, `entryHtml` or `js`/`css`).
+For non-game features inside `others/<feature-name>-<your-name>/`, create `feature.json`. Choose the template matching your contribution type:
+
+**Option A: Standalone Tool (opens a dedicated tool page in the portal / Tools tab)**
+```json
+{
+  "id": "feature-name-your-name",
+  "title": "Your Tool Title",
+  "category": "DevTools",
+  "type": "standalone-tool",
+  "lucideIcon": "tool",
+  "description": "Short description of what your standalone tool does.",
+  "author": "Your Full Name",
+  "github": "your-github-username",
+  "entryHtml": "tool.html",
+  "tags": ["DevTools", "Utility", "NSOC26"]
+}
+```
+
+**Option B: Background Plugin / Engine (automatically injected into `index.html` by the dynamic loader)**
+```json
+{
+  "id": "feature-name-your-name",
+  "title": "Your Feature Title",
+  "category": "Platform",
+  "type": "background-plugin",
+  "lucideIcon": "cpu",
+  "description": "Short description of your platform engine or background plugin.",
+  "author": "Your Full Name",
+  "github": "your-github-username",
+  "js": "feature.js",
+  "css": "feature.css",
+  "tags": ["Platform", "Engine", "NSOC26"]
+}
+```
 
 > ⚡ **ZERO MERGE CONFLICT WORKFLOW:**
 >
 > - **Do NOT edit `assets/js/games-registry.js` or `index.html`.**
 > - When I merge your Pull Request into `main`, our **GitHub Actions automated workflow** will instantly detect your `game.json` or `feature.json` and compile the registries automatically!
 > - The automated dynamic loader will display and activate your component on `index.html`.
+>
+> ⚠️ **STRICT COMPLIANCE & PA REVIEW NOTICE:**
+> - If any contributor **does not obey these rules** (e.g. editing `index.html` or `games-registry.js`, omitting `game.json` or `feature.json`, adding emojis/unauthorized files, or using non-compliant folder structures), I will **manually instruct them in the PR review to strictly follow the `CONTRIBUTING.md` file**.
+> - You will be required to reorganize your files and adhere strictly to these guidelines before your Pull Request can be approved or merged.
 
 ### 📌 STEP 5: COMMIT, PUSH & OPEN PULL REQUEST
 
@@ -379,7 +417,7 @@ As your Project Admin, here is what I expect from every contributor:
 > [!CAUTION]
 > The following are **strictly prohibited** and will result in PR rejection or disqualification:
 >
-> - ❌ **Modifying `games-registry.js`, `index.html`, or root core files** — contributors must NOT edit `assets/js/games-registry.js`, `index.html`, or `leaderboard.html`. Game registration is automated via `game.json`, and I will link your game in `index.html`.
+> - ❌ **Modifying `games-registry.js`, `index.html`, or root core files** — contributors must NOT edit `assets/js/games-registry.js`, `index.html`, or `leaderboard.html`. Registration is automated via `game.json` and `feature.json`, and components are dynamically loaded by the platform.
 > - ❌ **Adding README or documentation files inside game or feature folders** — no `README.md` or doc files are allowed in `games/<game-name_your-name>/` or `others/<feature-name>-<your-name>/`. Describe your changes in your PR description.
 > - ❌ **Loose files or individual folders in the home/root directory** — creating or dumping any files or feature folders directly in the root directory.
 > - ❌ **Creating games inside `others/`** — games must STRICTLY and MANDATORILY be placed under `games/<game-name_your-name>/` (games folder ei game create mandatory!). The `others/` folder is strictly reserved for non-game features and tools.
@@ -430,11 +468,11 @@ Before submitting your PR to me, make sure every box is checked:
 - [ ] My change is meaningful, tested, and written by me (100% Vanilla JS/HTML/CSS)
 - [ ] **No files or folders were created directly in the home/root directory**
 - [ ] **I have NOT modified any root files (`index.html`, `leaderboard.html`, `games-registry.js`)**
-- [ ] All new non-game features, UI enhancements, or bug fixes are isolated inside `others/<feature-name>-<your-name>/` (NO games in `others/`!)
+- [ ] All new non-game features, UI enhancements, or bug fixes are isolated inside `others/<feature-name>-<your-name>/` with `feature.json` (NO games in `others/`!)
 - [ ] Games are strictly and mandatorily inside `games/<game-name_your-name>/` *(games folder ei game create mandatory)*
 - [ ] Game contains **ONLY** `index.html`, `style.css`, `game.js`, and `game.json` (strictly 4 files — no `README.md`, no documentation files, and no extraneous assets/binaries)
 - [ ] Used **icons only (SVG / Lucide)** in the game UI — **NO emojis**
-- [ ] Added `game.json` inside the game folder (I have **NOT** edited `assets/js/games-registry.js`)
+- [ ] Added `game.json` (for games) or `feature.json` (for features in `others/`) (I have **NOT** edited `assets/js/games-registry.js` or `index.html`)
 - [ ] The PR says `Closes #issue-number` with a short summary
 - [ ] I understand that the Project Admin will add the `nsoc26` and level labels during review
 - [ ] I am not submitting multiple PRs at once
