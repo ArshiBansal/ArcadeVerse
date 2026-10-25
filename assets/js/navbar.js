@@ -80,4 +80,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }, { passive: true });
   }
+
+  // Ensure active navbar pill matches the current active page
+  const currentPath = (window.location.pathname || "").toLowerCase();
+  const isLeaderboard = currentPath.includes("leaderboard.html");
+
+  document.querySelectorAll(".nav-item, .mobile-nav-item").forEach((link) => {
+    const href = (link.getAttribute("href") || "").toLowerCase();
+    if (!href || href.startsWith("http")) return;
+
+    if (isLeaderboard && href.includes("leaderboard.html")) {
+      link.classList.add("active");
+    } else if (!isLeaderboard && href.includes("index.html")) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
 });

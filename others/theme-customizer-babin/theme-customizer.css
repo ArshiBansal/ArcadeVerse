@@ -60,15 +60,22 @@
   border-color: rgba(var(--accent-rgb), 0.35) !important;
 }
 
-[data-theme] .nav-item.badge-link {
-  background: rgba(var(--accent-rgb), 0.12) !important;
+[data-theme] .nav-item.active {
+  background: rgba(var(--accent-rgb), 0.14) !important;
   color: var(--accent-light) !important;
-  border-color: rgba(var(--accent-rgb), 0.3) !important;
+  border-color: rgba(var(--accent-rgb), 0.35) !important;
+  box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.25) !important;
 }
 
-[data-theme] .nav-item.badge-link:hover {
+[data-theme] .nav-item.active:hover {
   background: rgba(var(--accent-rgb), 0.25) !important;
   color: #fff !important;
+}
+
+[data-theme] .mobile-nav-item.active {
+  background: rgba(var(--accent-rgb), 0.14) !important;
+  color: var(--accent-light) !important;
+  border-color: rgba(var(--accent-rgb), 0.35) !important;
 }
 
 [data-theme] .orb-1 {

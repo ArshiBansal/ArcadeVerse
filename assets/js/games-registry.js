@@ -193,6 +193,26 @@ const GAMES_REGISTRY = [
     "difficulty": "Intermediate"
   },
   {
+    "id": "neon-grid-defense_mistu7debnath",
+    "title": "Neon Grid Defense: Core Protocol",
+    "category": "Strategy",
+    "lucideIcon": "shield",
+    "description": "Defend your energy core against waves of cyber bots with strategic tower placement, upgrades, and tactical energy management.",
+    "author": "mistu7debnath",
+    "github": "mistu7debnath",
+    "role": "Arcade Developer",
+    "path": "games/neon-grid-defense_mistu7debnath/index.html",
+    "tags": [
+      "Strategy",
+      "Tower Defense",
+      "Cyberpunk",
+      "Arcade",
+      "NSOC26"
+    ],
+    "stars": 25,
+    "featured": false
+  },
+  {
     "id": "neon-runner_babin",
     "title": "Neon Beat Runner",
     "category": "Rhythm",
