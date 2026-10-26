@@ -10,23 +10,64 @@
 
   function getRecents() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (Array.isArray(stored) && stored.length > 0) {
+        return stored;
+      }
     } catch {
-      return [];
+      // ignore
     }
+
+    // Smart fallback: check player stats distinctGames if available
+    try {
+      const stats = JSON.parse(localStorage.getItem("arcadeverse_player_stats"));
+      if (stats && Array.isArray(stats.distinctGames) && stats.distinctGames.length > 0 && typeof GAMES_REGISTRY !== "undefined") {
+        const fallbackList = stats.distinctGames.slice(-MAX_RECENTS).reverse().map((id, index) => {
+          const game = GAMES_REGISTRY.find(g => g.id === id);
+          return {
+            id,
+            title: game ? game.title : id,
+            category: game ? game.category : "Arcade",
+            timestamp: Date.now() - (index * 60000)
+          };
+        });
+        if (fallbackList.length > 0) {
+          saveRecents(fallbackList);
+          return fallbackList;
+        }
+      }
+    } catch {
+      // ignore
+    }
+
+    return [];
   }
 
   function saveRecents(list) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0, MAX_RECENTS)));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0, MAX_RECENTS)));
+    } catch {
+      // ignore
+    }
   }
 
   function recordPlayed(gameId, title, category) {
     if (!gameId) return;
+
+    // Resolve missing title/category from GAMES_REGISTRY if needed
+    if ((!title || title === "Game" || !category || category === "Arcade") && typeof GAMES_REGISTRY !== "undefined") {
+      const found = GAMES_REGISTRY.find(g => g.id === gameId);
+      if (found) {
+        title = found.title;
+        category = found.category;
+      }
+    }
+
     let list = getRecents().filter(item => item.id !== gameId);
     list.unshift({
       id: gameId,
       title: title || "Arcade Game",
-      category: category || "Retro",
+      category: category || "Arcade",
       timestamp: Date.now()
     });
     saveRecents(list);
@@ -79,7 +120,6 @@
     `;
 
     document.body.appendChild(drawer);
-    if (window.lucide) lucide.createIcons();
 
     // Backdrop
     const backdrop = document.createElement("div");
@@ -87,10 +127,19 @@
     backdrop.className = "recent-backdrop";
     document.body.appendChild(backdrop);
 
+    if (window.lucide) lucide.createIcons();
+
     // Event listeners
     trigger.addEventListener("click", () => toggleDrawer(true));
     document.getElementById("recent-drawer-close").addEventListener("click", () => toggleDrawer(false));
     backdrop.addEventListener("click", () => toggleDrawer(false));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && drawer.classList.contains("active")) {
+        toggleDrawer(false);
+      }
+    });
+
     document.getElementById("clear-recent-btn").addEventListener("click", () => {
       localStorage.removeItem(STORAGE_KEY);
       renderDrawerItems();
@@ -153,16 +202,25 @@
       </div>
     `).join("");
 
+    if (window.lucide) lucide.createIcons();
+
     listContainer.querySelectorAll(".recent-play-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         const id = btn.getAttribute("data-game-id");
         toggleDrawer(false);
-        // Find play button on page or redirect to index with deep link
-        const targetBtn = document.querySelector(`[data-game-id="${id}"] .btn-play, [data-game-id="${id}"]`);
+
+        // 1. Try launching directly through ArcadeApp API
+        if (window.ArcadeApp && typeof window.ArcadeApp.openGame === "function") {
+          if (window.ArcadeApp.openGame(id)) return;
+        }
+
+        // 2. Try finding button/card on the current page
+        const targetBtn = document.querySelector(`[data-game-id="${id}"] .btn-play-trigger, [data-game-id="${id}"] .btn-play, [data-game-id="${id}"]`);
         if (targetBtn) {
-          const actualBtn = targetBtn.querySelector(".btn-play") || targetBtn;
+          const actualBtn = targetBtn.querySelector(".btn-play-trigger, .btn-play") || targetBtn;
           actualBtn.click();
         } else {
+          // 3. Fallback to index.html with game query parameter
           window.location.href = `index.html?game=${id}`;
         }
       });
@@ -170,20 +228,60 @@
   }
 
   function attachGameWatchers() {
-    // Intercept clicks on game play buttons or modal openings
+    // 1. Use capture phase click listener to bypass stopPropagation
     document.addEventListener("click", (e) => {
-      const playBtn = e.target.closest(".btn-play, [data-action='play'], .game-card");
-      if (!playBtn) return;
+      const trigger = e.target.closest(".btn-play-trigger, .btn-play, [data-action='play'], .game-card");
+      if (!trigger) return;
 
-      const card = playBtn.closest(".game-card") || playBtn;
-      const gameId = card.getAttribute("data-game-id") || card.id;
-      const title = card.querySelector(".game-card-title")?.textContent || "Game";
-      const category = card.querySelector(".game-card-tag, .category-badge")?.textContent || "Arcade";
+      const card = trigger.closest(".game-card") || trigger;
+      const gameId = card.getAttribute("data-game-id") || card.getAttribute("data-id") || card.id;
+      if (!gameId) return;
 
-      if (gameId) {
-        recordPlayed(gameId, title, category);
+      let title = card.querySelector(".game-card-title")?.textContent?.trim();
+      let category = card.querySelector(".game-category-tag, .game-card-tag, .category-badge")?.textContent?.trim();
+
+      if ((!title || !category) && typeof GAMES_REGISTRY !== "undefined") {
+        const found = GAMES_REGISTRY.find(g => g.id === gameId);
+        if (found) {
+          title = title || found.title;
+          category = category || found.category;
+        }
+      }
+
+      recordPlayed(gameId, title || "Arcade Game", category || "Retro");
+    }, true);
+
+    // 2. Listen to custom event dispatched by app.js
+    window.addEventListener("arcadeverse:game-launched", (e) => {
+      if (e.detail && e.detail.id) {
+        recordPlayed(e.detail.id, e.detail.title, e.detail.category);
       }
     });
+
+    // 3. Safety net: observe #game-modal when it becomes active
+    const gameModal = document.getElementById("game-modal");
+    if (gameModal) {
+      const observer = new MutationObserver(() => {
+        if (gameModal.classList.contains("active")) {
+          const title = document.getElementById("modal-game-title")?.textContent?.trim();
+          const category = document.getElementById("modal-game-badge")?.textContent?.trim();
+          const iframeSrc = document.getElementById("game-iframe")?.src || "";
+
+          let gameId = "";
+          if (typeof activeGame !== "undefined" && activeGame && activeGame.id) {
+            gameId = activeGame.id;
+          } else if (typeof GAMES_REGISTRY !== "undefined") {
+            const found = GAMES_REGISTRY.find(g => (g.path && iframeSrc.includes(g.path)) || g.title === title);
+            if (found) gameId = found.id;
+          }
+
+          if (gameId) {
+            recordPlayed(gameId, title || "Arcade Game", category || "Retro");
+          }
+        }
+      });
+      observer.observe(gameModal, { attributes: true, attributeFilter: ["class"] });
+    }
   }
 
   document.addEventListener("DOMContentLoaded", () => {

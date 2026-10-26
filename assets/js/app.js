@@ -314,11 +314,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateModalFavoriteButton(isFavorite(game.id));
 
+    // Record game play in Recently Played drawer
+    if (window.ArcadeRecent && typeof window.ArcadeRecent.recordPlayed === "function") {
+      window.ArcadeRecent.recordPlayed(game.id, game.title, game.category);
+    }
+    window.dispatchEvent(new CustomEvent("arcadeverse:game-launched", { detail: game }));
+
     gameModal.classList.add("active");
     gameModal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
     closeModalBtn.focus();
   }
+
+  // Expose global helper to open game modal from plugins, search, or recent drawer
+  window.ArcadeApp = {
+    openGame: (gameId) => {
+      const game = GAMES_REGISTRY.find((g) => g.id === gameId);
+      if (game) {
+        openGameModal(game);
+        return true;
+      }
+      return false;
+    }
+  };
 
   function closeGameModal() {
     activeGame = null;

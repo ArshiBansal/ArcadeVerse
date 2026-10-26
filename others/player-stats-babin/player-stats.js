@@ -146,15 +146,36 @@
       modal = document.createElement("div");
       modal.id = "achievements-modal";
       modal.className = "modal achievements-modal";
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-modal", "true");
+      modal.setAttribute("aria-labelledby", "achievements-modal-title");
       modal.innerHTML = `
-        <div class="modal-content">
+        <div class="modal-content" role="document">
           <div class="modal-header">
-            <h3>Arcade Achievements</h3>
-            <button id="close-achievements-btn" class="close-btn">&times;</button>
+            <h3 id="achievements-modal-title">
+              <svg class="modal-title-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                <path d="M4 22h16"></path>
+                <path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-2.34"></path>
+                <path d="M14 14.66V17c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-2.34"></path>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+              </svg>
+              <span>Arcade Achievements</span>
+            </h3>
+            <button id="close-achievements-btn" class="close-btn" aria-label="Close Achievements Modal">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
           </div>
           <div class="modal-body">
             <div class="achievements-progress-bar">
-              <span id="ach-progress-text">0 / 5 Unlocked</span>
+              <div class="ach-progress-header">
+                <span>Progress Overview</span>
+                <span id="ach-progress-text">0 / 5 Unlocked</span>
+              </div>
               <div class="progress-track"><div class="progress-fill" id="ach-progress-fill" style="width: 0%;"></div></div>
             </div>
             <div class="achievements-list" id="achievements-list"></div>
@@ -163,11 +184,19 @@
       `;
       document.body.appendChild(modal);
 
-      modal.querySelector("#close-achievements-btn").addEventListener("click", () => {
+      const closeModal = () => {
         modal.classList.remove("active");
-      });
+      };
+
+      modal.querySelector("#close-achievements-btn").addEventListener("click", closeModal);
       modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.remove("active");
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("active")) {
+          closeModal();
+        }
       });
     }
 
@@ -205,7 +234,9 @@
 
   // Intercept game launches & page views
   document.addEventListener("DOMContentLoaded", () => {
-    injectAchievementsNavbarButton();
+    // User requested to remove trophy button from nav bar
+    const existingNavBtn = document.getElementById("achievements-nav-btn");
+    if (existingNavBtn) existingNavBtn.remove();
 
     if (window.location.pathname.includes("leaderboard.html")) {
       playerStats.visitedLeaderboard = true;
