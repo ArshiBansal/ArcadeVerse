@@ -232,6 +232,26 @@ const GAMES_REGISTRY = [
     "featured": true
   },
   {
+    "id": "prism-pulse_joitapaul",
+    "title": "Prism Pulse: Laser Labyrinth",
+    "category": "Puzzle",
+    "lucideIcon": "focus",
+    "description": "Rotate mirrors to guide a laser through a shifting labyrinth and hit the receiver.",
+    "author": "Joita Paul",
+    "github": "joitapaul",
+    "role": "Contributor",
+    "path": "games/prism-pulse_joitapaul/index.html",
+    "tags": [
+      "Puzzle",
+      "Laser",
+      "Logic",
+      "NSOC26"
+    ],
+    "stars": 0,
+    "featured": false,
+    "difficulty": "Intermediate"
+  },
+  {
     "id": "quantum-2048_babin",
     "title": "Quantum 2048",
     "category": "Puzzle",
