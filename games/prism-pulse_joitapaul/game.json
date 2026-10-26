@@ -1,0 +1,18 @@
+{
+  "title": "Prism Pulse: Laser Labyrinth",
+  "category": "Puzzle",
+  "lucideIcon": "focus",
+  "difficulty": "Intermediate",
+  "description": "Rotate mirrors to guide a laser through a shifting labyrinth and hit the receiver.",
+  "author": "Joita Paul",
+  "github": "joitapaul",
+  "role": "Contributor",
+  "tags": [
+    "Puzzle",
+    "Laser",
+    "Logic",
+    "NSOC26"
+  ],
+  "stars": 0,
+  "featured": false
+}

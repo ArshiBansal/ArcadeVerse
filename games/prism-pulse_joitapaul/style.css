@@ -1,0 +1,367 @@
+:root {
+  color-scheme: dark;
+  font-family: 'Segoe UI', sans-serif;
+  background: #080b14;
+  color: #f4f7ff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1.25rem;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(55, 66, 160, 0.2), transparent 48%),
+    #080b14;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.game-shell {
+  width: min(100%, 590px);
+  margin: 0 auto;
+}
+
+.game-header {
+  position: relative;
+  padding: 0.3rem 0 1.25rem;
+  text-align: center;
+}
+
+.back-link {
+  position: absolute;
+  top: 0.4rem;
+  left: 0;
+  color: #aebad0;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: #68d8ff;
+}
+
+.eyebrow,
+.stat-label {
+  color: #63d4ff;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.eyebrow {
+  margin: 0.9rem 0 0.35rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 7vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 0.45rem 0 0;
+  color: #98a7c1;
+  font-size: 0.9rem;
+}
+
+.game-panel {
+  padding: clamp(0.8rem, 4vw, 1.25rem);
+  border: 1px solid rgba(130, 158, 205, 0.18);
+  border-radius: 1rem;
+  background: rgba(16, 22, 37, 0.94);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.25);
+}
+
+.game-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.level-stat {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.stat-label {
+  color: #8392ac;
+  font-size: 0.56rem;
+}
+
+.level-stat strong {
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.secondary-button,
+.primary-button {
+  min-height: 42px;
+  border-radius: 0.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.secondary-button {
+  margin-left: auto;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(151, 173, 210, 0.22);
+  background: #151d2c;
+  color: #dce7fb;
+  font-size: 0.78rem;
+}
+
+.secondary-button:hover {
+  border-color: #61cfff;
+  background: #1a2940;
+}
+
+.instructions {
+  margin: 0 0 0.75rem;
+  color: #a6b4ca;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.board-frame {
+  padding: 0.45rem;
+  border: 1px solid rgba(95, 132, 188, 0.2);
+  border-radius: 0.8rem;
+  background: #090e19;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgba(86, 120, 173, 0.25);
+  border-radius: 0.45rem;
+  background: #0d1524;
+}
+
+.cell {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  place-items: center;
+  border: 1px solid rgba(110, 140, 184, 0.1);
+  background: rgba(19, 30, 49, 0.78);
+}
+
+.cell.beam {
+  background:
+    radial-gradient(circle, rgba(90, 221, 255, 0.2), transparent 72%),
+    rgba(20, 42, 63, 0.92);
+}
+
+.cell.beam::before {
+  position: absolute;
+  z-index: 1;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #e5fbff;
+  box-shadow: 0 0 8px 3px #39d7ff, 0 0 18px 6px rgba(57, 215, 255, 0.55);
+  content: "";
+}
+
+.cell.mirror {
+  padding: 0;
+  color: #80dfff;
+  font-size: clamp(1.45rem, 8vw, 2.45rem);
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(72, 207, 255, 0.75);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.cell.mirror:hover {
+  z-index: 2;
+  background: #1a2c44;
+  color: #d0f7ff;
+}
+
+.cell.mirror:active {
+  transform: scale(0.92);
+}
+
+.cell.mirror.beam {
+  color: #c5f4ff;
+}
+
+.cell.emitter,
+.cell.receiver {
+  background: #132138;
+}
+
+.endpoint-icon {
+  color: #4fceff;
+  font-size: clamp(1rem, 5vw, 1.5rem);
+  text-shadow: 0 0 12px currentColor;
+}
+
+.cell.receiver .endpoint-icon {
+  color: #8394b3;
+}
+
+.cell.receiver.lit {
+  background: rgba(16, 80, 72, 0.72);
+}
+
+.cell.receiver.lit .endpoint-icon {
+  color: #5dffc3;
+  text-shadow: 0 0 14px rgba(73, 255, 193, 0.9);
+}
+
+.cell.blocker {
+  background:
+    repeating-linear-gradient(135deg, rgba(119, 132, 157, 0.12) 0 5px, transparent 5px 10px),
+    #151b28;
+}
+
+.blocker-icon {
+  color: #58677f;
+  font-size: 1rem;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem 1.2rem;
+  padding: 0.85rem 0 0.65rem;
+  color: #9caac0;
+  font-size: 0.69rem;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-emitter,
+.legend-receiver,
+.legend-wall {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #4fceff;
+  box-shadow: 0 0 8px rgba(79, 206, 255, 0.7);
+}
+
+.legend-receiver {
+  background: #5dffc3;
+  box-shadow: 0 0 8px rgba(93, 255, 195, 0.65);
+}
+
+.legend-wall {
+  border-radius: 2px;
+  background: #58677f;
+  box-shadow: none;
+}
+
+.legend-mirror {
+  color: #80dfff;
+  font-size: 1.15rem;
+  font-style: normal;
+  line-height: 0.8;
+}
+
+.game-status {
+  min-height: 2.8rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(103, 139, 187, 0.15);
+  border-radius: 0.6rem;
+  background: rgba(7, 12, 22, 0.7);
+  color: #b7c5dc;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.game-status.success {
+  border-color: rgba(93, 255, 195, 0.4);
+  color: #81ffce;
+}
+
+.primary-button {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  background: linear-gradient(100deg, #35c7ff, #7a8bff);
+  color: #07111d;
+  font-size: 0.88rem;
+  box-shadow: 0 6px 18px rgba(60, 176, 255, 0.18);
+}
+
+.primary-button:hover {
+  filter: brightness(1.12);
+}
+
+.footer-note {
+  margin: 0.8rem 0 0;
+  color: #73829c;
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 0.8rem;
+  }
+
+  .game-header {
+    padding-top: 1.7rem;
+  }
+
+  .game-toolbar {
+    gap: 0.65rem;
+  }
+
+  .secondary-button {
+    padding-inline: 0.6rem;
+    font-size: 0.72rem;
+  }
+
+  .legend {
+    gap: 0.65rem 0.85rem;
+    font-size: 0.64rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
