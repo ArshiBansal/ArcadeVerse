@@ -270,6 +270,26 @@ const GAMES_REGISTRY = [
     "featured": true
   },
   {
+    "id": "quantum-pinball_joitapaul",
+    "title": "Quantum Pinball: Reactor Run",
+    "category": "Arcade",
+    "lucideIcon": "circle-dot",
+    "description": "Keep the reactor ball in play, fire the flippers, and score big on glowing bumpers and targets.",
+    "author": "Joita Paul",
+    "github": "joitapaul",
+    "role": "Contributor",
+    "path": "games/quantum-pinball_joitapaul/index.html",
+    "tags": [
+      "Arcade",
+      "Pinball",
+      "Physics",
+      "NSOC26"
+    ],
+    "stars": 0,
+    "featured": false,
+    "difficulty": "Intermediate"
+  },
+  {
     "id": "space-invaders_babin",
     "title": "Space Invaders 2026",
     "category": "Action",

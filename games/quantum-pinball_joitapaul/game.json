@@ -1,0 +1,18 @@
+{
+  "title": "Quantum Pinball: Reactor Run",
+  "category": "Arcade",
+  "lucideIcon": "circle-dot",
+  "difficulty": "Intermediate",
+  "description": "Keep the reactor ball in play, fire the flippers, and score big on glowing bumpers and targets.",
+  "author": "Joita Paul",
+  "github": "joitapaul",
+  "role": "Contributor",
+  "tags": [
+    "Arcade",
+    "Pinball",
+    "Physics",
+    "NSOC26"
+  ],
+  "stars": 0,
+  "featured": false
+}
