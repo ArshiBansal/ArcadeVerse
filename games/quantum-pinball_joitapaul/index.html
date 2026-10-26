@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <title>Quantum Pinball: Reactor Run | ArcadeVerse</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="game-header">
+      <a class="back-link" href="../../index.html">← ArcadeVerse</a>
+      <p class="eyebrow">ARCADEVERSE · ARCADE</p>
+      <h1>Quantum Pinball</h1>
+      <p class="subtitle">Reactor Run · Keep the core alive!</p>
+    </header>
+
+    <section class="game-panel" aria-label="Quantum Pinball game">
+      <div class="scoreboard" aria-label="Game statistics">
+        <div class="stat">
+          <span class="stat-label">SCORE</span>
+          <strong id="score-value" aria-live="polite">0</strong>
+        </div>
+        <div class="stat">
+          <span class="stat-label">BEST</span>
+          <strong id="best-value">0</strong>
+        </div>
+        <div class="stat">
+          <span class="stat-label">BALLS</span>
+          <strong id="balls-value">3</strong>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <canvas id="pinball-table" width="600" height="800" role="img" aria-label="Pinball table. Press Space or the Launch button to serve. Use the left and right arrow keys or A and D to control the flippers.">
+          Your browser does not support canvas.
+        </canvas>
+        <div class="overlay" id="game-overlay">
+          <p class="overlay-kicker" id="overlay-kicker">REACTOR SYSTEMS ONLINE</p>
+          <h2 id="overlay-title">Ready to launch?</h2>
+          <p id="overlay-message">Keep the quantum core in play. Hit glowing bumpers and targets to build your score.</p>
+          <button class="primary-button" id="start-button" type="button">Start game</button>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <button class="flipper-button" id="left-flipper" type="button" aria-label="Hold left flipper">◀ Left</button>
+        <p class="keyboard-hint"><kbd>←</kbd> / <kbd>A</kbd> left <span>·</span> <kbd>D</kbd> / <kbd>→</kbd> right</p>
+        <button class="flipper-button" id="right-flipper" type="button" aria-label="Hold right flipper">Right ▶</button>
+      </div>
+      <div class="launch-row">
+        <span class="hint">Press Space or tap to launch</span>
+        <button class="launch-button" id="launch-button" type="button">Launch ball</button>
+      </div>
+    </section>
+
+    <p class="footer-note">Three balls per run · Flippers work with keyboard or touch</p>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
