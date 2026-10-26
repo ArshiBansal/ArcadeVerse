@@ -21,6 +21,27 @@ const GAMES_REGISTRY = [
     "releaseDate": "2026-10-23"
   },
   {
+    "id": "bubble-burst-arena_mistu7debnath",
+    "title": "Bubble Pop: Bubble Burst Arena",
+    "category": "Arcade",
+    "lucideIcon": "circle-dot",
+    "description": "Aim, launch, and burst vibrant bubble clusters in an adrenaline-charged puzzle arena with explosive chain reactions, rainbow combos, and high scores.",
+    "author": "mistu7debnath",
+    "github": "mistu7debnath",
+    "role": "Arcade Developer",
+    "path": "games/bubble-burst-arena_mistu7debnath/index.html",
+    "tags": [
+      "Arcade",
+      "Puzzle",
+      "Shooter",
+      "Physics",
+      "NSOC26"
+    ],
+    "stars": 25,
+    "featured": true,
+    "difficulty": "All Skill Levels"
+  },
+  {
     "id": "cryptic-wordle_babin",
     "title": "Cryptic Wordle Hack",
     "category": "Puzzle",
