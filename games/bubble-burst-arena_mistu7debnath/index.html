@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bubble Pop: Bubble Burst Arena | ArcadeVerse</title>
+  <meta name="description" content="Aim, launch, and burst vibrant bubble clusters in an adrenaline-charged puzzle arena with explosive chain reactions, rainbow combos, and high scores.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bba-app" id="bba-app">
+    <!-- Main Game Frame -->
+    <div class="bba-container" id="bba-container">
+
+      <!-- Top In-Game HUD -->
+      <header class="bba-hud" id="bba-hud" aria-label="Game Heads Up Display">
+        <!-- Left Group: Sound, Pause, Restart -->
+        <div class="bba-hud-left">
+          <button id="bba-btn-sound" class="bba-hud-btn" type="button" aria-label="Toggle Sound (M)" title="Toggle Sound (M)">
+            <svg class="bba-icon bba-icon-sound-on" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+            <svg class="bba-icon bba-icon-sound-off bba-hidden" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+
+          <button id="bba-btn-pause" class="bba-hud-btn" type="button" aria-label="Pause Game (P / ESC)" title="Pause Game (P / ESC)">
+            <svg class="bba-icon bba-icon-pause" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+            <svg class="bba-icon bba-icon-play bba-hidden" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </button>
+
+          <div class="bba-level-pill" id="bba-level-pill" title="Current Level">
+            <span class="bba-pill-label">LVL</span>
+            <span class="bba-pill-value" id="bba-hud-level">1</span>
+          </div>
+        </div>
+
+        <!-- Center Group: Score & Objective -->
+        <div class="bba-hud-center">
+          <div class="bba-score-wrap">
+            <span class="bba-score-label">SCORE</span>
+            <span class="bba-score-value" id="bba-hud-score">0</span>
+          </div>
+          <div class="bba-objective-wrap" id="bba-objective-wrap" title="Level Goal">
+            <span class="bba-obj-label" id="bba-hud-obj-label">POPS</span>
+            <span class="bba-obj-value" id="bba-hud-objective">0 / 25</span>
+          </div>
+        </div>
+
+        <!-- Right Group: Shots & Best Score -->
+        <div class="bba-hud-right">
+          <div class="bba-shots-pill" id="bba-shots-pill" title="Remaining Shots">
+            <svg class="bba-shots-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="4"></circle>
+            </svg>
+            <span class="bba-shots-count" id="bba-hud-shots">30</span>
+          </div>
+
+          <div class="bba-best-pill" title="High Score">
+            <span class="bba-best-label">BEST</span>
+            <span class="bba-best-value" id="bba-hud-best">0</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Active Floating Combo Multiplier Banner -->
+      <div class="bba-combo-indicator" id="bba-combo-indicator" aria-hidden="true">
+        <span class="bba-combo-text" id="bba-combo-text">COMBO x2</span>
+      </div>
+
+      <!-- In-Game Danger Warning Banner -->
+      <div class="bba-danger-banner bba-hidden" id="bba-danger-banner" aria-live="assertive">
+        <svg class="bba-alert-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>DANGER: CEILING DESCENDING</span>
+      </div>
+
+      <!-- Main Game Canvas -->
+      <canvas id="bba-canvas" width="440" height="660" role="img" aria-label="Bubble Pop: Bubble Burst Arena game canvas"></canvas>
+
+      <!-- Bottom Next Bubble & Controls Bar -->
+      <footer class="bba-bottom-bar" id="bba-bottom-bar">
+        <div class="bba-next-bubble-card" title="Next bubble in launcher">
+          <span class="bba-next-label">NEXT</span>
+          <div class="bba-next-preview" id="bba-next-preview">
+            <span class="bba-preview-circle" id="bba-next-circle"></span>
+          </div>
+        </div>
+
+        <div class="bba-controls-hint" id="bba-controls-hint">
+          <span>Aim: Mouse / Touch / Arrows</span>
+          <span class="bba-bullet">•</span>
+          <span>Shoot: Click / Tap / Space</span>
+        </div>
+
+        <button id="bba-btn-help-mini" class="bba-hud-btn" type="button" aria-label="How to play instructions" title="How to Play">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </button>
+      </footer>
+
+      <!-- Screen reader announcer for live events -->
+      <div id="bba-live-announcer" class="bba-sr-only" aria-live="polite" aria-atomic="true"></div>
+
+      <!-- ================= OVERLAYS ================= -->
+
+      <!-- 1. Start Screen / Main Menu Overlay -->
+      <div class="bba-overlay bba-start-screen" id="bba-start-screen" role="dialog" aria-modal="true" aria-labelledby="bba-start-title">
+        <div class="bba-modal-card">
+          <div class="bba-brand-badge">
+            <span class="bba-pulse-dot"></span> NSOC '26 • ARCADEVERSE
+          </div>
+
+          <h1 class="bba-title" id="bba-start-title">
+            <span class="bba-title-sub">BUBBLE POP</span>
+            <span class="bba-title-main">BUBBLE BURST ARENA</span>
+          </h1>
+
+          <p class="bba-tagline">Aim • Match 3 • Cascade Reaction • Neon Supernova</p>
+
+          <!-- Vector Preview Graphic -->
+          <div class="bba-preview-banner" aria-hidden="true">
+            <svg class="bba-banner-svg" viewBox="0 0 320 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="bbaGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#070a14" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="bbaCyanSphere" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="30%" stop-color="#38bdf8"/>
+                  <stop offset="80%" stop-color="#00f0ff"/>
+                  <stop offset="100%" stop-color="#0369a1"/>
+                </radialGradient>
+                <radialGradient id="bbaPinkSphere" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="30%" stop-color="#f43f5e"/>
+                  <stop offset="80%" stop-color="#ff2a85"/>
+                  <stop offset="100%" stop-color="#9f1239"/>
+                </radialGradient>
+                <radialGradient id="bbaVioletSphere" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="30%" stop-color="#c084fc"/>
+                  <stop offset="80%" stop-color="#a855f7"/>
+                  <stop offset="100%" stop-color="#581c87"/>
+                </radialGradient>
+                <radialGradient id="bbaGoldSphere" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="30%" stop-color="#fbbf24"/>
+                  <stop offset="80%" stop-color="#f59e0b"/>
+                  <stop offset="100%" stop-color="#78350f"/>
+                </radialGradient>
+                <radialGradient id="bbaBombSphere" cx="40%" cy="40%" r="60%">
+                  <stop offset="0%" stop-color="#ff7700"/>
+                  <stop offset="40%" stop-color="#dc2626"/>
+                  <stop offset="90%" stop-color="#18181b"/>
+                  <stop offset="100%" stop-color="#000000"/>
+                </radialGradient>
+              </defs>
+              <!-- Background Ambient -->
+              <circle cx="160" cy="60" r="70" fill="url(#bbaGlow)"/>
+              <!-- Staggered Cluster Art -->
+              <circle cx="70" cy="45" r="20" fill="url(#bbaCyanSphere)"/>
+              <circle cx="110" cy="45" r="20" fill="url(#bbaPinkSphere)"/>
+              <circle cx="150" cy="45" r="20" fill="url(#bbaVioletSphere)"/>
+              <circle cx="190" cy="45" r="20" fill="url(#bbaGoldSphere)"/>
+              <circle cx="230" cy="45" r="20" fill="url(#bbaCyanSphere)"/>
+              <!-- Second Row -->
+              <circle cx="90" cy="78" r="20" fill="url(#bbaVioletSphere)"/>
+              <circle cx="130" cy="78" r="20" fill="url(#bbaBombSphere)"/>
+              <circle cx="170" cy="78" r="20" fill="url(#bbaPinkSphere)"/>
+              <circle cx="210" cy="78" r="20" fill="url(#bbaCyanSphere)"/>
+              <!-- Bomb Icon on Bomb Sphere -->
+              <circle cx="130" cy="78" r="7" fill="none" stroke="#fef08a" stroke-width="2"/>
+              <circle cx="130" cy="78" r="2" fill="#fef08a"/>
+              <!-- Trajectory Dash Line -->
+              <line x1="160" y1="118" x2="160" y2="92" stroke="#00f0ff" stroke-width="2" stroke-dasharray="4,4"/>
+            </svg>
+          </div>
+
+          <!-- Quick Stats Highlights -->
+          <div class="bba-start-stats">
+            <div class="bba-stat-item">
+              <span class="bba-stat-val" id="bba-menu-best">0</span>
+              <span class="bba-stat-lbl">ALL-TIME BEST</span>
+            </div>
+            <div class="bba-stat-divider"></div>
+            <div class="bba-stat-item">
+              <span class="bba-stat-val">5</span>
+              <span class="bba-stat-lbl">SECTOR LEVELS</span>
+            </div>
+            <div class="bba-stat-divider"></div>
+            <div class="bba-stat-item">
+              <span class="bba-stat-val" id="bba-menu-popped">0</span>
+              <span class="bba-stat-lbl">BUBBLES POPPED</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="bba-menu-actions">
+            <button class="bba-btn bba-btn-primary" id="bba-btn-play" type="button">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>ENTER ARENA</span>
+            </button>
+
+            <button class="bba-btn bba-btn-secondary" id="bba-btn-how" type="button">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+              <span>HOW TO PLAY</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. How to Play Modal Overlay -->
+      <div class="bba-overlay bba-modal bba-hidden" id="bba-how-modal" role="dialog" aria-modal="true" aria-labelledby="bba-how-title">
+        <div class="bba-modal-card bba-modal-scrollable">
+          <div class="bba-modal-header">
+            <h2 class="bba-modal-title" id="bba-how-title">ARENA TRAINING MANUAL</h2>
+            <button class="bba-modal-close-btn" id="bba-btn-close-how" type="button" aria-label="Close training instructions">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <div class="bba-modal-body">
+            <!-- Section 1: Objective -->
+            <section class="bba-guide-section">
+              <h3 class="bba-guide-heading">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+                Core Objective
+              </h3>
+              <p>Aim and launch colored bubbles into the honeycomb cluster. Form groups of <strong>3 or more</strong> matching colors to pop them. Complete sector objectives before running out of shots or allowing bubbles to cross the red <strong>Danger Line</strong>.</p>
+            </section>
+
+            <!-- Section 2: Mechanics & Physics -->
+            <section class="bba-guide-section">
+              <h3 class="bba-guide-heading">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Physics & Avalanches
+              </h3>
+              <ul class="bba-guide-list">
+                <li><strong>Wall Ricochet:</strong> Shots bounce accurately off left and right perimeter boundaries. Use wall banks to reach hidden clusters.</li>
+                <li><strong>Ceiling Anchorage:</strong> Bubbles remain attached to the ceiling or to connected cluster neighbors.</li>
+                <li><strong>Avalanche Cascades:</strong> Any bubbles cut off from ceiling connection will drop freely, rewarding <strong>+250 bonus points</strong> each!</li>
+                <li><strong>Combo Multiplier:</strong> Consecutive successful matches multiply your points up to <strong>5x</strong>. Missing a match resets the combo.</li>
+              </ul>
+            </section>
+
+            <!-- Section 3: Special Bubbles -->
+            <section class="bba-guide-section">
+              <h3 class="bba-guide-heading">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+                Special Arsenal Bubbles
+              </h3>
+              <div class="bba-specials-grid">
+                <div class="bba-special-card">
+                  <div class="bba-special-icon bba-special-bomb">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="13" r="8"></circle>
+                      <path d="M12 5V2"></path>
+                      <path d="M15 3l-1.5 2"></path>
+                      <path d="M9 3l1.5 2"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4>Explosive Nova Bomb</h4>
+                    <p>Detonates on contact, clearing all adjacent bubbles in an explosive shockwave (+150 pts/bubble).</p>
+                  </div>
+                </div>
+
+                <div class="bba-special-card">
+                  <div class="bba-special-icon bba-special-rainbow">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4>Prism Rainbow Bubble</h4>
+                    <p>Universal wildcard! Matches with any neighboring color to complete 3+ bubble combinations.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 4: Controls Matrix -->
+            <section class="bba-guide-section">
+              <h3 class="bba-guide-heading">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6" y2="8"/><line x1="10" y1="8" x2="10" y2="8"/><line x1="14" y1="8" x2="14" y2="8"/><line x1="18" y1="8" x2="18" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="6" y1="16" x2="6" y2="16"/><line x1="18" y1="16" x2="18" y2="16"/></svg>
+                Controls Reference
+              </h3>
+              <table class="bba-controls-table">
+                <thead>
+                  <tr>
+                    <th>Action</th>
+                    <th>Keyboard</th>
+                    <th>Mouse / Touch</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Aim Launcher</td>
+                    <td><kbd>Left</kbd> / <kbd>Right</kbd> or <kbd>A</kbd> / <kbd>D</kbd></td>
+                    <td>Move cursor / Drag on screen</td>
+                  </tr>
+                  <tr>
+                    <td>Launch Bubble</td>
+                    <td><kbd>Space</kbd> / <kbd>Enter</kbd> / <kbd>Up</kbd></td>
+                    <td>Click / Release touch</td>
+                  </tr>
+                  <tr>
+                    <td>Pause / Resume</td>
+                    <td><kbd>P</kbd> or <kbd>Escape</kbd></td>
+                    <td>Pause button on HUD</td>
+                  </tr>
+                  <tr>
+                    <td>Restart Level</td>
+                    <td><kbd>R</kbd></td>
+                    <td>Pause menu Restart button</td>
+                  </tr>
+                  <tr>
+                    <td>Mute Sound</td>
+                    <td><kbd>M</kbd></td>
+                    <td>Speaker button on HUD</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+
+          <div class="bba-modal-footer">
+            <button class="bba-btn bba-btn-primary" id="bba-btn-how-start" type="button">READY TO PLAY</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Pause Overlay -->
+      <div class="bba-overlay bba-pause-screen bba-hidden" id="bba-pause-screen" role="dialog" aria-modal="true" aria-labelledby="bba-pause-title">
+        <div class="bba-modal-card">
+          <div class="bba-brand-badge">SYSTEM SUSPENDED</div>
+          <h2 class="bba-modal-title" id="bba-pause-title">ARENA PAUSED</h2>
+          <p class="bba-tagline">Take a breath. Your trajectory and cluster are on hold.</p>
+
+          <div class="bba-pause-stats">
+            <div class="bba-stat-item">
+              <span class="bba-stat-val" id="bba-pause-score">0</span>
+              <span class="bba-stat-lbl">CURRENT SCORE</span>
+            </div>
+            <div class="bba-stat-divider"></div>
+            <div class="bba-stat-item">
+              <span class="bba-stat-val" id="bba-pause-shots">0</span>
+              <span class="bba-stat-lbl">SHOTS LEFT</span>
+            </div>
+          </div>
+
+          <div class="bba-menu-actions">
+            <button class="bba-btn bba-btn-primary" id="bba-btn-resume" type="button">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>RESUME ARENA</span>
+            </button>
+            <button class="bba-btn bba-btn-secondary" id="bba-btn-pause-restart" type="button">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>RESTART SECTOR</span>
+            </button>
+            <button class="bba-btn bba-btn-ghost" id="bba-btn-pause-menu" type="button">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>MAIN MENU</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Level Complete Overlay -->
+      <div class="bba-overlay bba-level-clear-screen bba-hidden" id="bba-level-clear-screen" role="dialog" aria-modal="true" aria-labelledby="bba-clear-title">
+        <div class="bba-modal-card">
+          <div class="bba-brand-badge bba-badge-success">SECTOR PURGED</div>
+          <h2 class="bba-modal-title bba-glow-cyan" id="bba-clear-title">VICTORY ACHIEVED!</h2>
+          <p class="bba-tagline" id="bba-clear-tagline">Objective completed with precision!</p>
+
+          <div class="bba-summary-card">
+            <div class="bba-summary-row">
+              <span class="bba-sum-label">Level Clear Base:</span>
+              <span class="bba-sum-value" id="bba-clear-base">+1,000</span>
+            </div>
+            <div class="bba-summary-row">
+              <span class="bba-sum-label">Shots Remaining Bonus:</span>
+              <span class="bba-sum-value" id="bba-clear-shots-bonus">+1,200</span>
+            </div>
+            <div class="bba-summary-row">
+              <span class="bba-sum-label">Best Combo Streak:</span>
+              <span class="bba-sum-value" id="bba-clear-max-combo">x4</span>
+            </div>
+            <div class="bba-summary-row bba-sum-total">
+              <span class="bba-sum-label">TOTAL ARENA SCORE:</span>
+              <span class="bba-sum-value" id="bba-clear-total-score">0</span>
+            </div>
+          </div>
+
+          <div class="bba-menu-actions">
+            <button class="bba-btn bba-btn-primary" id="bba-btn-next-level" type="button">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span id="bba-btn-next-text">ADVANCE TO NEXT SECTOR</span>
+            </button>
+            <button class="bba-btn bba-btn-ghost" id="bba-btn-clear-menu" type="button">
+              <span>RETURN TO MENU</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Game Over Overlay -->
+      <div class="bba-overlay bba-game-over-screen bba-hidden" id="bba-game-over-screen" role="dialog" aria-modal="true" aria-labelledby="bba-over-title">
+        <div class="bba-modal-card">
+          <div class="bba-brand-badge bba-badge-danger">MISSION COMPROMISED</div>
+          <h2 class="bba-modal-title bba-glow-pink" id="bba-over-title">GAME OVER</h2>
+          <p class="bba-tagline" id="bba-over-reason">The bubble cluster breached the perimeter line.</p>
+
+          <div class="bba-summary-card">
+            <div class="bba-summary-row">
+              <span class="bba-sum-label">Final Arena Score:</span>
+              <span class="bba-sum-value" id="bba-over-final-score">0</span>
+            </div>
+            <div class="bba-summary-row">
+              <span class="bba-sum-label">Sector Reached:</span>
+              <span class="bba-sum-value" id="bba-over-sector">Level 1</span>
+            </div>
+            <div class="bba-summary-row">
+              <span class="bba-sum-label">High Score:</span>
+              <span class="bba-sum-value" id="bba-over-high-score">0</span>
+            </div>
+          </div>
+
+          <div class="bba-menu-actions">
+            <button class="bba-btn bba-btn-primary" id="bba-btn-retry" type="button">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>TRY AGAIN</span>
+            </button>
+            <button class="bba-btn bba-btn-ghost" id="bba-btn-over-menu" type="button">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>MAIN MENU</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
