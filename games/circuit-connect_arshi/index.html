@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circuit Connect</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="game-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo">
+          <span class="logo-icon">⚡</span>
+          <h1>Circuit Connect</h1>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">Level</span>
+            <span class="stat-value" id="level-num">1</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Moves</span>
+            <span class="stat-value" id="move-count">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Time</span>
+            <span class="stat-value" id="timer">0:00</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Score</span>
+            <span class="stat-value" id="score">0</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Game Area -->
+      <main class="main">
+        <div class="board-wrapper">
+          <div class="board" id="board"></div>
+        </div>
+
+        <!-- Side Panel -->
+        <aside class="panel">
+          <div class="panel-section">
+            <h2>Controls</h2>
+            <p class="hint-text">
+              Click or tap a tile to rotate it 90° clockwise.
+            </p>
+            <div class="btn-group">
+              <button class="btn btn-primary" id="btn-hint" title="Show a hint">
+                <span>💡</span> Hint
+              </button>
+              <button
+                class="btn btn-secondary"
+                id="btn-restart"
+                title="Restart level"
+              >
+                <span>↺</span> Restart
+              </button>
+            </div>
+            <div class="btn-group">
+              <button
+                class="btn btn-secondary"
+                id="btn-prev"
+                title="Previous level"
+              >
+                ← Prev
+              </button>
+              <button
+                class="btn btn-secondary"
+                id="btn-next"
+                title="Next level"
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Goal</h2>
+            <p class="goal-text">
+              Connect the <span class="power">⚡ Power</span> to the
+              <span class="dest">◎ Destination</span> by rotating tiles into a
+              continuous path.
+            </p>
+          </div>
+
+          <div class="panel-section legend">
+            <h2>Legend</h2>
+            <div class="legend-items">
+              <div class="legend-item">
+                <div class="mini-tile power-src"></div>
+                <span>Power Source</span>
+              </div>
+              <div class="legend-item">
+                <div class="mini-tile dest-node"></div>
+                <span>Destination</span>
+              </div>
+              <div class="legend-item">
+                <div class="mini-tile connected"></div>
+                <span>Connected</span>
+              </div>
+              <div class="legend-item">
+                <div class="mini-tile disconnected"></div>
+                <span>Disconnected</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <button class="btn btn-outline" id="btn-howto">How to Play</button>
+          </div>
+        </aside>
+      </main>
+
+      <!-- Overlay: Level Complete -->
+      <div class="overlay hidden" id="complete-overlay">
+        <div class="modal">
+          <div class="modal-icon">✓</div>
+          <h2>Circuit Complete!</h2>
+          <p id="complete-msg">Great job connecting the circuit.</p>
+          <div class="modal-stats">
+            <div><span>Moves</span><strong id="final-moves">0</strong></div>
+            <div><span>Time</span><strong id="final-time">0:00</strong></div>
+            <div><span>Score</span><strong id="final-score">0</strong></div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-secondary" id="btn-replay">Replay</button>
+            <button class="btn btn-primary" id="btn-continue">
+              Next Level
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlay: How to Play -->
+      <div class="overlay hidden" id="howto-overlay">
+        <div class="modal howto">
+          <h2>How to Play</h2>
+          <ol>
+            <li>
+              Click or tap any tile (except fixed power & destination) to rotate
+              it 90° clockwise.
+            </li>
+            <li>
+              Create a continuous path of pipes from the ⚡ Power Source to the
+              ◎ Destination.
+            </li>
+            <li>
+              Connected segments light up; when the full path is complete the
+              level is solved.
+            </li>
+            <li>Fewer moves and faster times earn higher scores.</li>
+            <li>
+              Use the Hint button if you get stuck — it will highlight a tile
+              that needs rotating.
+            </li>
+          </ol>
+          <button class="btn btn-primary" id="btn-close-howto">Got it!</button>
+        </div>
+      </div>
+
+      <!-- Overlay: Game Complete -->
+      <div class="overlay hidden" id="win-overlay">
+        <div class="modal">
+          <div class="modal-icon">🏆</div>
+          <h2>All Circuits Solved!</h2>
+          <p>
+            You've mastered every level. Total score:
+            <strong id="total-score">0</strong>
+          </p>
+          <button class="btn btn-primary" id="btn-play-again">
+            Play Again
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>

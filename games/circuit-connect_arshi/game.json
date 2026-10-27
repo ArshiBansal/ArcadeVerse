@@ -1,0 +1,12 @@
+{
+    "title": "Circuit Connect",
+    "category": "Puzzle",
+    "lucideIcon": "circuit-board",
+    "description": "Rotate circuit tiles to connect the power source to the destination. Solve increasingly complex grids with logic and spatial reasoning!",
+    "author": "ArcadeVerse Contributor",
+    "github": "arcadeverse",
+    "role": "Puzzle Developer",
+    "tags": ["Puzzle", "Logic", "Spatial", "Circuit", "Rotation"],
+    "stars": 25,
+    "featured": true
+}
